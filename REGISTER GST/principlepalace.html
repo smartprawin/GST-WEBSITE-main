@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        body{
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        .container{
+            max-width: 1200px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 20px 8px rgba(0, 0,0, .1);
+        }
+        h2{
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-grid{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 20px;
+        }
+        .form-group{
+            display: flex;
+            flex-direction: column;
+        }
+        label{
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+        input,select{
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .map{
+            height: 300px;
+                background:#e9ecef;
+    border:1px solid #ccc;
+    border-radius:4px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#666;
+    font-size:20px;
+        }
+
+        .btn{
+            background: #1b4f9c;
+            color: #fff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .section{
+                margin:25px 0 15px;
+    padding-bottom:8px;
+    border-bottom:2px solid #ddd;
+    color:#1b4f9c;
+        }
+        @media(max-width:768px){
+            .form-grid{
+                grid-template-columns: 1fr;
+            }
+        }
+        .full-width{
+            grid-column: 1/-1;
+        }
+        small{
+            display: block;
+            font-size: 13px;
+        }
+        input[type="file"]{
+            padding: 6px;
+            border: none;
+        }
+        .fomr-grid{
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            gap: 20px;
+        }
+        @media(max-width:768px){
+            .form-grid{
+                grid-template-columns: 1fr;
+            }
+        }
+        .checkbox{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 15px 30px;
+            margin-top: 20px;
+        }
+        .checkbox label{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        .checkbox input[type="checkbox"]{
+            width: 18px;
+            height: 18px;
+        }
+        @media(max-width:768px){
+            .checkbox{
+                grid-template-columns: 1fr;
+            }
+        }
+        .damage{
+            margin-left: 80%;
+            margin-top: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .damage button{
+            padding: 10px;
+            cursor: pointer;
+        }
+        #save{
+            background-color: #1b4f9c;
+            color: white;
+        }
+    .rest{
+    grid-template-columns:1fr;
+    gap:10px;
+}
+.rest{
+    background-color: #173b6d;
+    color: white;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin-left: 35px;
+}
+    .portable{
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        text-align: center;
+        margin-left: 10%;
+        width: 50%;
+        margin-bottom: 30px;
+        margin-top: 15px;
+    }
+    .portable p{
+border: 1px solid black;
+padding: 10px;
+    }
+    
+
+.dancing{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    background:#efe27a;
+    margin:20px;
+    padding:20px;
+}
+
+.dancing p{
+    margin:5px 0;
+}
+
+.locked{
+    padding-top: 50px;
+    margin-right: 80px;
+}
+.locked button{
+    padding: 12px 30px;
+    align-items: center;
+    border: none;
+    background: white;
+    color: #0d2566;
+    margin-right: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+@media(max-width:992px){
+    .business{
+        grid-template-columns: 1fr;
+    }
+    .dancing{
+        grid-template-columns: 1fr 1fr;
+    }
+    .portable{
+        grid-template-columns: repeat(2,1fr);
+    }
+    .com{
+        grid-template-columns: 1fr;
+    }
+    .rest{
+    grid-template-columns:1fr;
+    gap:10px;
+}
+}
+#save a{
+    text-decoration: none;
+    color: white;
+}
+.portable p.active{
+    background: #163d73;
+    color: white;
+    font-weight: bold;
+    border-color: #163d73;
+}
+button a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+    </style>
+</head>
+<body>
+        <div class="mart">
+        <p>Skip to Main Content</p>
+        <p>A+</p>
+        <p>A-</p>
+    </div>
+
+        <header>
+        <div class="wait">
+        <h3>Goods and Services Tax</h3>
+        <h4>Government of India, States and Union Territories</h4>
+        </div>
+
+        <div class="locked">
+        <button>REGISTER</button>
+        <button>LOGIN</button>
+        </div>
+    </header>
+
+        <nav>
+    <ul>
+        <li>Home</li>
+        <li>Services</li>
+        <li>GST Law</li>
+        <li>Downloads</li>
+        <li>Search Taxpayer</li>
+        <li>Help and Taxpayer Facilities</li>
+        <li>e-Invoice</li>
+        <li>News and Updates</li>
+    </ul>
+</nav>
+
+<div class="dancing">
+        <div>
+            <p>Application Type</p>
+            <p>New Registration</p>
+        </div>
+        <div>
+            <p>Due Date to Complete</p>
+            <p>30/10/2020</p>
+        </div>
+        <div>
+            <p>Last Modified</p>
+            <p>15/10/2020</p>
+        </div>
+        <div>
+            <p>Profile</p>
+            <p>0%</p>
+        </div>
+</div>
+
+<div class="portable">
+    <p>Bussiness Details</p>
+    <p>Promoter/ Partners</p>
+    <p>Authorized Signature</p>
+    <p>Authorized Representative</p>
+    <p class="active">Principal  Place of Bussiness</p>
+    <p>Additonal Places of Bussiness</p>
+    <p>Goods and Services</p>
+    <p>State Specific Information</p>
+    <p>Aadhar Authentication</p>
+    <p>Verification</p>
+</div>
+
+
+    <div class="container">
+        <h2>Details of Principle Place of Bussiness</h2>
+        <div class="map">
+            Map Location
+        </div> 
+        <div class="section">Address Details</div>
+    <form class="form-grid">
+        <div class="form-group">
+            <label for="">PIN Code</label>
+            <input type="text" id="pincode" placeholder="Enter PIN Code">
+        </div>
+
+    <div class="form-group">
+            <label for="">State</label>
+            <input type="text" id="state" placeholder="Enter State">
+        </div>
+        
+                <div class="form-group">
+            <label for="">District</label>
+            <input type="text" id="District" placeholder="Enter District">
+        </div>
+        
+                <div class="form-group">
+            <label for="">City/ Town/ Village</label>
+            <input type="text" id="city">
+        </div>
+        
+        <div class="form-group">
+            <label for="">Locality / Sub Localoty</label>
+            <input type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="">Road / Street</label>
+            <input type="text">
+        </div>
+        
+     <div class="form-group">
+            <label for="">Name of Premises / Building</label>
+            <input type="text">
+        </div>
+
+    <div class="form-group">
+            <label for="">Building No/ Flat No</label>
+            <input type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="">Floor No</label>
+            <input type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="">Nearby Landmark</label>
+            <input type="text">
+        </div>
+
+        <div class="form-group">
+            <label for="">Latitude</label>
+            <input type="text">
+        </div>
+
+     <div class="form-group">
+            <label for="">Longitude</label>
+            <input type="text">
+    </div>
+ </div>
+ <div style="margin: 20px 0;">
+ <button type="button" class="btn">RESET ADDRESS</button>
+ </div>
+ <div class="section">Jurisdication Details</div>
+       
+ <div class="form-grid">
+    <div class="form-group">
+        <label>Select / Circle / Ward/ Charge / Unit</label>
+        <select>
+            <option>Select</option>
+        </select>
+    </div>
+
+ <div class="form-group">
+        <label>Commissionerate</label>
+        <select>
+            <option>Select</option>
+        </select>
+    </div>
+
+        <div class="form-group">
+        <label>Divison</label>
+        <select>
+            <option>Select</option>
+        </select>
+    </div>
+
+     <div class="form-group">
+        <label>Range</label>
+        <select>
+            <option>Select</option>
+        </select>
+    </div>
+ </div>
+
+ <div class="section">Contact Information</div>
+ <div class="form-grid">
+     <div class="form-group">
+        <label>Office Email Address</label>
+        <input type="email">
+    </div>
+
+    <div class="form-group">
+        <label>Office Telephone Number</label>
+        <input type="text">
+    </div>
+
+    <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="number">
+    </div>
+
+    <div class="form-group">
+        <label>Office FAX Number (with STD Code)</label>
+        <input type="number">
+    </div>
+
+ </div>
+    </form>
+
+    <div class="section">Nature of Possession & Document Upload</div>
+    <div class="form-grid">
+        <div class="form-group">
+                    <label>Nature of Possession of Premises *</label>
+        <select>
+            <option>Please Select</option>
+            <option>Owned</option>
+            <option>Rented</option>
+            <option>Leased</option>
+            <option>Consent</option>
+            <option>Shared</option>
+        </select>
+        </div>
+
+            <div class="form-group">
+        <label>Proof of Principle Place of Business *</label>
+        <select>
+            <option>Select Document</option>
+            <option>Electricity Bill</option>
+            <option>Property Tax Receipt</option>
+            <option>Rent Agreement</option>
+            <option>Water Bill</option>
+        </select>
+
+                <small style="margin-top:8px;color:#666;">
+            File with PDF or JPEG format is only allowed.
+        </small>
+
+        <small style="margin-top:5px;color:#666;">
+            Maximum file size for upload is 100 KB.
+        </small>
+            <input type="file" style="margin-top:10px;">
+    </div>
+    </div>
+
+    <div class="section">
+        Nature of Bussiness Activity being carried out at above mentioned premises
+    </div>
+    <div class="checkbox">
+        <label>
+            <input type="checkbox">Bonded Warehouse
+        </label>
+        <label>
+            <input type="checkbox">EOU / STP/ EHTP
+        </label>
+        <label>
+            <input type="checkbox">Export
+        </label>
+                <label>
+            <input type="checkbox">Factory / Manufacturing
+        </label>
+                <label>
+            <input type="checkbox">Import
+        </label>
+                <label>
+            <input type="checkbox">Supplier of Services
+        </label>
+
+            <label><input type="checkbox"> Leasing Business</label>
+    <label><input type="checkbox"> Office / Sale Office</label>
+    <label><input type="checkbox"> Recipient of Goods or Services</label>
+
+    <label><input type="checkbox"> Retail Business</label>
+    <label><input type="checkbox"> Warehouse / Depot</label>
+    <label><input type="checkbox"> Wholesale Business</label>
+
+    <label><input type="checkbox"> Works Contract</label>
+    <label><input type="checkbox"> Others (Please Specify)</label>
+    </div>
+    <div class="form-group full-width" style="margin-top: 20px;">
+            <label>Have Additional Place of Business</label>
+    <select>
+        <option>Select</option>
+        <option>Yes</option>
+        <option>No</option>
+    </select>
+    </div>
+    <div class="damage">
+        <button><a href="./dash7.html">BACK</a></button>
+        <button id="save"><a href="additionalplaces.html">SAVE & CONTINUE</a></button>
+    </div>
+
+    
+    <div class="rest">
+        <div class="sing">
+     <p>@2018-19 Good and Services Tax Network</p>
+        </div>
+        <div class="sing">
+            <p>Site Last Updated on 29-05-2026</p>
+        </div>
+        <div class="sing">
+            <p>Design and Developed by GSTN</p>
+        </div>
+    </div>
+
+        <footer>
+       Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
+    </footer>
+</body>
+</html>

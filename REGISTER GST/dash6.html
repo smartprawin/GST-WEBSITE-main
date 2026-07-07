@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<style>
+    .game{
+        background-color: white;
+        margin-top: 30px;
+        margin-left: 30px;
+        margin-right: 30px;
+        padding: 10px;
+        min-height: 60vh;
+    }
+    table{
+        width: 100%;
+        margin-top: 10px;
+
+    }
+    table tr th{
+       padding: 10px;
+    }
+    table td{
+        padding: 20px;
+    }
+    .game p{
+        font-size: 20px;
+    }
+    .dancing{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    background:#efe27a;
+    margin:20px;
+    padding:20px;
+}
+
+.dancing p{
+    margin:5px 0;
+}
+
+    .portable{
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        text-align: center;
+        margin-left: 10%;
+        width: 50%;
+    }
+    .portable p{
+border: 1px solid black;
+padding: 10px;
+    }
+    .game{
+        background: #fff;
+        margin: 30px;
+        padding: 20px;
+        border-radius: 5px;
+    }
+    .game h2,h3{
+        margin-bottom: 15px;
+        color: #1f3b64;
+    }
+    .game input,select{
+        width: 90%;
+        padding: 8px;
+        margin-top: 5px;
+    }
+    .game table{
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    .game td,th{
+        padding: 15px;
+    }
+
+    .btn-group{
+        text-align: right;
+        margin-top: 20px;
+    }
+    .btn-group button{
+        padding: 10px 20px;
+        margin-left: 10px;
+        background: #1f4e8c;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    .btn-group button a{
+        text-decoration: none;
+        color: white;
+    }
+    input[type="checkbox"]{
+        width: auto;
+        margin-right: 8px;
+    }
+
+.checkbox-line{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.game input:not([type="checkbox"]),
+.game select{
+    width: 90%;
+    padding: 8px;
+    margin-top: 5px;
+}
+
+.portable p.active{
+    background: #163d73;
+    color: white;
+    font-weight: bold;
+    border-color: #163d73;
+}
+button a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+hr{
+    color: black;
+}
+.proof-label{
+    font-size: 14px;
+}
+.info-text{
+    font-size: 8px;
+    color: #555;
+}
+hr{
+    border: 0;
+    height: 1px;
+    background-color: #000;
+}
+label{
+    font-size: 14px;
+}
+.game p{
+    font-size: 12px;
+}
+hr{
+    border: none;
+    height: 1px;
+    background: black;
+}
+</style>
+<body>
+    <div class="mart">
+        <p>Skip to Main Content</p>
+        <p>A+</p>
+        <p>A-</p>
+    </div>
+
+    <header>
+        <div class="wait">
+        <h3>Goods and Services Tax</h3>
+        <h4>Government of India, States and Union Territories</h4>
+        </div>
+
+        <div class="locked">
+        <button>REGISTER</button>
+        <button>LOGIN</button>
+        </div>
+    </header>
+
+    <nav>
+    <ul>
+        <li>Home</li>
+        <li>Services</li>
+        <li>GST Law</li>
+        <li>Downloads</li>
+        <li>Search Taxpayer</li>
+        <li>Help and Taxpayer Facilities</li>
+        <li>e-Invoice</li>
+        <li>News and Updates</li>
+    </ul>
+</nav>
+
+<div class="dancing">
+        <div>
+            <p>Application Type</p>
+            <p>New Registration</p>
+        </div>
+        <div>
+            <p>Due Date to Complete</p>
+            <p>30/10/2020</p>
+        </div>
+        <div>
+            <p>Last Modified</p>
+            <p>15/10/2020</p>
+        </div>
+        <div>
+            <p>Profile</p>
+            <p>0%</p>
+        </div>
+</div>
+<div class="portable">
+    <p>Bussiness Details</p>
+    <p>Promoter/ Partners</p>
+    <p class="active">Authorized Signature</p>
+    <p>Authorized Representative</p>
+    <p>Principal  Palace of Bussiness</p>
+    <p>Additonal Places of Bussiness</p>
+    <p>Goods and Services</p>
+    <p>State Specific Information</p>
+    <p>Aadhar Authentication</p>
+    <p>Verification</p>
+</div>
+
+<div class="game">
+    <h2>Details of Authorized Signatory</h2>
+<label class="checkbox-line">
+    <input type="checkbox" checked>
+    Primary Authorized Signatory
+</label>
+    <h3>Personal Information</h3>
+    <table border="1">
+        <tr>
+            <th colspan="3" style="text-align: left;">Name of Person</th>
+        </tr>
+        <tr>
+            <td>
+                First Name<br>
+                <input type="text" value="S NARESH">
+            </td>
+            <td>
+                Middle Name<br>
+                <input type="text" placeholder="Enter Middle Name">
+            </td>
+            <td>Last Name<br>
+            <input type="text" value="NARESH">
+            </td>
+        </tr>
+        <tr>
+            <th colspan="3" style="text-align: left;">Name of Father</th>
+        </tr>
+        <tr>
+            <td>First Name<br>
+            <input type="text" value="SANKAR">
+        </td>
+        <td>
+            MIDDLE NAME<br>
+            <input type="text" placeholder="Enter Middle Name">
+        </td>
+        <td>
+            Last Name<br>
+            <input type="text" placeholder="Enter last Name">
+        </td>
+        </tr>
+        <tr>
+            <td>Date of Birth<br>
+            <input type="date">
+        </td>
+        <td>Mobile Number<br>
+        <input type="tel">
+        </td>
+        <td>Email Address<br>
+        <input type="email">
+    </td>
+        </tr>
+    </table>
+    <h3>Residential Address</h3>
+    <table border="1"> 
+        <tr>
+            <td>Country<br>
+            <input type="text" value="India"></td>
+                       <td>PIN Code<br>
+            <input type="text" value="600017"></td>
+                       <td>State<br>
+            <input type="text" value="Tamil Nadu"></td>
+                       </tr>
+        <tr>
+            <td>District<br>
+            <input type="text" value="Chennai"></td>
+                       <td>City/ Town/ Village<br>
+            <input type="text" value="Chennai"></td>
+                       <td>Locality / Sub Locality<br>
+            <input type="text" value="T Nagar"></td>
+        </tr>
+
+                <tr>
+            <td>Road /Street<br>
+            <input type="text" value="Ramachandra Road"></td>
+                       <td>Name of Premises / Building<br>
+            <input type="text"></td>
+                       <td>Building No / Flat No<br>
+            <input type="text" value="11/6"></td>
+        </tr>
+
+         <tr>
+            <td>Floor No<br>
+            <input type="text" value="Ground Floor"></td>
+                       <td>Nearby Landmark<br>
+            <input type="text"></td>
+                       <td></td>
+        </tr>
+    </table>
+    <h3>Document Upload</h3>
+    <p>Photo</p>
+    <input type="file">
+    <br><br>
+        <label class="proof-label">Proof of details of authorized signatory</label><br>
+    <select>
+        <option>Select</option>
+        <option>Aadhaar Card</option>
+        <option>Passport</option>
+        <option>Voter ID</option>
+        <option>Driving License</option>
+    </select>
+    <p class="info-text">ⓘ File with PDF or JPEG format is only allowed</p>
+    <p class="info-text">ⓘ Maximum file size for upload 1 MB.</p>
+    <br><br>
+<hr>
+    <input type="file">
+        <p style="color:red">
+        Proof of Authorized Signatory is not required for proprietor who is also an authorized signatory.
+    </p>
+    <hr>
+      <p style="color:red">
+        Proof of Authorized Signatory is not required for proprietor who is also an authorized signatory.
+    </p>
+
+    <div class="btn-group">
+        <button><a href="./dash4.html">BACK</a></button>
+        <button>SHOW LIST</button>
+        <button>ADD NEW</button>
+        <button><a href="dash7.html">SAVE & CONTINUE</a></button>
+    </div>
+</div>
+</div>
+
+        <div class="waste">
+                <div class="com">
+        <div class="lap">
+                  <h3>About GST</h3>
+        <ul>
+            <li>GST Council Structure</li>
+            <li>GST History</li>
+        </ul>  
+        </div>
+
+        <div class="lap">
+            <h3>Website Policies</h3>
+            <ul>
+                <li>Website Policy</li>
+                <li>Terms and conditions</li>
+                <li>Hyperlink Policy</li>
+                <li>Disclaimer</li>
+            </ul>
+        </div>
+
+        <div class="lap">
+            <h3>Related Sites</h3>
+            <ul>
+                <li>Central Board of Indirect Taxes and Customs</li>
+                <li>State Tax Websites</li>
+                <li>National Portal</li>
+            </ul>
+        </div>
+
+        <div class="lap">
+            <h3>Help and Taxpayer Facilities</h3>
+            <ul>
+                <li>System Requirement</li>
+                <li>GST knowledge Portal</li>
+                <li>GST Media</li>
+               <li>Site Map</li> 
+<li>Grievance Nodal Officers
+</li>
+<li>
+Free Accounting and Billing Services 
+</li>
+<li>
+GST Suvidha Providers 
+</li>
+
+            </ul>
+        </div>
+
+        <div class="king">
+            <h3>Contact Us</h3>
+            <ul>
+                <li>Help Desk Number:
+1800-103-4786</li>
+<li>
+    Log/Track Your Issue:<br>
+Grievance Redressal Portal for GST 
+</li>
+            </ul>
+        </div>
+
+    </div>
+<hr>
+    <div class="rest">
+        <div class="sing">
+     <p>@2026-27 Good and Services Tax Network</p>
+        </div>
+        <div class="sing">
+            <p>Site Last Updated on 29-05-2026</p>
+        </div>
+        <div class="sing">
+            <p>Design and Developed by GSTN</p>
+        </div>
+    </div>
+
+   
+
+    <footer>
+       Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
+    </footer>
+
+</body>
+</html>
