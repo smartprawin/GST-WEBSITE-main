@@ -21,8 +21,8 @@
         </div>
 
         <div class="locked">
-        <button type="button" onclick="window.location.href='MAIN.html'">REGISTER</button>
-        <button type="button" onclick="window.location.href='../LOGIN GST/loginPage.html'">LOGIN</button>
+        <button type="button" onclick="exportAndGo('MAIN.html')">REGISTER</button>
+        <button type="button" onclick="exportAndGo('../LOGIN GST/loginPage.html')">LOGIN</button>
         </div>
     </header>
     
@@ -48,16 +48,16 @@
         <p id="singing">New Registration</p>
         <div class="king">
  <form>
-            <input type="radio" id="newReg" name="Registration" value="New Registration">
+            <input type="radio" id="newReg" name="Registration Type" value="New Registration">
             <label for="newReg">New Registration</label>
 
-            <input type="radio" id="trn" name="Registration" value="Temporary Registration Number(TRN)">
+            <input type="radio" id="trn" name="Registration Type" value="Temporary Registration Number(TRN)">
             <label for="trn">Temporary Reference Number(TRN)</label><br>
             </div>
           
 <div class="part">
 <label for="iam">I am a </label><br>
-            <select class="field" id="iam" name="I am a">
+            <select class="field" id="iam" name="User Type">
                 <option value="">Select</option>
                 <option value="Tax Payer">Tax Payer</option>
                 <option value="Tax deducator">Tax deducator</option>
@@ -66,7 +66,7 @@
             </select>
             <br>
             <label for="state">State/ UT </label><br>
-            <select class="field" id="state" name="State/ UT">
+            <select class="field" id="state" name="State">
                 <option value="">Select</option>
                 <option value="Andhra Pradesh">Andhra Pradesh</option>
                 <option value="Assam">Assam</option>
@@ -88,16 +88,16 @@
             </select>
             <br>
             <label for="legalName">Legal Name of the Business</label><br>
-            <input type="text" placeholder="Ex-Nachimuthu Saravanakumar" id="legalName" name="Legal Name of the Business"><br>
+            <input type="text" placeholder="Ex-Nachimuthu Saravanakumar" id="legalName" name="Business Name"><br>
             <label for="pan">Permanent Account Number(PAN)</label><br>
             <input type="text" placeholder="Ex-AYGPS0480G1ZH" id="pan" name="PAN"><br>
             <label for="email" id="king">Email Address</label><br>
-            <input type="email" placeholder="Ex-Krrhitech@gmail.com" id="email" name="Email Address">
+            <input type="email" placeholder="Ex-Krrhitech@gmail.com" id="email" name="Email">
             <p>OTP will be sent to this Email Address</p>
             <label for="mobile">Mobile Number</label><br>
-            <input type="number" placeholder="Ex-98946 39410" id="mobile" name="Mobile Number">
+            <input type="number" placeholder="Ex-98946 39410" id="mobile" name="Mobile">
             <p>Seperate OTP will be sent to this mobile number</p>
-            <button type="button" onclick="window.location.href='OTP.html'">PROCEED</button>
+            <button type="button" onclick="exportAndGo('OTP.html')">PROCEED</button>
         </form>
 
             
@@ -184,6 +184,7 @@ Grievance Redressal Portal for GST
     <footer>
        Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
     </footer>
-    <script src="../excel-exporter.js"></script>
+    <script src="../excel-exporter.js?v=5"></script>
+    <script>console.log('exportAndGo defined:', typeof exportAndGo);</script>
 </body>
 </html>
