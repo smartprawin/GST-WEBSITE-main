@@ -1,0 +1,13 @@
+{
+  "name": "gst-website",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "xlsx": "^0.18.5",
+    "cors": "^2.8.5"
+  }
+}

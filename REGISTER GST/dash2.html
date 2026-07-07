@@ -28,7 +28,7 @@
 
         <div class="locked">
         <button>REGISTER</button>
-        <button>LOGIN</button>
+        <button type="button" onclick="window.location.href='../LOGIN GST/loginPage.html'">LOGIN</button>
         </div>
     </header>
 
@@ -50,17 +50,18 @@
         <div class="king">
               <p id="shake">*Indicates manatory fileds</p>
  <form>
-            <input type="radio" id="New Registration" name="Registation" value="New Registration">
-            <label for="New Registration">New Registration</label>
+            <input type="radio" id="newReg" name="Registration" value="New Registration">
+            <label for="newReg">New Registration</label>
 
-            <input type="radio" id="Temporary Reference Number(TRN)" name="Registation" value="Temporary Registration Number(TRN)" >Temporary Reference Number(TRN)<br>
+            <input type="radio" id="trn" name="Registration" value="Temporary Registration Number(TRN)">
+            <label for="trn">Temporary Reference Number(TRN)</label><br>
             </div>
     <div class="part">
-                    <label>Temporary References Number (TRN)*</label><br>
-            <input type="text" placeholder="Ex - 332300189520TRN" id="field"><br>
-            <label>Type the characters you can see in the image below</label><br>
-            <input type="text" placeholder="Type the characters you can see in the image below id="field"><br>
-                   <button><a href="OTP2.html">PROCEED</a></button>
+                    <label for="trnInput">Temporary References Number (TRN)*</label><br>
+            <input type="text" id="trnInput" name="TRN Number" placeholder="Ex - 332300189520TRN"><br>
+            <label for="captcha">Type the characters you can see in the image below</label><br>
+            <input type="text" id="captcha" name="Captcha" placeholder="Type the characters you can see in the image below"><br>
+                   <button type="button" onclick="window.location.href='OTP2.html'">PROCEED</button>
     </div>
      </div>
 

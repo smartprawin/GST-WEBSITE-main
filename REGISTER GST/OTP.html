@@ -212,17 +212,17 @@ button a{
     <div class="king">
         <div class="part">
             <form>
-        <label>Mobile OTP*</label><br>
-        <input type="number" placeholder="Enter 6 digit code">
+        <label for="mobileOtp">Mobile OTP*</label><br>
+        <input type="number" id="mobileOtp" name="Mobile OTP" placeholder="Enter 6 digit code">
         <p>ⓘ Fill OTP sent to Mobile and Email</p>
-                <label>Email OTP*</label><br>
-        <input type="number" placeholder="Enter 6 digit code">
+                <label for="emailOtp">Email OTP*</label><br>
+        <input type="number" id="emailOtp" name="Email OTP" placeholder="Enter 6 digit code">
         <p>Enter OTP sent to Your Email Address</p>
         <p>ⓘ Please check the junk / spam folder in case you donot get email</p>
         <p id="game">Need OTP to be resent? Click here</p>
         <div class="asd">
-        <button id="race"><a href="MAIN.html">BACK</a></button>
-<button id="sales"><a href="verify.html">PROCEED</a></button>
+        <button type="button" id="race" onclick="window.location.href='MAIN.html'">BACK</button>
+<button type="button" id="sales" onclick="window.location.href='verify.html'">PROCEED</button>
         </div>
 
     </form>

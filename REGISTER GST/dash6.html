@@ -165,7 +165,7 @@ hr{
 
         <div class="locked">
         <button>REGISTER</button>
-        <button>LOGIN</button>
+        <button type="button" onclick="window.location.href='../LOGIN GST/loginPage.html'">LOGIN</button>
         </div>
     </header>
 
@@ -227,14 +227,14 @@ hr{
         <tr>
             <td>
                 First Name<br>
-                <input type="text" value="S NARESH">
+                <input type="text" id="pFirstName" name="First Name" value="S NARESH">
             </td>
             <td>
                 Middle Name<br>
-                <input type="text" placeholder="Enter Middle Name">
+                <input type="text" id="pMiddleName" name="Middle Name" placeholder="Enter Middle Name">
             </td>
             <td>Last Name<br>
-            <input type="text" value="NARESH">
+            <input type="text" id="pLastName" name="Last Name" value="NARESH">
             </td>
         </tr>
         <tr>
@@ -242,26 +242,26 @@ hr{
         </tr>
         <tr>
             <td>First Name<br>
-            <input type="text" value="SANKAR">
+            <input type="text" id="fFirstName" name="Father First Name" value="SANKAR">
         </td>
         <td>
             MIDDLE NAME<br>
-            <input type="text" placeholder="Enter Middle Name">
+            <input type="text" id="fMiddleName" name="Father Middle Name" placeholder="Enter Middle Name">
         </td>
         <td>
             Last Name<br>
-            <input type="text" placeholder="Enter last Name">
+            <input type="text" id="fLastName" name="Father Last Name" placeholder="Enter last Name">
         </td>
         </tr>
         <tr>
             <td>Date of Birth<br>
-            <input type="date">
+            <input type="date" id="dob" name="Date of Birth">
         </td>
         <td>Mobile Number<br>
-        <input type="tel">
+        <input type="tel" id="mobile" name="Mobile Number">
         </td>
         <td>Email Address<br>
-        <input type="email">
+        <input type="email" id="email" name="Email Address">
     </td>
         </tr>
     </table>
@@ -269,35 +269,35 @@ hr{
     <table border="1"> 
         <tr>
             <td>Country<br>
-            <input type="text" value="India"></td>
+            <input type="text" id="country" name="Country" value="India"></td>
                        <td>PIN Code<br>
-            <input type="text" value="600017"></td>
+            <input type="text" id="pincode" name="PIN Code" value="600017"></td>
                        <td>State<br>
-            <input type="text" value="Tamil Nadu"></td>
+            <input type="text" id="state" name="State" value="Tamil Nadu"></td>
                        </tr>
         <tr>
             <td>District<br>
-            <input type="text" value="Chennai"></td>
+            <input type="text" id="district" name="District" value="Chennai"></td>
                        <td>City/ Town/ Village<br>
-            <input type="text" value="Chennai"></td>
+            <input type="text" id="city" name="City/Town" value="Chennai"></td>
                        <td>Locality / Sub Locality<br>
-            <input type="text" value="T Nagar"></td>
+            <input type="text" id="locality" name="Locality" value="T Nagar"></td>
         </tr>
 
                 <tr>
             <td>Road /Street<br>
-            <input type="text" value="Ramachandra Road"></td>
+            <input type="text" id="road" name="Road/Street" value="Ramachandra Road"></td>
                        <td>Name of Premises / Building<br>
-            <input type="text"></td>
+            <input type="text" id="building" name="Building Name"></td>
                        <td>Building No / Flat No<br>
-            <input type="text" value="11/6"></td>
+            <input type="text" id="flatNo" name="Flat Number" value="11/6"></td>
         </tr>
 
          <tr>
             <td>Floor No<br>
-            <input type="text" value="Ground Floor"></td>
+            <input type="text" id="floorNo" name="Floor Number" value="Ground Floor"></td>
                        <td>Nearby Landmark<br>
-            <input type="text"></td>
+            <input type="text" id="landmark" name="Nearby Landmark"></td>
                        <td></td>
         </tr>
     </table>
@@ -306,12 +306,12 @@ hr{
     <input type="file">
     <br><br>
         <label class="proof-label">Proof of details of authorized signatory</label><br>
-    <select>
-        <option>Select</option>
-        <option>Aadhaar Card</option>
-        <option>Passport</option>
-        <option>Voter ID</option>
-        <option>Driving License</option>
+    <select id="proofDoc" name="Proof of Authorized Signatory">
+        <option value="">Select</option>
+        <option value="Aadhaar Card">Aadhaar Card</option>
+        <option value="Passport">Passport</option>
+        <option value="Voter ID">Voter ID</option>
+        <option value="Driving License">Driving License</option>
     </select>
     <p class="info-text">ⓘ File with PDF or JPEG format is only allowed</p>
     <p class="info-text">ⓘ Maximum file size for upload 1 MB.</p>
@@ -327,10 +327,10 @@ hr{
     </p>
 
     <div class="btn-group">
-        <button><a href="./dash4.html">BACK</a></button>
+        <button type="button" onclick="window.location.href='./dash4.html'">BACK</button>
         <button>SHOW LIST</button>
         <button>ADD NEW</button>
-        <button><a href="dash7.html">SAVE & CONTINUE</a></button>
+        <button type="button" onclick="window.location.href='dash7.html'">SAVE & CONTINUE</button>
     </div>
 </div>
 </div>

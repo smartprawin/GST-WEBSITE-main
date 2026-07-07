@@ -178,25 +178,25 @@ select{
 <p class="wide">Nil return for GSTR-1,GSTR-3B and CMP-1</p>
 <p class="port">*Indicates Mandatory Fields</p>
 <div class="rote">
-    <label>Financial Year * </label>
-    <select>
-        <option>2026-2027</option>
-     <option>2028-2029</option>
-    <option>2029-2030</option>
+    <label for="finYear">Financial Year * </label>
+    <select id="finYear" name="Financial Year">
+        <option value="2026-2027">2026-2027</option>
+     <option value="2028-2029">2028-2029</option>
+    <option value="2029-2030">2029-2030</option>
     </select>
 
-        <label>Quarter * </label>
-    <select>
-        <option>Quarter 2 (Jul -Sep)</option>
-     <option>Quarter 2 (Oct -Dec)</option>
-    <option>Quarter 2 (Jan -March)</option>
+        <label for="quarter">Quarter * </label>
+    <select id="quarter" name="Quarter">
+        <option value="Q2 Jul-Sep">Quarter 2 (Jul -Sep)</option>
+     <option value="Q2 Oct-Dec">Quarter 2 (Oct -Dec)</option>
+    <option value="Q2 Jan-Mar">Quarter 2 (Jan -March)</option>
     </select>
 
-            <label>Period * </label>
-    <select>
-        <option>July</option>
-     <option>October</option>
-    <option>January</option>
+            <label for="period">Period * </label>
+    <select id="period" name="Period">
+        <option value="July">July</option>
+     <option value="October">October</option>
+    <option value="January">January</option>
     </select>
 
     <button>Search</button>

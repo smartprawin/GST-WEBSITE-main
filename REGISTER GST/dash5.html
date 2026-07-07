@@ -394,7 +394,7 @@ input:checked + .slider:before{
 
         <div class="locked">
         <button>REGISTER</button>
-        <button>LOGIN</button>
+        <button type="button" onclick="window.location.href='../LOGIN GST/loginPage.html'">LOGIN</button>
         </div>
     </header>
 
@@ -461,23 +461,23 @@ input:checked + .slider:before{
 
     <div class="form-row">
 <div class="field">
-    <label>Trade Name</label>
-    <input type="text" placeholder="EX- HI-TECK COMPUTER">
+    <label for="tradeName">Trade Name</label>
+    <input type="text" id="tradeName" name="Trade Name" placeholder="EX- HI-TECK COMPUTER">
 </div>
         <div class="field">
-            <label>Constitution of Business *</label>
-            <select>
-                <option>Select</option>
-                <option>Proprietorship</option>
-                <option>Partnership</option>
-                <option>Company</option>
+            <label for="constitution">Constitution of Business *</label>
+            <select id="constitution" name="Constitution of Business">
+                <option value="">Select</option>
+                <option value="Proprietorship">Proprietorship</option>
+                <option value="Partnership">Partnership</option>
+                <option value="Company">Company</option>
             </select>
         </div>
     </div>
     <div class="additional-row">
         <div class="field">
-            <label>Additional Trade Name</label>
-            <input type="text" placeholder="Enter Trade Name">
+            <label for="addTradeName">Additional Trade Name</label>
+            <input type="text" id="addTradeName" name="Additional Trade Name" placeholder="Enter Trade Name">
         </div>
                 <button class="add-btn">+ ADD</button>
         <button class="cancel-btn">CANCEL</button>
@@ -489,9 +489,9 @@ input:checked + .slider:before{
             <p>Tamil Nadu</p>
         </div>
                 <div class="field">
-            <label>District *</label>
-            <select>
-                <option>Chennai</option>
+            <label for="district">District *</label>
+            <select id="district" name="District">
+                <option value="Chennai">Chennai</option>
             </select>
         </div>
         </div>
@@ -501,7 +501,7 @@ input:checked + .slider:before{
         <div class="toggle">
             <label>Are you applying for registration as a casual taxable person?</label>
                   <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" name="Casual Taxable Person">
             <span class="slider"></span>
         </label>
         </div>
@@ -510,13 +510,13 @@ input:checked + .slider:before{
     <div class="toggle">
             <label>Option for Composition</label>
                   <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" name="Composition Option">
             <span class="slider"></span>
         </label>
         </div>
 
         <div class="best">
-                <input type="checkbox">
+                <input type="checkbox" name="Option for Composition">
             <label>Option for Composition</label>
         
         </div>
@@ -526,20 +526,20 @@ input:checked + .slider:before{
         <h2>Indicate Existing Regsitrations</h2>
         <div class="registration">
             <div class="form">
-                            <label>Type of Registration</label>
-            <select>
-                <option>Select</option>
+                            <label for="regType">Type of Registration</label>
+            <select id="regType" name="Type of Registration">
+                <option value="">Select</option>
             </select>
             </div>
             <div class="form">
-                            <label>Registration No.<span>*</span></label>
-            <input type="text">
+                            <label for="regNo">Registration No.<span>*</span></label>
+            <input type="text" id="regNo" name="Registration Number">
             </div>
             <div class="form">
-                            <label>Date of Registration<span>*</span></label>
+                            <label for="regDate">Date of Registration<span>*</span></label>
 
             <div class="date">
-                <input type="text" placeholder="DD/MM/YYYY">
+                <input type="text" id="regDate" name="Date of Registration" placeholder="DD/MM/YYYY">
                 <button class="calendar">📅</button>
             </div>
          </div>
@@ -561,8 +561,8 @@ input:checked + .slider:before{
 
     </div>
         <div class="buttons">
-        <button class="back-btn"><a href="dash3.html">BACK</a></button>
-        <button class="save-btn"><a href="dash4.html">SAVE & CONTINUE</a></button>
+        <button type="button" class="back-btn" onclick="window.location.href='dash3.html'">BACK</button>
+        <button type="button" class="save-btn" onclick="window.location.href='dash4.html'">SAVE & CONTINUE</button>
     </div>
 </div>
 

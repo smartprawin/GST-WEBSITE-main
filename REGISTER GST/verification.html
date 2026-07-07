@@ -175,7 +175,7 @@ button a{
 
         <div class="locked">
         <button>REGISTER</button>
-        <button>LOGIN</button>
+        <button type="button" onclick="window.location.href='../LOGIN GST/loginPage.html'">LOGIN</button>
         </div>
     </header>
 
@@ -226,30 +226,31 @@ button a{
 <div class="love">
     <h3>Verification</h3>
     <hr>
-    <input type="checkbox" id="la">I hearby solemnly affirm and declare that the information given herein above is true and correct to the best of my knowledge and belief and  nothing has been concealed therefrom.
+    <input type="checkbox" id="declaration" name="Declaration">
+    <label for="declaration">I hearby solemnly affirm and declare that the information given herein above is true and correct to the best of my knowledge and belief and  nothing has been concealed therefrom.</label>
     <div class="rock">
         <div>
-            <label>Name of Authorized Signatory*</label>
-            <select>
+            <label for="authSignatory">Name of Authorized Signatory*</label>
+            <select id="authSignatory" name="Authorized Signatory">
                 <option value="">Select</option>
             </select>
         </div>
         <div class="qwe">
-            <label>Place*</label><br>
-            <input type="text" id="place" placeholder="Enter Place">
+            <label for="place">Place*</label><br>
+            <input type="text" id="place" name="Place" placeholder="Enter Place">
         </div>
         <div>
-            <label>Designation /Status*</label><br>
-            <textarea cols="4" style="width: 100%; height: 50px;" ></textarea>
+            <label for="designation">Designation /Status*</label><br>
+            <textarea id="designation" name="Designation" cols="4" style="width: 100%; height: 50px;"></textarea>
         </div>
         <div class="qwe">
-            <label>Date*</label><br>
-            <input type="date" d="date">
+            <label for="date">Date*</label><br>
+            <input type="date" id="date" name="Date">
         </div>
     </div>
     <p id="np">ⓘFacing problem using DSC? Click here for help</p>
     <div class="btn">
-        <button><a href="adhar.html">BACK</a></button>
+        <button type="button" onclick="window.location.href='adhar.html'">BACK</button>
         <button id="lack">SUBMIT WITH DSC</button>
          <button id="lack">SUBMIT WITH EVC</button>
     </div>

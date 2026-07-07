@@ -240,7 +240,7 @@ button a{
 
         <div class="locked">
         <button>REGISTER</button>
-        <button>LOGIN</button>
+        <button type="button" onclick="window.location.href='../LOGIN GST/loginPage.html'">LOGIN</button>
         </div>
     </header>
 
@@ -298,63 +298,63 @@ button a{
         <div class="section">Address Details</div>
     <form class="form-grid">
         <div class="form-group">
-            <label for="">PIN Code</label>
-            <input type="text" id="pincode" placeholder="Enter PIN Code">
+            <label for="pincode">PIN Code</label>
+            <input type="text" id="pincode" name="PIN Code" placeholder="Enter PIN Code">
         </div>
 
     <div class="form-group">
-            <label for="">State</label>
-            <input type="text" id="state" placeholder="Enter State">
+            <label for="state">State</label>
+            <input type="text" id="state" name="State" placeholder="Enter State">
         </div>
         
                 <div class="form-group">
-            <label for="">District</label>
-            <input type="text" id="District" placeholder="Enter District">
+            <label for="district">District</label>
+            <input type="text" id="district" name="District" placeholder="Enter District">
         </div>
         
                 <div class="form-group">
-            <label for="">City/ Town/ Village</label>
-            <input type="text" id="city">
+            <label for="city">City/ Town/ Village</label>
+            <input type="text" id="city" name="City/Town">
         </div>
         
         <div class="form-group">
-            <label for="">Locality / Sub Localoty</label>
-            <input type="text">
+            <label for="locality">Locality / Sub Localoty</label>
+            <input type="text" id="locality" name="Locality">
         </div>
 
         <div class="form-group">
-            <label for="">Road / Street</label>
-            <input type="text">
+            <label for="road">Road / Street</label>
+            <input type="text" id="road" name="Road/Street">
         </div>
         
      <div class="form-group">
-            <label for="">Name of Premises / Building</label>
-            <input type="text">
+            <label for="building">Name of Premises / Building</label>
+            <input type="text" id="building" name="Building Name">
         </div>
 
     <div class="form-group">
-            <label for="">Building No/ Flat No</label>
-            <input type="text">
+            <label for="flatNo">Building No/ Flat No</label>
+            <input type="text" id="flatNo" name="Flat Number">
         </div>
 
         <div class="form-group">
-            <label for="">Floor No</label>
-            <input type="text">
+            <label for="floorNo">Floor No</label>
+            <input type="text" id="floorNo" name="Floor Number">
         </div>
 
         <div class="form-group">
-            <label for="">Nearby Landmark</label>
-            <input type="text">
+            <label for="landmark">Nearby Landmark</label>
+            <input type="text" id="landmark" name="Nearby Landmark">
         </div>
 
         <div class="form-group">
-            <label for="">Latitude</label>
-            <input type="text">
+            <label for="latitude">Latitude</label>
+            <input type="text" id="latitude" name="Latitude">
         </div>
 
      <div class="form-group">
-            <label for="">Longitude</label>
-            <input type="text">
+            <label for="longitude">Longitude</label>
+            <input type="text" id="longitude" name="Longitude">
     </div>
  </div>
  <div style="margin: 20px 0;">
@@ -364,30 +364,30 @@ button a{
        
  <div class="form-grid">
     <div class="form-group">
-        <label>Select / Circle / Ward/ Charge / Unit</label>
-        <select>
-            <option>Select</option>
+        <label for="jurisdiction">Select / Circle / Ward/ Charge / Unit</label>
+        <select id="jurisdiction" name="Jurisdiction">
+            <option value="">Select</option>
         </select>
     </div>
 
  <div class="form-group">
-        <label>Commissionerate</label>
-        <select>
-            <option>Select</option>
+        <label for="commissionerate">Commissionerate</label>
+        <select id="commissionerate" name="Commissionerate">
+            <option value="">Select</option>
         </select>
     </div>
 
         <div class="form-group">
-        <label>Divison</label>
-        <select>
-            <option>Select</option>
+        <label for="division">Divison</label>
+        <select id="division" name="Division">
+            <option value="">Select</option>
         </select>
     </div>
 
      <div class="form-group">
-        <label>Range</label>
-        <select>
-            <option>Select</option>
+        <label for="range">Range</label>
+        <select id="range" name="Range">
+            <option value="">Select</option>
         </select>
     </div>
  </div>
@@ -395,23 +395,23 @@ button a{
  <div class="section">Contact Information</div>
  <div class="form-grid">
      <div class="form-group">
-        <label>Office Email Address</label>
-        <input type="email">
+        <label for="officeEmail">Office Email Address</label>
+        <input type="email" id="officeEmail" name="Office Email">
     </div>
 
     <div class="form-group">
-        <label>Office Telephone Number</label>
-        <input type="text">
+        <label for="officeTel">Office Telephone Number</label>
+        <input type="text" id="officeTel" name="Office Telephone">
     </div>
 
     <div class="form-group">
-        <label>Mobile Number</label>
-        <input type="number">
+        <label for="mobileNum">Mobile Number</label>
+        <input type="number" id="mobileNum" name="Mobile Number">
     </div>
 
     <div class="form-group">
-        <label>Office FAX Number (with STD Code)</label>
-        <input type="number">
+        <label for="officeFax">Office FAX Number (with STD Code)</label>
+        <input type="number" id="officeFax" name="Office FAX">
     </div>
 
  </div>
@@ -420,25 +420,25 @@ button a{
     <div class="section">Nature of Possession & Document Upload</div>
     <div class="form-grid">
         <div class="form-group">
-                    <label>Nature of Possession of Premises *</label>
-        <select>
-            <option>Please Select</option>
-            <option>Owned</option>
-            <option>Rented</option>
-            <option>Leased</option>
-            <option>Consent</option>
-            <option>Shared</option>
+                    <label for="possession">Nature of Possession of Premises *</label>
+        <select id="possession" name="Nature of Possession">
+            <option value="">Please Select</option>
+            <option value="Owned">Owned</option>
+            <option value="Rented">Rented</option>
+            <option value="Leased">Leased</option>
+            <option value="Consent">Consent</option>
+            <option value="Shared">Shared</option>
         </select>
         </div>
 
             <div class="form-group">
-        <label>Proof of Principle Place of Business *</label>
-        <select>
-            <option>Select Document</option>
-            <option>Electricity Bill</option>
-            <option>Property Tax Receipt</option>
-            <option>Rent Agreement</option>
-            <option>Water Bill</option>
+        <label for="proofDoc">Proof of Principle Place of Business *</label>
+        <select id="proofDoc" name="Proof of Principle Place">
+            <option value="">Select Document</option>
+            <option value="Electricity Bill">Electricity Bill</option>
+            <option value="Property Tax Receipt">Property Tax Receipt</option>
+            <option value="Rent Agreement">Rent Agreement</option>
+            <option value="Water Bill">Water Bill</option>
         </select>
 
                 <small style="margin-top:8px;color:#666;">
@@ -457,46 +457,46 @@ button a{
     </div>
     <div class="checkbox">
         <label>
-            <input type="checkbox">Bonded Warehouse
+            <input type="checkbox" name="Bonded Warehouse">Bonded Warehouse
         </label>
         <label>
-            <input type="checkbox">EOU / STP/ EHTP
+            <input type="checkbox" name="EOU/STP/EHTP">EOU / STP/ EHTP
         </label>
         <label>
-            <input type="checkbox">Export
+            <input type="checkbox" name="Export">Export
         </label>
                 <label>
-            <input type="checkbox">Factory / Manufacturing
+            <input type="checkbox" name="Factory/Manufacturing">Factory / Manufacturing
         </label>
                 <label>
-            <input type="checkbox">Import
+            <input type="checkbox" name="Import">Import
         </label>
                 <label>
-            <input type="checkbox">Supplier of Services
+            <input type="checkbox" name="Supplier of Services">Supplier of Services
         </label>
 
-            <label><input type="checkbox"> Leasing Business</label>
-    <label><input type="checkbox"> Office / Sale Office</label>
-    <label><input type="checkbox"> Recipient of Goods or Services</label>
+            <label><input type="checkbox" name="Leasing Business"> Leasing Business</label>
+    <label><input type="checkbox" name="Office/Sale Office"> Office / Sale Office</label>
+    <label><input type="checkbox" name="Recipient of Goods or Services"> Recipient of Goods or Services</label>
 
-    <label><input type="checkbox"> Retail Business</label>
-    <label><input type="checkbox"> Warehouse / Depot</label>
-    <label><input type="checkbox"> Wholesale Business</label>
+    <label><input type="checkbox" name="Retail Business"> Retail Business</label>
+    <label><input type="checkbox" name="Warehouse/Depot"> Warehouse / Depot</label>
+    <label><input type="checkbox" name="Wholesale Business"> Wholesale Business</label>
 
-    <label><input type="checkbox"> Works Contract</label>
-    <label><input type="checkbox"> Others (Please Specify)</label>
+    <label><input type="checkbox" name="Works Contract"> Works Contract</label>
+    <label><input type="checkbox" name="Others"> Others (Please Specify)</label>
     </div>
     <div class="form-group full-width" style="margin-top: 20px;">
-            <label>Have Additional Place of Business</label>
-    <select>
-        <option>Select</option>
-        <option>Yes</option>
-        <option>No</option>
+            <label for="additionalPlace">Have Additional Place of Business</label>
+    <select id="additionalPlace" name="Additional Place of Business">
+        <option value="">Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
     </select>
     </div>
     <div class="damage">
-        <button><a href="./dash7.html">BACK</a></button>
-        <button id="save"><a href="additionalplaces.html">SAVE & CONTINUE</a></button>
+        <button type="button" onclick="window.location.href='./dash7.html'">BACK</button>
+        <button type="button" id="save" onclick="window.location.href='additionalplaces.html'">SAVE & CONTINUE</button>
     </div>
 
     

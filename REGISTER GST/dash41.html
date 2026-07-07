@@ -299,7 +299,7 @@ header{
 
         <div class="locked">
         <button>REGISTER</button>
-        <button>LOGIN</button>
+        <button type="button" onclick="window.location.href='../LOGIN GST/loginPage.html'">LOGIN</button>
         </div>
     </header>
 
@@ -352,18 +352,18 @@ header{
 </div>
 <div class="business">
     <div class="group">
-        <label>First Name *</label>
-        <input type="text" placeholder="Enter First Name">
+        <label for="pFirstName">First Name *</label>
+        <input type="text" id="pFirstName" name="First Name" placeholder="Enter First Name">
     </div>
 
     <div class="group">
-        <label>Middle Name</label>
-        <input type="text" placeholder="Enter Middle Name">
+        <label for="pMiddleName">Middle Name</label>
+        <input type="text" id="pMiddleName" name="Middle Name" placeholder="Enter Middle Name">
     </div>
 
     <div class="group">
-        <label>last Name</label>
-        <input type="text" placeholder="Enter last Name">
+        <label for="pLastName">last Name</label>
+        <input type="text" id="pLastName" name="Last Name" placeholder="Enter last Name">
     </div>
     <div class="group full-row">
     <label><b>Name of Father</b></label>
@@ -371,40 +371,40 @@ header{
 
 
     <div class="group">
-        <label>First Name *</label>
-        <input type="text" placeholder="Enter First Number">
+        <label for="fFirstName">First Name *</label>
+        <input type="text" id="fFirstName" name="Father First Name" placeholder="Enter First Number">
     </div>
     
     <div class="group">
-        <label>Middle Name</label>
-        <input type="text" placeholder="Enter Middle Name">
+        <label for="fMiddleName">Middle Name</label>
+        <input type="text" id="fMiddleName" name="Father Middle Name" placeholder="Enter Middle Name">
     </div>
 
     <div class="group">
-        <label>last Name</label>
-        <input type="text" placeholder="Enter last Name">
+        <label for="fLastName">last Name</label>
+        <input type="text" id="fLastName" name="Father Last Name" placeholder="Enter last Name">
     </div>
 
      <div class="group">
-        <label>Date of Birth *</label>
-        <input type="date">
+        <label for="dob">Date of Birth *</label>
+        <input type="date" id="dob" name="Date of Birth">
     </div>
 
     <div class="group">
-        <label>Mobile Number *</label>
-        <input type="number" placeholder="Enter Mobile Number">
+        <label for="mobile">Mobile Number *</label>
+        <input type="number" id="mobile" name="Mobile Number" placeholder="Enter Mobile Number">
     </div>
 
     <div class="group">
-        <label>Email Address*</label>
-        <input type="email" placeholder="Enter Email Address">
+        <label for="email">Email Address*</label>
+        <input type="email" id="email" name="Email Address" placeholder="Enter Email Address">
     </div>
 </div>
 
 <div class="gender">
-<label><input type="radio" name="gender"> Male</label>
-<label><input type="radio" name="gender"> Female</label>
-<label><input type="radio" name="gender"> Others</label>
+<label><input type="radio" name="gender" value="Male"> Male</label>
+<label><input type="radio" name="gender" value="Female"> Female</label>
+<label><input type="radio" name="gender" value="Others"> Others</label>
 </div>
 
 <div class="section">
@@ -412,32 +412,32 @@ header{
 </div>
 <div class="form">
     <div class="group">
-        <label>Designation /Status *</label>
-        <input type="text" placeholder="Enter Designation">
+        <label for="designation">Designation /Status *</label>
+        <input type="text" id="designation" name="Designation" placeholder="Enter Designation">
     </div>
 
     <div class="group">
-        <label>DIN Number *</label>
-        <input type="text" placeholder="Enter Designation">
+        <label for="din">DIN Number *</label>
+        <input type="text" id="din" name="DIN Number" placeholder="Enter Designation">
     </div>
     <div class="group">
-        <label>Citizen of India</label>
-        <select>
-            <option>Yes</option>
-            option>No</option>
+        <label for="citizenIndia">Citizen of India</label>
+        <select id="citizenIndia" name="Citizen of India">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
         </select>
     </div>
     <div class="group">
-        <label>PAN Number *</label>
-        <input type="text" placeholder="Enter PAN number">
+        <label for="panNum">PAN Number *</label>
+        <input type="text" id="panNum" name="PAN Number" placeholder="Enter PAN number">
     </div>
     <div class="group">
-        <label>Passport Number</label>
-        <input type="text" placeholder="Enter Passport Number">
+        <label for="passport">Passport Number</label>
+        <input type="text" id="passport" name="Passport Number" placeholder="Enter Passport Number">
     </div>
     <div class="group">
-        <label>Aadhaar Number ⓘ </label>
-        <input type="text" placeholder="Enter Aadhaar Number">
+        <label for="aadhaar">Aadhaar Number ⓘ </label>
+        <input type="text" id="aadhaar" name="Aadhaar Number" placeholder="Enter Aadhaar Number">
     </div>
 </div>
 
@@ -449,48 +449,48 @@ header{
 </div>
 <div class="form-grid">
     <div class="group">
-        <label>Country *</label>
-        <select>
-            <option>India</option>
+        <label for="country">Country *</label>
+        <select id="country" name="Country">
+            <option value="India">India</option>
         </select>
     </div>
     <div class="group">
-        <label>PIN Code *</label>
-        <input type="text" placeholder="Enter PIN Code">
+        <label for="pincode">PIN Code *</label>
+        <input type="text" id="pincode" name="PIN Code" placeholder="Enter PIN Code">
     </div>
     <div class="group">
-        <label>State *</label>
-        <input type="text" placeholder="Enter State">
+        <label for="state">State *</label>
+        <input type="text" id="state" name="State" placeholder="Enter State">
     </div>
     <div class="group">
-        <label>District *</label>
-        <input type="text" placeholder="Enter District">
+        <label for="district">District *</label>
+        <input type="text" id="district" name="District" placeholder="Enter District">
     </div>
     <div class="group">
-        <label>City? Town *</label>
-        <input type="text" placeholder="Enter City">
+        <label for="city">City? Town *</label>
+        <input type="text" id="city" name="City/Town" placeholder="Enter City">
     </div>
     <div class="group">
-<label>Road / Street *</label>
-<input type="text" placeholder="Enter Road">
+<label for="road">Road / Street *</label>
+<input type="text" id="road" name="Road/Street" placeholder="Enter Road">
 </div>
 
 <div class="group">
-<label>Building Name *</label>
-<input type="text" placeholder="Enter Building Name">
+<label for="building">Building Name *</label>
+<input type="text" id="building" name="Building Name" placeholder="Enter Building Name">
 </div>
 <div class="group">
-<label>Flat Number *</label>
-<input type="text" placeholder="Enter Flat Number">
+<label for="flatNo">Flat Number *</label>
+<input type="text" id="flatNo" name="Flat Number" placeholder="Enter Flat Number">
 </div>
 
 <div class="group">
-<label>Floor Number</label>
-<input type="text" placeholder="Enter Floor Number">
+<label for="floorNo">Floor Number</label>
+<input type="text" id="floorNo" name="Floor Number" placeholder="Enter Floor Number">
 </div>
 <div class="group">
-<label>Nearby Landmark</label>
-<input type="text" placeholder="Enter Landmark">
+<label for="landmark">Nearby Landmark</label>
+<input type="text" id="landmark" name="Nearby Landmark" placeholder="Enter Landmark">
 </div>
 </div>
 <div class="section">
@@ -508,10 +508,10 @@ header{
         </button>
     </div>
     <div class="bottom">
-        <button class="back"><a href="dash5.html">BACK</a></button>
+        <button type="button" class="back" onclick="window.location.href='dash5.html'">BACK</button>
         <button class="show">SHOW LIST</button>
-        <button class="add"><a href="dash4.html" style="color: white;">ADD NEW</a></button>
-        <button id="save"><a href="dash6.html">SAVE & CONTINUE</a></button>
+        <button type="button" class="add" onclick="window.location.href='dash4.html'">ADD NEW</button>
+        <button type="button" id="save" onclick="window.location.href='dash6.html'">SAVE & CONTINUE</button>
     </div>
 </div>
         <div class="waste">

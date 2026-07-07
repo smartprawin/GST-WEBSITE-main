@@ -22,7 +22,7 @@
 
         <div class="locked">
         <button>REGISTER</button>
-        <button>LOGIN</button>
+        <button type="button" onclick="window.location.href='../LOGIN GST/loginPage.html'">LOGIN</button>
         </div>
     </header>
     
@@ -48,55 +48,56 @@
         <p id="singing">New Registration</p>
         <div class="king">
  <form>
-            <input type="radio" id="New Registration" name="Registation" value="New Registration">
-            <label for="New Registration">New Registration</label>
+            <input type="radio" id="newReg" name="Registration" value="New Registration">
+            <label for="newReg">New Registration</label>
 
-            <input type="radio" id="Temporary Reference Number(TRN)" name="Registation" value="Temporary Registration Number(TRN)">Temporary Reference Number(TRN)<br>
+            <input type="radio" id="trn" name="Registration" value="Temporary Registration Number(TRN)">
+            <label for="trn">Temporary Reference Number(TRN)</label><br>
             </div>
           
 <div class="part">
-<label >I am a </label><br>
-            <select class="field">
-                <option value="Select">Select</option>
-                <option value="Select">Tax Payer</option>
-                <option value="Select">Tax deducator</option>
-                 <option value="Select">Tax Collector (E-commerce)</option>
-                <option value="Select">GST Practioner</option>
+<label for="iam">I am a </label><br>
+            <select class="field" id="iam" name="I am a">
+                <option value="">Select</option>
+                <option value="Tax Payer">Tax Payer</option>
+                <option value="Tax deducator">Tax deducator</option>
+                 <option value="Tax Collector (E-commerce)">Tax Collector (E-commerce)</option>
+                <option value="GST Practioner">GST Practioner</option>
             </select>
             <br>
-            <label >State/ UT </label><br>
-            <select class="field">
-                <option value="Select">Select</option>
-                <option value="Select">Andhra Pradesh</option>
-                <option value="Select">Assam</option>
-                 <option value="Select">Bihar</option>
-                <option value="Select">Gujarath</option>
-                 <option value="Select">Kerala</option>
-                     <option value="Select">Tamil Nadu</option>
+            <label for="state">State/ UT </label><br>
+            <select class="field" id="state" name="State/ UT">
+                <option value="">Select</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Assam">Assam</option>
+                 <option value="Bihar">Bihar</option>
+                <option value="Gujarath">Gujarath</option>
+                 <option value="Kerala">Kerala</option>
+                     <option value="Tamil Nadu">Tamil Nadu</option>
             </select>
             <br>
-            <label>District</label><br>
-                        <select class="field">
-                <option value="Select">Select</option>
-                <option value="Select">Chennai</option>
-                <option value="Select">Coimbatore</option>
-                 <option value="Select">Erode</option>
-                <option value="Select">Karur</option>
-                 <option value="Select">Trichy</option>
-                     <option value="Select">Paramathi</option>
+            <label for="district">District</label><br>
+                        <select class="field" id="district" name="District">
+                <option value="">Select</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Coimbatore">Coimbatore</option>
+                 <option value="Erode">Erode</option>
+                <option value="Karur">Karur</option>
+                 <option value="Trichy">Trichy</option>
+                     <option value="Paramathi">Paramathi</option>
             </select>
             <br>
-            <label>Legal Name of the Business</label><br>
-            <input type="text" placeholder="Ex-Nachimuthu Saravanakumar" id="field"><br>
-            <label>Permanent Account Number(PAN)</label><br>
-            <input type="text" placeholder="Ex-AYGPS0480G1ZH" id="field"><br>
-            <label id="king">Email Address</label><br>
-            <input type="email" placeholder="Ex-Krrhitech@gmail.com" id="field">
+            <label for="legalName">Legal Name of the Business</label><br>
+            <input type="text" placeholder="Ex-Nachimuthu Saravanakumar" id="legalName" name="Legal Name of the Business"><br>
+            <label for="pan">Permanent Account Number(PAN)</label><br>
+            <input type="text" placeholder="Ex-AYGPS0480G1ZH" id="pan" name="PAN"><br>
+            <label for="email" id="king">Email Address</label><br>
+            <input type="email" placeholder="Ex-Krrhitech@gmail.com" id="email" name="Email Address">
             <p>OTP will be sent to this Email Address</p>
-            <label>Mobile Number</label><br>
-            <input type="number" placeholder="Ex-98946 39410" id="field">
+            <label for="mobile">Mobile Number</label><br>
+            <input type="number" placeholder="Ex-98946 39410" id="mobile" name="Mobile Number">
             <p>Seperate OTP will be sent to this mobile number</p>
-            <button><a href="OTP.html">PROCEED</a></button>
+            <button type="button" onclick="window.location.href='OTP.html'">PROCEED</button>
         </form>
 
             

@@ -123,7 +123,7 @@ button a{text-decoration: none;color:black;}
 
         <div class="locked">
         <button>REGISTER</button>
-        <button>LOGIN</button>
+        <button type="button" onclick="window.location.href='../LOGIN GST/loginPage.html'">LOGIN</button>
         </div>
     </header>
 
@@ -173,28 +173,28 @@ button a{text-decoration: none;color:black;}
 
 <div class="kill">
     <div class="field">
-        <label>Professional Tax Employee Code(EC) No.</label>
-        <input type="number" placeholder="Enter Professional Tax E.C Number">
+        <label for="ptec">Professional Tax Employee Code(EC) No.</label>
+        <input type="number" id="ptec" name="Professional Tax EC Number" placeholder="Enter Professional Tax E.C Number">
     </div>
 
     <div class="field">
-        <label>State Excise License No</label>
-        <input type="number" placeholder="Enter State Excise License Number">
+        <label for="excise">State Excise License No</label>
+        <input type="number" id="excise" name="State Excise License Number" placeholder="Enter State Excise License Number">
     </div>
 
     <div class="field">
-        <label>Professional Tax Registration Certificate (RC) No.</label>
-        <input type="number" placeholder="Enter Professional Tax R.C Number">
+        <label for="ptrc">Professional Tax Registration Certificate (RC) No.</label>
+        <input type="number" id="ptrc" name="Professional Tax RC Number" placeholder="Enter Professional Tax R.C Number">
     </div>
 
     <div class="field">
-        <label>Name of the person in whose name Excise license is held</label>
-        <input type="text" placeholder="Enter Name">
+        <label for="exciseName">Name of the person in whose name Excise license is held</label>
+        <input type="text" id="exciseName" name="Excise License Holder Name" placeholder="Enter Name">
     </div>
 </div>
     <div class="laptop">
-    <button><a href="goods.html">BACK</a></button>
-    <button id="btn"><a href="adhar.html">SAVE AND CONTINUE</a></button>
+    <button type="button" onclick="window.location.href='goods.html'">BACK</button>
+    <button type="button" id="btn" onclick="window.location.href='adhar.html'">SAVE AND CONTINUE</button>
     </div>
 </div>
 
