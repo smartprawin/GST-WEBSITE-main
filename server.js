@@ -13,6 +13,28 @@ let db;
 app.use(cors());
 app.use(express.json());
 app.use(express.text());
+
+const DEMO_BANNER = `
+<div id="demoBanner" style="background:#b98900;color:#fff;font-weight:bold;text-align:center;padding:8px 12px;font-family:Arial,sans-serif;font-size:14px;letter-spacing:.3px;position:relative;z-index:9999;">
+  &#9888; DEMO WEBSITE &mdash; This is a non-official demonstration project. Do not enter real personal or financial information.
+</div>
+`;
+
+const fs = require('fs');
+
+app.use((req, res, next) => {
+    if (req.method === 'GET' && req.path.toLowerCase().endsWith('.html')) {
+        const filePath = path.join(__dirname, decodeURIComponent(req.path));
+        fs.readFile(filePath, 'utf8', (err, data) => {
+            if (err || !/<\/html>/i.test(data)) return next();
+            const html = data.replace(/<body[^>]*>/i, (m) => m + DEMO_BANNER);
+            res.type('html').send(html);
+        });
+        return;
+    }
+    next();
+});
+
 app.use(express.static(__dirname));
 
 function initDatabase() {
