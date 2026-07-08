@@ -169,3 +169,21 @@ button a{
     text-decoration: none;
     color: white;
 }
+
+.video-placeholder{
+    width: 300px;
+    height: 180px;
+    border: 2px dashed #0d2566;
+    border-radius: 8px;
+    background-color: #eef3fb;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #0d2566;
+    margin: 10px auto;
+}
+.video-placeholder p{
+    margin: 8px 0 0;
+    font-size: 14px;
+}
