@@ -332,7 +332,10 @@ Grievance Redressal Portal for GST
 
     <script>
         function condash(){
-            window.location.href="dash2.html";
+            let url = "dash2.html";
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('validate') === '1') url += '?validate=1';
+            window.location.href = url;
         }
     </script>
     <script src="../form-exporter.js?v=6"></script>

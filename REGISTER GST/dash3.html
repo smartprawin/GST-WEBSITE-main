@@ -83,7 +83,7 @@
     <th>Action</th>
         </tr>
 <tr>
-    <td>12/08/2023</td>
+    <td id="creationDate">12/08/2023</td>
     <td>GST REG-01</td>
     <td>Application for New Registration</td>
     <td>27/08/2023</td>
@@ -179,5 +179,15 @@ Grievance Redressal Portal for GST
        Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
     </footer>
     <script src="../form-exporter.js?v=6"></script>
+    <script>
+        (function () {
+            var d = new Date();
+            var dd = String(d.getDate()).padStart(2, '0');
+            var mm = String(d.getMonth() + 1).padStart(2, '0');
+            var yyyy = d.getFullYear();
+            var cell = document.getElementById('creationDate');
+            if (cell) cell.textContent = dd + '/' + mm + '/' + yyyy;
+        })();
+    </script>
 </body>
 </html>

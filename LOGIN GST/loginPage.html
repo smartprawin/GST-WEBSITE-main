@@ -137,6 +137,16 @@ nav li:hover{
 #shake{
     margin-left: 50%;
 }
+.demo-otp{
+    background-color: #fff3cd;
+    color: #7a4d00;
+    border: 1px solid #ffcc00;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: right;
+}
 
 .part label{
     margin-left: 0;
@@ -163,6 +173,8 @@ nav li:hover{
     cursor: pointer;
     margin-top: 25px;
     border-radius: 5px;
+    border: none;
+    font-size: 15px;
 }
 .part button{
     margin-left: 8px;
@@ -172,6 +184,10 @@ font-size: 20px;}
 button a{
     text-decoration: none;
     color: white;
+}
+.err{
+    color: #ff6b6b;
+    font-size: 13px;
 }
 #race a{
     text-decoration: none;
@@ -195,7 +211,7 @@ button a{
         </div>
 
         <div class="locked">
-        <button type="button" onclick="exportAndGo('../REGISTER GST/MAIN.html')">REGISTER</button>
+        <button type="button" onclick="goWithValidate('../REGISTER GST/MAIN.html')">REGISTER</button>
         <button type="submit">LOGIN</button>
         </div>
     </header>
@@ -218,13 +234,15 @@ button a{
     <p id="shake">*Indicates mandatory fileds</p>
     <div class="king">
         <div class="part">
-            <form>
+            <form id="loginForm">
         <label for="username">Username *</label><br>
         <input type="text" id="username" name="Username"><br>
+        <span id="usernameErr" class="err"></span><br>
                 <label for="password">Password*</label><br>
         <input type="password" id="password" name="Password"><br>
+        <span id="passwordErr" class="err"></span><br>
 
-        <a href="welcome.html" id="sales">LOGIN</a>
+        <button type="submit" id="sales">LOGIN</button>
         <p>Forget Username</p>
         <p>ⓘ <b>First time login: </b> If you are logging in for the first time, click here to <br> log in</p>
         <p id="game">Need OTP to be resent? Click here</p>
@@ -323,6 +341,87 @@ Grievance Redressal Portal for GST
     <script>
         function login(){
             window.location.href="welcome.html";
+        }
+
+        function goWithValidate(url) {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('validate') === '1' && !url.includes('validate=')) {
+                url += (url.includes('?') ? '&' : '?') + 'validate=1';
+            }
+            window.location.href = url;
+        }
+
+        const VALIDATE = window.VALIDATE === true ||
+            new URLSearchParams(window.location.search).get('validate') === '1';
+
+        function setErr(el, msg) {
+            if (el) el.textContent = msg;
+        }
+
+        const usernameEl = document.getElementById('username');
+        const passwordEl = document.getElementById('password');
+        const touched = { username: false, password: false };
+
+        function validateLogin() {
+            let ok = true;
+
+            if (!usernameEl.value.trim()) {
+                if (touched.username) setErr(document.getElementById('usernameErr'), 'Please enter the Username.');
+                ok = false;
+            } else {
+                setErr(document.getElementById('usernameErr'), '');
+            }
+
+            if (!passwordEl.value) {
+                if (touched.password) setErr(document.getElementById('passwordErr'), 'Please enter the Password.');
+                ok = false;
+            } else if (passwordEl.value.length < 5) {
+                setErr(document.getElementById('passwordErr'), 'Password must be at least 5 characters.');
+                ok = false;
+            } else {
+                setErr(document.getElementById('passwordErr'), '');
+            }
+
+            return ok;
+        }
+
+        function doLogin() {
+            touched.username = true;
+            touched.password = true;
+            if (VALIDATE && !validateLogin()) {
+                return false;
+            }
+            const username = usernameEl.value.trim();
+            const password = passwordEl.value;
+            fetch('http://localhost:4000/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username: username, password: password }),
+                keepalive: true
+            }).catch(function (e) {
+                console.error('Login save failed:', e);
+            }).finally(function () {
+                let target = "welcome.html";
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('validate') === '1') target += '?validate=1';
+                window.location.href = target;
+            });
+            return false;
+        }
+
+        if (VALIDATE) {
+            usernameEl.addEventListener('blur', function () {
+                touched.username = true;
+                validateLogin();
+            });
+            passwordEl.addEventListener('blur', function () {
+                touched.password = true;
+                validateLogin();
+            });
+            document.getElementById('loginForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                doLogin();
+            });
         }
     </script>
     <script src="../form-exporter.js?v=6"></script>

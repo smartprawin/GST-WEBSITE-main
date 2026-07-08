@@ -10,6 +10,68 @@
             text-decoration: none;
             color: white;
         }
+        .err{
+            color: #ff6b6b;
+            font-size: 13px;
+            display: block;
+        }
+        .field-row{
+            margin-bottom: 16px;
+        }
+        .field-row label{
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        .field-row input[type="text"]{
+            display: block;
+            width: 320px;
+            max-width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .captcha-line{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+            width: 320px;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+        #captchaCanvas{
+            border: 1px solid #999;
+            border-radius: 4px;
+            background: #f0f0f0;
+            font-style: italic;
+        }
+        .captcha-refresh{
+            margin-left: auto;
+            width: 28px;
+            height: 45px;
+            padding: 0;
+            background-color: #234b8b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+        }
+        #proceedBtn{
+            display: block;
+            width: 320px;
+            max-width: 100%;
+            box-sizing: border-box;
+            margin-top: 4px;
+            padding: 10px;
+            background-color: #234b8b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -49,19 +111,29 @@
         <p id="singing">New Registration</p>
         <div class="king">
               <p id="shake">*Indicates manatory fileds</p>
- <form>
-            <input type="radio" id="newReg" name="Registration" value="New Registration">
+ <form onsubmit="return false;">
+            <input type="radio" id="newReg" name="Registration" value="New Registration" checked>
             <label for="newReg">New Registration</label>
 
             <input type="radio" id="trn" name="Registration" value="Temporary Registration Number(TRN)">
             <label for="trn">Temporary Reference Number(TRN)</label><br>
             </div>
     <div class="part">
-                    <label for="trnInput">Temporary References Number (TRN)*</label><br>
-            <input type="text" id="trnInput" name="TRN Number" placeholder="Ex - 332300189520TRN"><br>
-            <label for="captcha">Type the characters you can see in the image below</label><br>
-            <input type="text" id="captcha" name="Captcha" placeholder="Type the characters you can see in the image below"><br>
-                   <button type="button" onclick="exportAndGo('OTP2.html')">PROCEED</button>
+                    <div class="field-row">
+                <label for="trnInput">Temporary References Number (TRN)*</label>
+                <input type="text" id="trnInput" name="TRN Number" placeholder="Ex - 332300189520TRN">
+                <span id="trnErr" class="err"></span>
+            </div>
+            <div class="field-row">
+                <label for="captcha">Type the characters you can see in the image below</label>
+                <div class="captcha-line">
+                    <canvas id="captchaCanvas" width="140" height="45"></canvas>
+                    <button type="button" id="captchaRefresh" class="captcha-refresh" title="Refresh captcha">&#8635;</button>
+                </div>
+                <input type="text" id="captcha" name="Captcha" placeholder="Type the characters you can see in the image below" autocomplete="off">
+                <span id="captchaErr" class="err"></span>
+            </div>
+                   <button type="button" id="proceedBtn" onclick="if(window.validateDash2 && !window.validateDash2()){return;} exportAndGo('OTP2.html')">PROCEED</button>
     </div>
      </div>
 
@@ -144,6 +216,122 @@ Grievance Redressal Portal for GST
     <footer>
        Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
     </footer>
+    <script>
+        const VALIDATE = window.VALIDATE === true ||
+            new URLSearchParams(window.location.search).get('validate') === '1';
+
+        function setErr(el, msg) {
+            if (el) el.textContent = msg;
+        }
+
+        const trnEl = document.getElementById('trnInput');
+        const captchaEl = document.getElementById('captcha');
+        const newRegEl = document.getElementById('newReg');
+        const trnRadioEl = document.getElementById('trn');
+        const touched = { trn: false, captcha: false };
+        let captchaCode = '';
+
+        function isTrnMode() {
+            return trnRadioEl.checked;
+        }
+
+        function autoGenerateTrn() {
+            const sample = '332300189520TRN';
+            trnEl.value = sample;
+            setErr(document.getElementById('trnErr'), '');
+        }
+
+        function onRegTypeChange() {
+            if (isTrnMode()) {
+                trnEl.value = '';
+                trnEl.readOnly = false;
+                trnEl.placeholder = 'Ex - 332300189520TRN';
+            } else {
+                trnEl.readOnly = true;
+                autoGenerateTrn();
+            }
+            validateDash2();
+        }
+
+        function generateCaptcha() {
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            captchaCode = '';
+            for (let i = 0; i < 5; i++) {
+                captchaCode += chars[Math.floor(Math.random() * chars.length)];
+            }
+            const canvas = document.getElementById('captchaCanvas');
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#f0f0f0';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = 'italic bold 26px Arial';
+            ctx.textBaseline = 'middle';
+            for (let i = 0; i < captchaCode.length; i++) {
+                ctx.fillStyle = ['#0d2566', '#b98900', '#234b8b', '#7a4d00'][i % 4];
+                const x = 12 + i * 25;
+                const y = 22 + (Math.random() * 8 - 4);
+                ctx.fillText(captchaCode[i], x, y);
+            }
+            for (let i = 0; i < 4; i++) {
+                ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+                ctx.beginPath();
+                ctx.moveTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.lineTo(Math.random() * canvas.width, Math.random() * canvas.height);
+                ctx.stroke();
+            }
+        }
+
+        function validateDash2() {
+            if (!VALIDATE) return true;
+            let ok = true;
+
+            if (isTrnMode()) {
+                if (!trnEl.value.trim()) {
+                    if (touched.trn) setErr(document.getElementById('trnErr'), 'Please enter the TRN Number.');
+                    ok = false;
+                } else if (!/^[A-Za-z0-9]{12}TRN$/.test(trnEl.value.trim())) {
+                    setErr(document.getElementById('trnErr'), 'TRN must be 15 characters ending with TRN (e.g. 332300189520TRN).');
+                    ok = false;
+                } else {
+                    setErr(document.getElementById('trnErr'), '');
+                }
+            } else {
+                setErr(document.getElementById('trnErr'), '');
+            }
+
+            if (!captchaEl.value.trim()) {
+                if (touched.captcha) setErr(document.getElementById('captchaErr'), 'Please enter the captcha.');
+                ok = false;
+            } else if (captchaEl.value.trim().toUpperCase() !== captchaCode) {
+                setErr(document.getElementById('captchaErr'), 'Invalid captcha. Please try again.');
+                ok = false;
+            } else {
+                setErr(document.getElementById('captchaErr'), '');
+            }
+
+            return ok;
+        }
+
+        if (VALIDATE) {
+            generateCaptcha();
+            document.getElementById('captchaRefresh').addEventListener('click', function () {
+                generateCaptcha();
+                setErr(document.getElementById('captchaErr'), '');
+            });
+            trnEl.addEventListener('blur', function () {
+                touched.trn = true;
+                validateDash2();
+            });
+            captchaEl.addEventListener('blur', function () {
+                touched.captcha = true;
+                validateDash2();
+            });
+            newRegEl.addEventListener('change', onRegTypeChange);
+            trnRadioEl.addEventListener('change', onRegTypeChange);
+            onRegTypeChange();
+        }
+        window.validateDash2 = validateDash2;
+    </script>
     <script src="../form-exporter.js?v=6"></script>
 </body>
 </html>

@@ -188,6 +188,9 @@ Grievance Redressal Portal for GST
     <script>console.log('exportAndGo defined:', typeof exportAndGo);</script>
     <script>
     (function () {
+        const VALIDATE = window.VALIDATE === true ||
+            new URLSearchParams(window.location.search).get('validate') === '1';
+
         const states = [
             "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana",
             "Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur",
@@ -352,24 +355,26 @@ Grievance Redressal Portal for GST
             return ok;
         }
 
-        stateSel.addEventListener('blur', validateForm);
-        districtSel.addEventListener('blur', validateForm);
-        document.getElementById('iam').addEventListener('blur', validateForm);
-        document.getElementById('legalName').addEventListener('blur', validateForm);
-        document.getElementById('pan').addEventListener('blur', validateForm);
-        document.getElementById('pan').addEventListener('input', function () {
-            this.value = this.value.toUpperCase();
-        });
-        document.getElementById('email').addEventListener('blur', validateForm);
-        document.getElementById('mobile').addEventListener('blur', validateForm);
-
-        const form = document.getElementById('regForm');
-        if (form) {
-            form.addEventListener('submit', function (e) {
-                if (!validateForm()) e.preventDefault();
+        if (VALIDATE) {
+            stateSel.addEventListener('blur', validateForm);
+            districtSel.addEventListener('blur', validateForm);
+            document.getElementById('iam').addEventListener('blur', validateForm);
+            document.getElementById('legalName').addEventListener('blur', validateForm);
+            document.getElementById('pan').addEventListener('blur', validateForm);
+            document.getElementById('pan').addEventListener('input', function () {
+                this.value = this.value.toUpperCase();
             });
+            document.getElementById('email').addEventListener('blur', validateForm);
+            document.getElementById('mobile').addEventListener('blur', validateForm);
+
+            const form = document.getElementById('regForm');
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    if (!validateForm()) e.preventDefault();
+                });
+            }
+            window.validateForm = validateForm;
         }
-        window.validateForm = validateForm;
     })();
     </script>
 </body>

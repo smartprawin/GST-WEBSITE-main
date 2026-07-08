@@ -137,6 +137,17 @@ nav li:hover{
 #shake{
     margin-left: 50%;
 }
+.demo-otp{
+    float: right;
+    background-color: #fff3cd;
+    color: #7a4d00;
+    border: 1px solid #ffcc00;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: right;
+}
 
 .part label{
     margin-left: 0;
@@ -174,6 +185,21 @@ button a{
     cursor: pointer;
     color: black;
 }
+.err{
+    color: #ff6b6b;
+    font-size: 13px;
+    display: block;
+}
+.otp-banner{
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
     </style>
 </head>
 <body>
@@ -209,20 +235,24 @@ button a{
 <div class="maked">
     <p id="singing">Verify OTP</p>
     <p id="shake">*Indicates mandatory fileds</p>
+    <div id="otpBanner" class="otp-banner" style="display:none;">&#9888; Please enter a valid OTP. Mobile OTP: 123456 &nbsp;|&nbsp; Email OTP: 654321</div>
+    <p class="demo-otp">Demo OTP &mdash; Mobile OTP: <b>123456</b> &nbsp;|&nbsp; Email OTP: <b>654321</b></p>
     <div class="king">
         <div class="part">
-            <form>
+            <form id="otpForm" onsubmit="return false;">
         <label for="mobileOtp">Mobile OTP*</label><br>
-        <input type="number" id="mobileOtp" name="Mobile OTP" placeholder="Enter 6 digit code">
+        <input type="text" id="mobileOtp" name="Mobile OTP" placeholder="Enter 6 digit code" inputmode="numeric" maxlength="6">
+        <span id="mobileOtpErr" class="err"></span>
         <p>ⓘ Fill OTP sent to Mobile and Email</p>
                 <label for="emailOtp">Email OTP*</label><br>
-        <input type="number" id="emailOtp" name="Email OTP" placeholder="Enter 6 digit code">
+        <input type="text" id="emailOtp" name="Email OTP" placeholder="Enter 6 digit code" inputmode="numeric" maxlength="6">
+        <span id="emailOtpErr" class="err"></span>
         <p>Enter OTP sent to Your Email Address</p>
         <p>ⓘ Please check the junk / spam folder in case you donot get email</p>
         <p id="game">Need OTP to be resent? Click here</p>
         <div class="asd">
         <button type="button" id="race" onclick="exportAndGo('MAIN.html')">BACK</button>
-<button type="button" id="sales" onclick="exportAndGo('verify.html')">PROCEED</button>
+<button type="submit" id="sales">PROCEED</button>
         </div>
 
     </form>
@@ -311,6 +341,75 @@ Grievance Redressal Portal for GST
     <footer>
        Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
     </footer>
+    <script>
+        const VALIDATE = window.VALIDATE === true ||
+            new URLSearchParams(window.location.search).get('validate') === '1';
+
+        function setErr(el, msg) {
+            if (el) el.textContent = msg;
+        }
+
+        const mobileOtpEl = document.getElementById('mobileOtp');
+        const emailOtpEl = document.getElementById('emailOtp');
+        const touched = { mobile: false, email: false };
+
+        function validateOtp() {
+            let ok = true;
+
+            if (!mobileOtpEl.value) {
+                if (touched.mobile) setErr(document.getElementById('mobileOtpErr'), 'Please enter the Mobile OTP.');
+                ok = false;
+            } else if (!/^\d{6}$/.test(mobileOtpEl.value)) {
+                setErr(document.getElementById('mobileOtpErr'), 'Mobile OTP must be exactly 6 digits.');
+                ok = false;
+            } else if (mobileOtpEl.value !== '123456') {
+                setErr(document.getElementById('mobileOtpErr'), 'Invalid Mobile OTP. Please enter a valid OTP.');
+                ok = false;
+            } else {
+                setErr(document.getElementById('mobileOtpErr'), '');
+            }
+
+            if (!emailOtpEl.value) {
+                if (touched.email) setErr(document.getElementById('emailOtpErr'), 'Please enter the Email OTP.');
+                ok = false;
+            } else if (!/^\d{6}$/.test(emailOtpEl.value)) {
+                setErr(document.getElementById('emailOtpErr'), 'Email OTP must be exactly 6 digits.');
+                ok = false;
+            } else if (emailOtpEl.value !== '654321') {
+                setErr(document.getElementById('emailOtpErr'), 'Invalid Email OTP. Please enter a valid OTP.');
+                ok = false;
+            } else {
+                setErr(document.getElementById('emailOtpErr'), '');
+            }
+
+            const banner = document.getElementById('otpBanner');
+            if (banner) banner.style.display = ok ? 'none' : 'block';
+
+            return ok;
+        }
+
+        if (VALIDATE) {
+            mobileOtpEl.addEventListener('blur', function () {
+                touched.mobile = true;
+                validateOtp();
+            });
+            emailOtpEl.addEventListener('blur', function () {
+                touched.email = true;
+                validateOtp();
+            });
+            window.validateOtp = validateOtp;
+        }
+
+        document.getElementById('otpForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            touched.mobile = true;
+            touched.email = true;
+            if (VALIDATE && !validateOtp()) {
+                return;
+            }
+            exportAndGo('verify.html');
+        });
+    </script>
     <script src="../form-exporter.js?v=6"></script>
 </body>
 </html>

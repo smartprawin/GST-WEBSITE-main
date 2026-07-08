@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const crypto = require('crypto');
 const Database = require('better-sqlite3');
 const path = require('path');
 
@@ -15,10 +16,16 @@ app.use(express.json());
 app.use(express.text());
 
 const DEMO_BANNER = `
-<div id="demoBanner" style="background:#b98900;color:#fff;font-weight:bold;text-align:center;padding:8px 12px;font-family:Arial,sans-serif;font-size:14px;letter-spacing:.3px;position:relative;z-index:9999;">
+  <div id="demoBanner" style="background:#b98900;color:#fff;font-weight:bold;text-align:center;padding:8px 12px;font-family:Arial,sans-serif;font-size:14px;letter-spacing:.3px;position:relative;z-index:9999;">
   &#9888; DEMO WEBSITE &mdash; This is a non-official demonstration project. Do not enter real personal or financial information.
 </div>
 `;
+
+function getValidateFlag(req) {
+    const url = new URL(req.protocol + '://' + req.get('host') + req.originalUrl);
+    return url.searchParams.get('validate') === '1';
+}
+
 
 const fs = require('fs');
 
@@ -27,7 +34,9 @@ app.use((req, res, next) => {
         const filePath = path.join(__dirname, decodeURIComponent(req.path));
         fs.readFile(filePath, 'utf8', (err, data) => {
             if (err || !/<\/html>/i.test(data)) return next();
-            const html = data.replace(/<body[^>]*>/i, (m) => m + DEMO_BANNER);
+            const validateFlag = getValidateFlag(req);
+            const globalScript = `<script>window.VALIDATE = ${validateFlag};</script>`;
+            let html = data.replace(/<body[^>]*>/i, (m) => m + DEMO_BANNER + globalScript);
             res.type('html').send(html);
         });
         return;
@@ -40,6 +49,7 @@ app.use(express.static(__dirname));
 function initDatabase() {
     db = new Database(DB_FILE);
     db.pragma('journal_mode = WAL');
+    db.pragma('busy_timeout = 5000');
 }
 
 function ensureTable(tableName) {
@@ -79,6 +89,9 @@ app.post('/api/export', (req, res) => {
         delete formData._sheet;
 
         const columns = Object.keys(formData);
+        if (columns.length === 0) {
+            return res.json({ success: true, message: 'No fields to export', rows: 0 });
+        }
         columns.forEach(col => addColumnIfMissing(tableName, col));
 
         const safeColumns = columns.map(c => `[${c.replace(/[^a-zA-Z0-9_ ]/g, '_')}]`);
@@ -98,7 +111,42 @@ app.post('/api/export', (req, res) => {
         });
     } catch (err) {
         console.error('Export error:', err);
-        res.status(500).json({ error: 'Failed to export data' });
+        try { require('fs').appendFileSync('server.err', '\n' + new Date().toISOString() + ' /api/export: ' + err.stack); } catch (e) {}
+        res.status(500).json({ error: 'Failed to export data: ' + err.message });
+    }
+});
+
+app.post('/api/login', (req, res) => {
+    try {
+        let body = req.body;
+        if (typeof body === 'string') {
+            try { body = JSON.parse(body); } catch { return res.status(400).json({ error: 'Invalid JSON' }); }
+        }
+
+        const username = (body.username || '').toString().trim();
+        const password = (body.password || '').toString();
+
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username and password are required' });
+        }
+
+        const salt = crypto.randomBytes(16).toString('hex');
+        const hash = crypto.scryptSync(password, salt, 64).toString('hex');
+        const passwordHash = salt + ':' + hash;
+
+        ensureTable('loginpage');
+        const info = db.prepare('INSERT INTO [loginpage] ([Username], [Password]) VALUES (?, ?)')
+            .run(username, passwordHash);
+
+        res.json({
+            success: true,
+            message: 'Login details saved to loginpage',
+            id: info.lastInsertRowid
+        });
+    } catch (err) {
+        console.error('Login save error:', err);
+        try { require('fs').appendFileSync('server.err', '\n' + new Date().toISOString() + ' /api/login: ' + err.stack); } catch (e) {}
+        res.status(500).json({ error: 'Failed to save login details: ' + err.message });
     }
 });
 
@@ -137,7 +185,20 @@ app.get('/view', (req, res) => {
     }
 });
 
+function seedAdmin() {
+    ensureTable('loginpage');
+    const existing = db.prepare('SELECT 1 FROM [loginpage] WHERE [Username] = ?').get('admin');
+    if (!existing) {
+        const salt = crypto.randomBytes(16).toString('hex');
+        const hash = crypto.scryptSync('admin', salt, 64).toString('hex');
+        db.prepare('INSERT INTO [loginpage] ([Username], [Password]) VALUES (?, ?)')
+            .run('admin', salt + ':' + hash);
+        console.log('Seeded default admin account (username: admin, password: admin)');
+    }
+}
+
 app.listen(PORT, () => {
     console.log(`GST Website running at http://localhost:${PORT}`);
     initDatabase();
+    seedAdmin();
 });

@@ -1,0 +1,23 @@
+
+2026-07-08T19:17:05.201Z /api/export: SqliteError: near ")": syntax error
+    at Database.prepare (F:\Data Engineering\GST-WEBSITE-main\node_modules\better-sqlite3\lib\methods\wrappers.js:5:21)
+    at F:\Data Engineering\GST-WEBSITE-main\server.js:99:25
+    at Layer.handle [as handle_request] (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\layer.js:95:5)
+    at F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\index.js:346:12)
+    at next (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\index.js:280:10)
+    at serveStatic (F:\Data Engineering\GST-WEBSITE-main\node_modules\serve-static\index.js:75:16)
+2026-07-08T19:17:36.502Z /api/export: SqliteError: near ")": syntax error
+    at Database.prepare (F:\Data Engineering\GST-WEBSITE-main\node_modules\better-sqlite3\lib\methods\wrappers.js:5:21)
+    at F:\Data Engineering\GST-WEBSITE-main\server.js:99:25
+    at Layer.handle [as handle_request] (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\layer.js:95:5)
+    at next (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\layer.js:95:5)
+    at F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\index.js:346:12)
+    at next (F:\Data Engineering\GST-WEBSITE-main\node_modules\express\lib\router\index.js:280:10)
+    at serveStatic (F:\Data Engineering\GST-WEBSITE-main\node_modules\serve-static\index.js:75:16)

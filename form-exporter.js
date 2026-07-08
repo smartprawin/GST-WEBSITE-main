@@ -3,6 +3,14 @@
  * Collects form data and sends to server to save in SQLite database.
  */
 
+function goWithValidate(url) {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('validate') === '1' && !url.includes('validate=')) {
+        url += (url.includes('?') ? '&' : '?') + 'validate=1';
+    }
+    window.location.href = url;
+}
+
 async function exportAndGo(url) {
     const data = {};
     const inputs = document.querySelectorAll('input, select, textarea');
@@ -91,22 +99,23 @@ async function exportAndGo(url) {
     const sheetMap = { main: 'main_html' };
     data._sheet = sheetMap[pageName] || pageName;
 
-    try {
-        const res = await fetch('http://localhost:4000/api/export', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-            keepalive: true
-        });
-        const text = await res.text();
-        console.log('Form Exporter: server response =', text);
-        if (!res.ok) {
-            alert('Warning: data may not have been saved (server responded: ' + res.status + '). Make sure you opened this page from http://localhost:4000');
-        }
-    } catch (e) {
-        console.error('Export failed:', e);
-        alert('Data was NOT saved. The GST server (http://localhost:4000) is not reachable. Open this page from http://localhost:4000/REGISTER GST/MAIN.html');
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('validate') === '1' && !url.includes('validate=')) {
+        url += (url.includes('?') ? '&' : '?') + 'validate=1';
     }
 
     window.location.href = url;
+
+    fetch('http://localhost:4000/api/export', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+        keepalive: true
+    }).then(function (res) {
+        return res.text();
+    }).then(function (text) {
+        console.log('Form Exporter: server response =', text);
+    }).catch(function (e) {
+        console.error('Export failed:', e);
+    });
 }
