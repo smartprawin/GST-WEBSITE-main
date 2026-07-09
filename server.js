@@ -88,15 +88,37 @@ app.post('/api/export', (req, res) => {
         const tableName = ensureTable(formData._sheet || 'form_data');
         delete formData._sheet;
 
+        const sessionId = formData['Session ID'];
+        delete formData['Session ID'];
+
         const columns = Object.keys(formData);
         if (columns.length === 0) {
             return res.json({ success: true, message: 'No fields to export', rows: 0 });
         }
         columns.forEach(col => addColumnIfMissing(tableName, col));
+        addColumnIfMissing(tableName, 'Session ID');
 
-        const safeColumns = columns.map(c => `[${c.replace(/[^a-zA-Z0-9_ ]/g, '_')}]`);
-        const placeholders = columns.map(() => '?');
-        const values = columns.map(c => formData[c]);
+        const safeCol = c => `[${c.replace(/[^a-zA-Z0-9_ ]/g, '_')}]`;
+
+        if (sessionId) {
+            const existing = db.prepare(`SELECT [id] FROM [${tableName}] WHERE [Session ID] = ?`).get(sessionId);
+            if (existing) {
+                const sets = columns.map(c => `${safeCol(c)} = ?`).join(', ');
+                const sql = `UPDATE [${tableName}] SET ${sets} WHERE [Session ID] = ?`;
+                db.prepare(sql).run(...columns.map(c => formData[c]), sessionId);
+                const count = db.prepare(`SELECT COUNT(*) as cnt FROM [${tableName}]`).get();
+                return res.json({
+                    success: true,
+                    message: `Updated session ${sessionId} in ${tableName}`,
+                    rows: count.cnt
+                });
+            }
+        }
+
+        const allCols = ['Session ID', ...columns];
+        const safeColumns = allCols.map(c => safeCol(c));
+        const placeholders = allCols.map(() => '?');
+        const values = [sessionId, ...columns.map(c => formData[c])];
 
         const sql = `INSERT INTO [${tableName}] (${safeColumns.join(', ')}) VALUES (${placeholders.join(', ')})`;
         const stmt = db.prepare(sql);
