@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Summary</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5527929723291753" crossorigin="anonymous"></script>
+    <style>
+        .ad-container {
+            background: #1a1a2e;
+            border: 1px solid #16213e;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .ad-container ins {
+            background: transparent !important;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #f4f6f9; }
+        header {
+            background: #0d2566;
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h3 { font-size: 18px; }
+        header h4 { font-size: 12px; opacity: 0.8; }
+        .btn-group { display: flex; gap: 10px; }
+        .btn-group button {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-group button:first-child { background: #fff; color: #0d2566; }
+        .btn-group button:last-child { background: #28a745; color: white; }
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        .summary-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .summary-header {
+            background: #0d2566;
+            color: white;
+            padding: 15px 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .summary-body { padding: 20px; }
+        .summary-row {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .summary-row:last-child { border-bottom: none; }
+        .summary-label { font-weight: bold; color: #333; }
+        .summary-value { color: #666; }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .status-draft { background: #ffc107; color: #333; }
+        .status-submitted { background: #28a745; color: white; }
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #dc3545;
+        }
+        footer {
+            background: #0d2566;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 30px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h3>Goods and Services Tax</h3>
+            <h4>Registration Summary</h4>
+        </div>
+        <div class="btn-group">
+            <button onclick="window.print()">PRINT</button>
+            <button onclick="goBack()">BACK</button>
+        </div>
+    </header>
+
+    <div class="ad-container" style="max-width:1000px;margin:15px auto;">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-5527929723291753"
+             data-ad-slot="3205459820"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+
+    <div class="container" id="content">
+        <div class="loading">Loading registration data...</div>
+    </div>
+
+    <footer>
+        <div class="ad-container" style="max-width:728px;margin:0 auto 15px;">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-5527929723291753"
+                 data-ad-slot="3205459820"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        Site best viewed at 1024 x 768 resolution
+    <p style="margin-top: 15px; color: #90a4ae; font-size: 12px;"><a href="../privacy-policy.html" style="color: #4fc3f7; text-decoration: none;">Privacy Policy</a></p>
+    </footer>
+
+    <script src="../form-exporter.js?v=6"></script>
+    <script>
+        const content = document.getElementById('content');
+        const sessionId = getSessionId();
+        const applicationId = getApplicationId();
+
+        function renderSection(title, data, fields) {
+            if (!data || Object.keys(data).length === 0) return '';
+            let html = `<div class="summary-card">
+                <div class="summary-header">${title}</div>
+                <div class="summary-body">`;
+            fields.forEach(field => {
+                const value = data[field] || '-';
+                if (value !== '-') {
+                    html += `<div class="summary-row">
+                        <div class="summary-label">${field}</div>
+                        <div class="summary-value">${value}</div>
+                    </div>`;
+                }
+            });
+            html += `</div></div>`;
+            return html;
+        }
+
+        async function loadSummary() {
+            if (!applicationId && !sessionId) {
+                content.innerHTML = '<div class="error">No registration data found. Please complete the registration form first.</div>';
+                return;
+            }
+
+            try {
+                const url = applicationId 
+                    ? `/api/registration/${applicationId}`
+                    : `/api/registration?session_id=${sessionId}`;
+                const response = await fetch(url);
+                const result = await response.json();
+
+                if (!result.success) {
+                    content.innerHTML = '<div class="error">Registration not found.</div>';
+                    return;
+                }
+
+                const reg = result.data ? result.data.registration : result.registration;
+                const steps = result.data ? result.data.steps : {};
+
+                let html = '';
+
+                // Registration Info
+                html += `<div class="summary-card">
+                    <div class="summary-header">Registration Information</div>
+                    <div class="summary-body">
+                        <div class="summary-row">
+                            <div class="summary-label">Application ID</div>
+                            <div class="summary-value">${reg.application_id}</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-label">Session ID</div>
+                            <div class="summary-value">${reg.session_id}</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-label">Status</div>
+                            <div class="summary-value">
+                                <span class="status-badge status-${reg.status}">${reg.status.toUpperCase()}</span>
+                            </div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-label">Current Step</div>
+                            <div class="summary-value">${reg.current_step}</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-label">Created</div>
+                            <div class="summary-value">${reg.created_at}</div>
+                        </div>
+                        <div class="summary-row">
+                            <div class="summary-label">Last Updated</div>
+                            <div class="summary-value">${reg.updated_at}</div>
+                        </div>
+                    </div>
+                </div>`;
+
+                // Main Registration (from main_html)
+                if (steps.main_html) {
+                    html += renderSection('New Registration Details', steps.main_html, [
+                        'Registration Type', 'User Type', 'State', 'District', 
+                        'Business Name', 'PAN', 'Email', 'Mobile'
+                    ]);
+                }
+
+                // OTP
+                if (steps.otp) {
+                    html += renderSection('OTP Verification', steps.otp, [
+                        'Mobile OTP', 'Email OTP'
+                    ]);
+                }
+
+                // Business Details (dash5)
+                if (steps.dash5) {
+                    html += renderSection('Business Details', steps.dash5, [
+                        'Trade Name', 'Constitution of Business', 'Additional Trade Name',
+                        'District', 'Casual Taxable Person', 'Composition Option',
+                        'Type of Registration', 'Registration Number', 'Date of Registration'
+                    ]);
+                }
+
+                // Promoter/Partner (dash4)
+                if (steps.dash4) {
+                    html += renderSection('Promoter / Partner Details', steps.dash4, [
+                        'First Name', 'Middle Name', 'Last Name',
+                        'Father First Name', 'Father Middle Name', 'Father Last Name',
+                        'Date of Birth', 'Mobile Number', 'Email Address',
+                        'gender', 'Designation', 'DIN Number', 'Citizen of India',
+                        'PAN Number', 'Passport Number', 'Aadhaar Number',
+                        'Country', 'PIN Code', 'State', 'District', 'City_Town',
+                        'Road_Street', 'Building Name', 'Flat Number', 'Floor Number', 'Nearby Landmark'
+                    ]);
+                }
+
+                // Authorized Signatory (dash6)
+                if (steps.dash6) {
+                    html += renderSection('Authorized Signatory', steps.dash6, [
+                        'Primary Authorized Signatory', 'First Name', 'Middle Name', 'Last Name',
+                        'Father First Name', 'Father Middle Name', 'Father Last Name',
+                        'Date of Birth', 'Mobile Number', 'Email Address',
+                        'Country', 'PIN Code', 'State', 'District', 'City_Town', 'Locality',
+                        'Road_Street', 'Building Name', 'Flat Number', 'Floor Number',
+                        'Nearby Landmark', 'Proof of Authorized Signatory'
+                    ]);
+                }
+
+                // Principal Place (principlepalace)
+                if (steps.principlepalace) {
+                    html += renderSection('Principal Place of Business', steps.principlepalace, [
+                        'PIN Code', 'State', 'District', 'City_Town', 'Locality',
+                        'Road_Street', 'Building Name', 'Flat Number', 'Floor Number',
+                        'Nearby Landmark', 'Latitude', 'Longitude',
+                        'Jurisdiction', 'Commissionerate', 'Division', 'Range',
+                        'Office Email', 'Office Telephone', 'Mobile Number', 'Office FAX',
+                        'Nature of Possession', 'Proof of Principle Place',
+                        'Bonded Warehouse', 'EOU _ STP_ EHTP', 'Export', 'Factory _ Manufacturing',
+                        'Import', 'Supplier of Services', 'Leasing Business', 'Office _ Sale Office',
+                        'Recipient of Goods or Services', 'Retail Business', 'Warehouse _ Depot',
+                        'Wholesale Business', 'Works Contract', 'Others _Please Specify_',
+                        'Additional Place of Business'
+                    ]);
+                }
+
+                // Goods (goods)
+                if (steps.goods) {
+                    html += renderSection('Goods / Services', steps.goods, [
+                        'HSN Chapter'
+                    ]);
+                }
+
+                // State Specific (state_20specific)
+                if (steps.state_20specific) {
+                    html += renderSection('State Specific Information', steps.state_20specific, [
+                        'Professional Tax EC Number', 'State Excise License Number',
+                        'Professional Tax RC Number', 'Excise License Holder Name'
+                    ]);
+                }
+
+                // Login (loginpage)
+                if (steps.loginpage) {
+                    html += renderSection('Login Credentials', steps.loginpage, [
+                        'Username'
+                    ]);
+                }
+
+                if (html === '') {
+                    html = '<div class="error">No form data found for this registration.</div>';
+                }
+
+                content.innerHTML = html;
+
+            } catch (error) {
+                console.error('Error loading summary:', error);
+                content.innerHTML = '<div class="error">Error loading registration data. Please try again.</div>';
+            }
+        }
+
+        loadSummary();
+    </script>
+<script src="../js/video-ad.js"></script>
+<script src="../js/adblocker-detect.js"></script>
+</body>
+</html>

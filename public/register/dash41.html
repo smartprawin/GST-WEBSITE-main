@@ -4,7 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style2.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5527929723291753" crossorigin="anonymous"></script>
+    <style>
+        .ad-container {
+            background: #1a1a2e;
+            border: 1px solid #16213e;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .ad-container ins {
+            background: transparent !important;
+        }
+    </style>
+    <link rel="stylesheet" href="../css/style2.css">
 </head>
 <style>
 *{
@@ -298,10 +312,20 @@ header{
         </div>
 
         <div class="locked">
-        <button type="button" onclick="exportAndGo('MAIN.html')">REGISTER</button>
-        <button type="button" onclick="exportAndGo('../login/loginPage.html')">LOGIN</button>
+        <button type="button" onclick="window.location.href='MAIN.html'">REGISTER</button>
+        <button type="button" onclick="window.location.href='../login/loginPage.html'">LOGIN</button>
         </div>
     </header>
+    <!-- AdSense - Header Banner (728x90) -->
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-5527929723291753"
+             data-ad-slot="3205459820"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 
     <nav>
     <ul>
@@ -508,7 +532,7 @@ header{
         </button>
     </div>
     <div class="bottom">
-        <button type="button" class="back" onclick="exportAndGo('dash5.html')">BACK</button>
+        <button type="button" class="back" onclick="goBack()">BACK</button>
         <button class="show">SHOW LIST</button>
         <button type="button" class="add" onclick="exportAndGo('dash4.html')">ADD NEW</button>
         <button type="button" id="save" onclick="exportAndGo('dash6.html')">SAVE & CONTINUE</button>
@@ -530,8 +554,21 @@ header{
 
     <hr>
     <footer>
+        <!-- AdSense - Footer Banner (728x90) -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-5527929723291753"
+                 data-ad-slot="3205459820"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
        Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
+    <p style="margin-top: 15px; color: #90a4ae; font-size: 12px;"><a href="../privacy-policy.html" style="color: #4fc3f7; text-decoration: none;">Privacy Policy</a></p>
     </footer>
     <script src="../form-exporter.js?v=6"></script>
+<script src="../js/video-ad.js"></script>
+<script src="../js/adblocker-detect.js"></script>
 </body>
 </html>

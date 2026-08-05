@@ -42,6 +42,12 @@ function goWithValidate(url) {
     }
     window.location.href = url;
 }
+window.goWithValidate = goWithValidate;
+
+function goBack() {
+    window.history.go(-1);
+}
+window.goBack = goBack;
 
 async function exportAndGo(url) {
     const data = {};

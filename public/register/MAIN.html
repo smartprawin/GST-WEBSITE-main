@@ -4,7 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5527929723291753" crossorigin="anonymous"></script>
+    <style>
+        .ad-container {
+            background: #1a1a2e;
+            border: 1px solid #16213e;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .ad-container ins {
+            background: transparent !important;
+        }
+    </style>
 
 </head>
 <body>
@@ -21,10 +35,21 @@
         </div>
 
         <div class="locked">
-        <button type="button" onclick="exportAndGo('MAIN.html')">REGISTER</button>
-        <button type="button" onclick="exportAndGo('../login/loginPage.html')">LOGIN</button>
+        <button type="button" onclick="window.location.href='MAIN.html'">REGISTER</button>
+        <button type="button" onclick="window.location.href='../login/loginPage.html'">LOGIN</button>
         </div>
     </header>
+    
+    <!-- AdSense - Header Banner (728x90) -->
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-5527929723291753"
+             data-ad-slot="3205459820"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
     
 
 <nav>
@@ -45,6 +70,17 @@
     </svg>
     <p>Video placeholder</p>
     <a href="https://tutorial.gst.gov.in/cbt/registration/gstregistration/course/story_html5.html" target="_blank" rel="noopener">GST Registration Tutorial</a>
+</div>
+
+<!-- AdSense - Sidebar Ad (300x250) -->
+<div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:inline-block;width:300px;height:250px"
+         data-ad-client="ca-pub-5527929723291753"
+         data-ad-slot="3205459820"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 </div>
     <div class="maked">
         <p id="singing">New Registration</p>
@@ -182,7 +218,18 @@ Grievance Redressal Portal for GST
         </div>
 
     <footer>
-       Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
+        <!-- AdSense - Footer Banner (728x90) -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-5527929723291753"
+                 data-ad-slot="3205459820"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+        Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
+    <p style="margin-top: 15px; color: #90a4ae; font-size: 12px;"><a href="../privacy-policy.html" style="color: #4fc3f7; text-decoration: none;">Privacy Policy</a></p>
     </footer>
     <script src="../form-exporter.js?v=6"></script>
     <script>console.log('exportAndGo defined:', typeof exportAndGo);</script>
@@ -377,5 +424,7 @@ Grievance Redressal Portal for GST
         }
     })();
     </script>
+<script src="../js/video-ad.js"></script>
+<script src="../js/adblocker-detect.js"></script>
 </body>
 </html>

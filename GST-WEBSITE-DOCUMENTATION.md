@@ -341,7 +341,7 @@ ORDER BY created_at DESC;
 
 ## Login Flow
 
-### 1. LOGIN GST/loginPage.html
+### 1. public/login/loginPage.html
 
 | Property | Value |
 |----------|-------|
@@ -357,14 +357,14 @@ ORDER BY created_at DESC;
 - `POST /api/login` - saves credentials
 
 **Navigation:**
-- REGISTER button -> `../REGISTER GST/MAIN.html`
+- REGISTER button -> `../register/MAIN.html`
 - Login success -> `welcome.html`
 
 **Validation:** Enabled when `?validate=1` or `window.VALIDATE` is set
 
 ---
 
-### 2. LOGIN GST/welcome.html
+### 2. public/login/welcome.html
 
 | Property | Value |
 |----------|-------|
@@ -380,7 +380,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 3. LOGIN GST/dashboard.html
+### 3. public/login/dashboard.html
 
 | Property | Value |
 |----------|-------|
@@ -396,7 +396,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 4. LOGIN GST/dash2.html
+### 4. public/login/dash2.html
 
 | Property | Value |
 |----------|-------|
@@ -416,7 +416,7 @@ ORDER BY created_at DESC;
 
 ## Registration Flow
 
-### 5. REGISTER GST/MAIN.html
+### 5. public/register/MAIN.html
 
 | Property | Value |
 |----------|-------|
@@ -447,7 +447,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 6. REGISTER GST/OTP.html
+### 6. public/register/OTP.html
 
 | Property | Value |
 |----------|-------|
@@ -467,7 +467,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 7. REGISTER GST/verify.html
+### 7. public/register/verify.html
 
 | Property | Value |
 |----------|-------|
@@ -485,7 +485,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 8. REGISTER GST/dash2.html
+### 8. public/register/dash2.html
 
 | Property | Value |
 |----------|-------|
@@ -508,7 +508,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 9. REGISTER GST/OTP2.html
+### 9. public/register/OTP2.html
 
 | Property | Value |
 |----------|-------|
@@ -527,7 +527,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 10. REGISTER GST/dash3.html
+### 10. public/register/dash3.html
 
 | Property | Value |
 |----------|-------|
@@ -542,7 +542,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 11. REGISTER GST/dash5.html
+### 11. public/register/dash5.html
 
 | Property | Value |
 |----------|-------|
@@ -570,7 +570,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 12. REGISTER GST/dash4.html
+### 12. public/register/dash4.html
 
 | Property | Value |
 |----------|-------|
@@ -593,7 +593,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 13. REGISTER GST/dash41.html
+### 13. public/register/dash41.html
 
 | Property | Value |
 |----------|-------|
@@ -610,7 +610,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 14. REGISTER GST/dash6.html
+### 14. public/register/dash6.html
 
 | Property | Value |
 |----------|-------|
@@ -631,7 +631,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 15. REGISTER GST/dash7.html
+### 15. public/register/dash7.html
 
 | Property | Value |
 |----------|-------|
@@ -648,7 +648,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 16. REGISTER GST/principlepalace.html
+### 16. public/register/principlepalace.html
 
 | Property | Value |
 |----------|-------|
@@ -672,7 +672,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 17. REGISTER GST/additionalplaces.html
+### 17. public/register/additionalplaces.html
 
 | Property | Value |
 |----------|-------|
@@ -688,7 +688,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 18. REGISTER GST/goods.html
+### 18. public/register/goods.html
 
 | Property | Value |
 |----------|-------|
@@ -705,7 +705,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 19. REGISTER GST/state specific.html
+### 19. public/register/state specific.html
 
 | Property | Value |
 |----------|-------|
@@ -727,7 +727,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 20. REGISTER GST/adhar.html
+### 20. public/register/adhar.html
 
 | Property | Value |
 |----------|-------|
@@ -743,7 +743,7 @@ ORDER BY created_at DESC;
 
 ---
 
-### 21. REGISTER GST/verification.html
+### 21. public/register/verification.html
 
 | Property | Value |
 |----------|-------|
@@ -923,4 +923,4 @@ curl http://localhost:4000/api/registration/7
 
 ---
 
-*Auto-generated for GST Website v1.0.0 — Updated with project restructuring and registrations schema*
+*Auto-generated for GST Website v1.0.0 — Updated with project restructuring, registrations schema, and cleanup*
