@@ -19,6 +19,22 @@ function getSessionId() {
 }
 window.getSessionId = getSessionId;
 
+function getApplicationId() {
+    try {
+        return localStorage.getItem('gst_application_id') || null;
+    } catch (e) {
+        return null;
+    }
+}
+window.getApplicationId = getApplicationId;
+
+function setApplicationId(id) {
+    try {
+        localStorage.setItem('gst_application_id', id);
+    } catch (e) {}
+}
+window.setApplicationId = setApplicationId;
+
 function goWithValidate(url) {
     const params = new URLSearchParams(window.location.search);
     if (params.get('validate') === '1' && !url.includes('validate=')) {
@@ -122,6 +138,12 @@ async function exportAndGo(url) {
         url += (url.includes('?') ? '&' : '?') + 'validate=1';
     }
 
+    // Include application_id if we have one
+    const appId = getApplicationId();
+    if (appId) {
+        data.application_id = appId;
+    }
+
     window.location.href = url;
 
     fetch('http://localhost:4000/api/export', {
@@ -130,9 +152,13 @@ async function exportAndGo(url) {
         body: JSON.stringify(data),
         keepalive: true
     }).then(function (res) {
-        return res.text();
-    }).then(function (text) {
-        console.log('Form Exporter: server response =', text);
+        return res.json();
+    }).then(function (result) {
+        console.log('Form Exporter: server response =', result);
+        // Store application_id from server response
+        if (result && result.application_id) {
+            setApplicationId(result.application_id);
+        }
     }).catch(function (e) {
         console.error('Export failed:', e);
     });

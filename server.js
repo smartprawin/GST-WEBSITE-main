@@ -50,6 +50,61 @@ function initDatabase() {
     db = new Database(DB_FILE);
     db.pragma('journal_mode = WAL');
     db.pragma('busy_timeout = 5000');
+    db.pragma('foreign_keys = ON');
+    ensureRegistrationsTable();
+    ensureApplicationIdColumns();
+}
+
+// All tables that participate in the registration flow
+const REGISTRATION_TABLES = [
+    'main_html', 'main', 'otp', 'dash2', 'otp2', 'dash3',
+    'dash4', 'dash5', 'dash6', 'dash7', 'principlepalace',
+    'additionalplaces', 'goods', 'state_20specific', 'adhar',
+    'loginpage', 'welcome', 'test_up'
+];
+
+function ensureRegistrationsTable() {
+    db.exec(`
+        CREATE TABLE IF NOT EXISTS [registrations] (
+            [application_id] INTEGER PRIMARY KEY AUTOINCREMENT,
+            [session_id] TEXT UNIQUE,
+            [created_at] DATETIME DEFAULT CURRENT_TIMESTAMP,
+            [updated_at] DATETIME DEFAULT CURRENT_TIMESTAMP,
+            [status] TEXT DEFAULT 'draft',
+            [current_step] TEXT DEFAULT 'main_html'
+        )
+    `);
+    try {
+        db.exec('CREATE INDEX IF NOT EXISTS [idx_registrations_session] ON [registrations] ([session_id])');
+    } catch (e) {}
+}
+
+function ensureApplicationIdColumns() {
+    for (const table of REGISTRATION_TABLES) {
+        try {
+            db.exec(`ALTER TABLE [${table}] ADD COLUMN [application_id] INTEGER`);
+        } catch (e) {}
+        try {
+            const idxName = `idx_${table.replace(/[^a-zA-Z0-9]/g, '_')}_app`;
+            db.exec(`CREATE INDEX IF NOT EXISTS [${idxName}] ON [${table}] ([application_id])`);
+        } catch (e) {}
+    }
+}
+
+function getOrCreateRegistration(sessionId) {
+    if (!sessionId) return null;
+    let reg = db.prepare('SELECT [application_id] FROM [registrations] WHERE [session_id] = ?').get(sessionId);
+    if (!reg) {
+        const info = db.prepare('INSERT INTO [registrations] ([session_id]) VALUES (?)').run(sessionId);
+        reg = { application_id: info.lastInsertRowid };
+    }
+    return reg.application_id;
+}
+
+function updateRegistrationStep(sessionId, step) {
+    if (!sessionId) return;
+    db.prepare('UPDATE [registrations] SET [current_step] = ?, [updated_at] = CURRENT_TIMESTAMP WHERE [session_id] = ?')
+        .run(step, sessionId);
 }
 
 function ensureTable(tableName) {
@@ -86,17 +141,25 @@ app.post('/api/export', (req, res) => {
         }
 
         const tableName = ensureTable(formData._sheet || 'form_data');
+        const currentStep = formData._sheet || 'form_data';
         delete formData._sheet;
 
         const sessionId = formData['Session ID'];
         delete formData['Session ID'];
 
+        // Get or create registration and link to this table
+        const applicationId = sessionId ? getOrCreateRegistration(sessionId) : null;
+        if (sessionId && applicationId) {
+            updateRegistrationStep(sessionId, currentStep);
+        }
+
         const columns = Object.keys(formData);
         if (columns.length === 0) {
-            return res.json({ success: true, message: 'No fields to export', rows: 0 });
+            return res.json({ success: true, message: 'No fields to export', rows: 0, application_id: applicationId });
         }
         columns.forEach(col => addColumnIfMissing(tableName, col));
         addColumnIfMissing(tableName, 'Session ID');
+        addColumnIfMissing(tableName, 'application_id');
 
         const safeCol = c => `[${c.replace(/[^a-zA-Z0-9_ ]/g, '_')}]`;
 
@@ -107,13 +170,13 @@ app.post('/api/export', (req, res) => {
 
         if (existing) {
             const setClauses = columns.map(c => `${safeCol(c)} = ?`).join(', ');
-            const updateSql = `UPDATE [${tableName}] SET ${setClauses} WHERE [id] = ?`;
-            db.prepare(updateSql).run(...columns.map(c => formData[c]), existing.id);
+            const updateSql = `UPDATE [${tableName}] SET ${setClauses}, [application_id] = ? WHERE [id] = ?`;
+            db.prepare(updateSql).run(...columns.map(c => formData[c]), applicationId, existing.id);
         } else {
-            const allCols = ['Session ID', ...columns];
+            const allCols = ['Session ID', 'application_id', ...columns];
             const safeColumns = allCols.map(c => safeCol(c));
             const placeholders = allCols.map(() => '?');
-            const values = [sessionId, ...columns.map(c => formData[c])];
+            const values = [sessionId, applicationId, ...columns.map(c => formData[c])];
 
             const insertSql = `INSERT INTO [${tableName}] (${safeColumns.join(', ')}) VALUES (${placeholders.join(', ')})`;
             db.prepare(insertSql).run(...values);
@@ -124,12 +187,66 @@ app.post('/api/export', (req, res) => {
         res.json({
             success: true,
             message: `Data exported to ${tableName}`,
-            rows: count.cnt
+            rows: count.cnt,
+            application_id: applicationId
         });
     } catch (err) {
         console.error('Export error:', err);
         try { require('fs').appendFileSync('server.err', '\n' + new Date().toISOString() + ' /api/export: ' + err.stack); } catch (e) {}
         res.status(500).json({ error: 'Failed to export data: ' + err.message });
+    }
+});
+
+// ---- Registration API endpoints ----
+
+app.get('/api/registration', (req, res) => {
+    try {
+        const sessionId = req.query.session_id;
+        if (!sessionId) {
+            return res.status(400).json({ error: 'session_id is required' });
+        }
+        const reg = db.prepare('SELECT * FROM [registrations] WHERE [session_id] = ?').get(sessionId);
+        if (!reg) {
+            return res.status(404).json({ error: 'Registration not found' });
+        }
+        res.json({ success: true, registration: reg });
+    } catch (err) {
+        console.error('Get registration error:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.get('/api/registration/:id', (req, res) => {
+    try {
+        const applicationId = req.params.id;
+        const reg = db.prepare('SELECT * FROM [registrations] WHERE [application_id] = ?').get(applicationId);
+        if (!reg) {
+            return res.status(404).json({ error: 'Registration not found' });
+        }
+
+        // Gather data from all linked tables
+        const data = { registration: reg, steps: {} };
+        for (const table of REGISTRATION_TABLES) {
+            try {
+                const row = db.prepare(`SELECT * FROM [${table}] WHERE [application_id] = ? LIMIT 1`).get(applicationId);
+                if (row) data.steps[table] = row;
+            } catch (e) {}
+        }
+
+        res.json({ success: true, data });
+    } catch (err) {
+        console.error('Get registration by ID error:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.get('/api/registrations', (req, res) => {
+    try {
+        const regs = db.prepare('SELECT * FROM [registrations] ORDER BY [application_id] DESC').all();
+        res.json({ success: true, count: regs.length, registrations: regs });
+    } catch (err) {
+        console.error('List registrations error:', err);
+        res.status(500).json({ error: err.message });
     }
 });
 
@@ -142,6 +259,7 @@ app.post('/api/login', (req, res) => {
 
         const username = (body.username || '').toString().trim();
         const password = (body.password || '').toString();
+        const sessionId = body.session_id || null;
 
         if (!username || !password) {
             return res.status(400).json({ error: 'Username and password are required' });
@@ -151,14 +269,19 @@ app.post('/api/login', (req, res) => {
         const hash = crypto.scryptSync(password, salt, 64).toString('hex');
         const passwordHash = salt + ':' + hash;
 
+        // Link to registration if session_id provided
+        const applicationId = sessionId ? getOrCreateRegistration(sessionId) : null;
+
         ensureTable('loginpage');
-        const info = db.prepare('INSERT INTO [loginpage] ([Username], [Password]) VALUES (?, ?)')
-            .run(username, passwordHash);
+        addColumnIfMissing('loginpage', 'application_id');
+        const info = db.prepare('INSERT INTO [loginpage] ([Username], [Password], [application_id]) VALUES (?, ?, ?)')
+            .run(username, passwordHash, applicationId);
 
         res.json({
             success: true,
             message: 'Login details saved to loginpage',
-            id: info.lastInsertRowid
+            id: info.lastInsertRowid,
+            application_id: applicationId
         });
     } catch (err) {
         console.error('Login save error:', err);
@@ -174,13 +297,17 @@ app.get('/view', (req, res) => {
         const rows = db.prepare(`SELECT * FROM [${safeName}]`).all();
         const cols = rows.length ? Object.keys(rows[0]) : [];
 
+        const navLinks = ['main_html', 'registrations', 'loginpage', 'otp', 'dash2', 'dash5', 'dash4']
+            .map(t => `<a href="/view?table=${t}">${t}</a>`).join(' | ');
+
         let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${safeName}</title>
         <style>body{font-family:Arial,sans-serif;padding:20px;background:#f4f6f9}
         h2{color:#0d2566}table{border-collapse:collapse;width:100%;background:#fff}
         th,td{border:1px solid #cdd;padding:8px 10px;text-align:left;font-size:13px}
-        th{background:#0d2566;color:#fff}tr:nth-child(even){background:#eef3fb}</style></head><body>
+        th{background:#0d2566;color:#fff}tr:nth-child(even){background:#eef3fb}
+        a{margin:0 8px}</style></head><body>
         <h2>Data in table: ${safeName}</h2>
-        <p><a href="/view?table=main_html">main_html</a> | <a href="/view?table=main">main</a></p>`;
+        <p>${navLinks}</p>`;
 
         if (!rows.length) {
             html += '<p>No rows found.</p></body></html>';

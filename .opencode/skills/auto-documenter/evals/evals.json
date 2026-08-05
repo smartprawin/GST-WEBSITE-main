@@ -1,0 +1,23 @@
+{
+  "skill_name": "auto-documenter",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "we just added a new /api/stats endpoint that returns user statistics. update the documentation to include it.",
+      "expected_output": "Skill should detect existing GST-WEBSITE-DOCUMENTATION.md (UPDATE mode), read it, add the new /api/stats endpoint to the API Endpoints section.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "document all the changes we made to the server - the new registration table, application_id foreign keys, and the new API endpoints.",
+      "expected_output": "Skill should detect existing documentation (UPDATE mode), scan server.js for new endpoints, scan database for registrations table, and update the documentation with all new schema and API changes.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "create documentation for this project from scratch. i need a complete reference of all pages, APIs, and database tables.",
+      "expected_output": "Skill should detect no existing documentation (CREATE mode), scan entire codebase, generate a comprehensive GST-WEBSITE-DOCUMENTATION.md file with all sections.",
+      "files": []
+    }
+  ]
+}
