@@ -1,0 +1,23 @@
+{
+  "skill_name": "gst-server-manager",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "start the server and check if everything is working",
+      "expected_output": "Skill should run pre-flight checks (Node version, deps, port), start the server, run health checks, and report status.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "the server won't start, port 4000 is already in use. fix it and get it running.",
+      "expected_output": "Skill should detect the port conflict, kill the stale process, start the server, and verify it's running.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "is the backend running? i need to test the login and export API endpoints.",
+      "expected_output": "Skill should check if server is running, if not start it, then test /api/login and /api/export endpoints.",
+      "files": []
+    }
+  ]
+}

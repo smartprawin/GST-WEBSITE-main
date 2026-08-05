@@ -100,29 +100,24 @@ app.post('/api/export', (req, res) => {
 
         const safeCol = c => `[${c.replace(/[^a-zA-Z0-9_ ]/g, '_')}]`;
 
-        if (sessionId) {
-            const existing = db.prepare(`SELECT [id] FROM [${tableName}] WHERE [Session ID] = ?`).get(sessionId);
-            if (existing) {
-                const sets = columns.map(c => `${safeCol(c)} = ?`).join(', ');
-                const sql = `UPDATE [${tableName}] SET ${sets} WHERE [Session ID] = ?`;
-                db.prepare(sql).run(...columns.map(c => formData[c]), sessionId);
-                const count = db.prepare(`SELECT COUNT(*) as cnt FROM [${tableName}]`).get();
-                return res.json({
-                    success: true,
-                    message: `Updated session ${sessionId} in ${tableName}`,
-                    rows: count.cnt
-                });
-            }
+        // Reuse the same row for an existing Session ID (upsert-style merge).
+        const existing = sessionId
+            ? db.prepare(`SELECT [id] FROM [${tableName}] WHERE [Session ID] = ?`).get(sessionId)
+            : null;
+
+        if (existing) {
+            const setClauses = columns.map(c => `${safeCol(c)} = ?`).join(', ');
+            const updateSql = `UPDATE [${tableName}] SET ${setClauses} WHERE [id] = ?`;
+            db.prepare(updateSql).run(...columns.map(c => formData[c]), existing.id);
+        } else {
+            const allCols = ['Session ID', ...columns];
+            const safeColumns = allCols.map(c => safeCol(c));
+            const placeholders = allCols.map(() => '?');
+            const values = [sessionId, ...columns.map(c => formData[c])];
+
+            const insertSql = `INSERT INTO [${tableName}] (${safeColumns.join(', ')}) VALUES (${placeholders.join(', ')})`;
+            db.prepare(insertSql).run(...values);
         }
-
-        const allCols = ['Session ID', ...columns];
-        const safeColumns = allCols.map(c => safeCol(c));
-        const placeholders = allCols.map(() => '?');
-        const values = [sessionId, ...columns.map(c => formData[c])];
-
-        const sql = `INSERT INTO [${tableName}] (${safeColumns.join(', ')}) VALUES (${placeholders.join(', ')})`;
-        const stmt = db.prepare(sql);
-        stmt.run(...values);
 
         const count = db.prepare(`SELECT COUNT(*) as cnt FROM [${tableName}]`).get();
 
