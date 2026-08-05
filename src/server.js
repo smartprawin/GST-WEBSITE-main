@@ -47,6 +47,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get('/', (req, res) => {
+    res.redirect('/register/MAIN.html');
+});
+
 app.use(express.static(PUBLIC_DIR));
 
 function logError(context, err) {
