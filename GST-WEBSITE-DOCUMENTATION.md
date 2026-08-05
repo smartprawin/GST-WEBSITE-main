@@ -6,14 +6,81 @@
 
 ## Table of Contents
 
-1. [Server Routes](#server-routes)
-2. [API Endpoints](#api-endpoints)
-3. [Database Schema & Relationships](#database-schema--relationships)
-4. [Login Flow Pages](#login-flow)
-5. [Registration Flow Pages](#registration-flow)
-6. [Navigation Flow Diagrams](#navigation-flow)
-7. [Shared Scripts](#shared-scripts)
-8. [Database Tables](#database-tables)
+1. [Project Structure](#project-structure)
+2. [Server Routes](#server-routes)
+3. [API Endpoints](#api-endpoints)
+4. [Database Schema & Relationships](#database-schema--relationships)
+5. [Login Flow Pages](#login-flow)
+6. [Registration Flow Pages](#registration-flow)
+7. [Navigation Flow Diagrams](#navigation-flow)
+8. [Shared Scripts](#shared-scripts)
+9. [Database Tables](#database-tables)
+
+---
+
+## Project Structure
+
+```
+GST-WEBSITE-main/
+├── src/
+│   ├── server.js                    ← Express server (main entry)
+│   └── db/
+│       └── migrations/
+│           ├── migrate.sql          ← Schema migration SQL
+│           ├── run-migration.js     ← Migration runner
+│           └── create-registrations.js
+├── public/
+│   ├── form-exporter.js             ← Client-side form collector
+│   ├── query.js                     ← CLI database query tool
+│   ├── css/
+│   │   ├── style.css                ← MAIN.html styles
+│   │   └── style2.css               ← Registration flow styles
+│   ├── images/
+│   │   ├── gst.png
+│   │   └── sa.png
+│   ├── login/                       ← Login flow pages
+│   │   ├── loginPage.html
+│   │   ├── welcome.html
+│   │   ├── dashboard.html
+│   │   └── dash2.html
+│   └── register/                    ← Registration flow pages
+│       ├── MAIN.html
+│       ├── OTP.html, OTP2.html
+│       ├── verify.html
+│       ├── dash2.html - dash7.html
+│       ├── principlepalace.html
+│       ├── additionalplaces.html
+│       ├── goods.html
+│       ├── state specific.html
+│       ├── adhar.html
+│       └── verification.html
+├── data/
+│   └── data.sqlite                  ← SQLite database
+├── logs/
+│   ├── server.err
+│   └── server.log
+├── .env                             ← Environment config
+├── .gitignore
+├── package.json
+└── GST-WEBSITE-DOCUMENTATION.md
+```
+
+### Commands
+
+| Command | Purpose |
+|---------|---------|
+| `npm start` | Start production server |
+| `npm run dev` | Start with auto-reload (--watch) |
+| `npm run migrate` | Run database migration |
+| `npm run query "SELECT..."` | Query database |
+
+### Environment Variables (.env)
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `PORT` | 4000 | Server port |
+| `DB_PATH` | ./data/data.sqlite | Database file path |
+| `LOG_PATH` | ./logs | Log directory |
 
 ---
 
@@ -31,7 +98,8 @@
 | `GET` | `/view?table=<name>` | Admin data viewer - displays SQLite table as HTML |
 
 **Port:** 4000  
-**Database:** `data.sqlite` (SQLite, WAL mode, foreign keys ON)
+**Database:** `data/data.sqlite` (SQLite, WAL mode, foreign keys ON)  
+**Server Entry:** `src/server.js`
 
 ---
 
@@ -823,23 +891,13 @@ http://localhost:4000/view?table=loginpage
 
 ### Query Data (Terminal)
 ```bash
-# List all tables
-node query.js "SELECT name FROM sqlite_master WHERE type='table'"
+# From project root
+npm run query "SELECT * FROM registrations"
+npm run query "SELECT * FROM main_html"
+npm run query "SELECT name FROM sqlite_master WHERE type='table'"
 
-# View registrations
-node query.js "SELECT * FROM registrations"
-
-# View main_html
-node query.js "SELECT * FROM main_html"
-
-# View loginpage
-node query.js "SELECT * FROM loginpage"
-
-# JOIN: Get registration with linked data
-node query.js "SELECT r.application_id, r.session_id, r.status, m.Name, m.Email FROM registrations r LEFT JOIN main_html m ON r.application_id = m.application_id ORDER BY r.application_id DESC"
-
-# Find incomplete registrations
-node query.js "SELECT application_id, session_id, current_step, status FROM registrations WHERE status = 'draft'"
+# Or directly
+node public/query.js "SELECT * FROM registrations"
 ```
 
 ### API Quick Reference
@@ -865,4 +923,4 @@ curl http://localhost:4000/api/registration/7
 
 ---
 
-*Document generated for GST Website v1.0.0 — Updated with registrations schema*
+*Auto-generated for GST Website v1.0.0 — Updated with project restructuring and registrations schema*

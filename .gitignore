@@ -1,0 +1,28 @@
+# Dependencies
+node_modules/
+
+# Database files
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+
+# Log files
+logs/*.err
+logs/*.log
+
+# Environment
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Old root-level files (remove after migration)
+*.err
+*.log
+server_run.*
+server_test.*

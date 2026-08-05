@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f5f5f5;
+}
+.mart{
+    display:flex;
+    justify-content:flex-end;
+    gap:20px;
+    padding:8px 20px;
+    background:#0d4a8d;
+    color:white;
+    font-size:14px;
+}
+header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px;
+    background:white;
+}
+
+.wait h3{
+    color:#0d4a8d;
+    margin-bottom:5px;
+}
+
+.wait h4{
+    color:#555;
+    font-weight:normal;
+}
+
+.locked button{
+    padding:10px 20px;
+    border:none;
+    background:#0d4a8d;
+    color:white;
+    cursor:pointer;
+    margin-left:10px;
+}
+nav{
+    background:#083a71;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+nav ul li{
+    color:white;
+    padding:15px 20px;
+    cursor:pointer;
+}
+
+nav ul li:hover{
+    background:#0d4a8d;
+}
+.dancing{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    background:#efe27a;
+    margin:20px;
+    padding:20px;
+}
+
+.dancing p{
+    margin:5px 0;
+}
+    .portable{
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        text-align: center;
+        margin-left: 10%;
+        width: 50%;
+        margin-bottom: 30px;
+        margin-top: 15px;
+    }
+    .portable p{
+border: 1px solid black;
+padding: 10px;
+    }
+
+
+.section{
+    background:#efefef;
+    margin:20px;
+    padding:15px;
+    border:1px solid #ddd;
+    font-size:22px;
+    font-weight:bold;
+}
+.business,
+.form,
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    background:white;
+    margin:20px;
+    padding:20px;
+    border:1px solid #ddd;
+}
+
+.group{
+    display:flex;
+    flex-direction:column;
+}
+
+.group label{
+    margin-bottom:8px;
+    font-weight:bold;
+    font-size:14px;
+}
+
+.group input,
+.group select{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:3px;
+}
+
+.group input:focus,
+.group select:focus{
+    border:2px solid #0d4a8d;
+    outline:none;
+}
+.gender{
+    display:flex;
+    gap:40px;
+    background:white;
+    margin:20px;
+    padding:20px;
+    border:1px solid #ddd;
+}
+.map{
+    margin:20px;
+    border:1px solid #ddd;
+    background:white;
+}
+
+.map img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+}
+.upload{
+    background:white;
+    margin:20px;
+    padding:20px;
+    border:1px solid #ddd;
+}
+
+.box{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.picture{
+    background:#0d4a8d;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    cursor:pointer;
+}
+.bottom{
+    display:flex;
+    justify-content:flex-end;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:20px;
+}
+
+.bottom button{
+    padding:12px 25px;
+    cursor:pointer;
+    border:none;
+}
+
+.bottom a{
+    color: inherit;
+}
+
+.back a{
+    color: white;
+}
+.show{
+    background:#eee;
+    border:1px solid #ccc;
+}
+
+.add{
+    background:#0d4a8d;
+    color:white;
+    padding:12px 25px;
+    text-decoration:none;
+    display:inline-block;
+}
+
+.save a{
+    text-decoration:none;
+    color:white;
+}
+.waste{
+    background:white;
+    margin-top:20px;
+}
+
+.rest{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    padding:20px;
+    text-align:center;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    color:#555;
+}
+@media(max-width:768px){
+
+header{
+    flex-direction:column;
+    gap:15px;
+}
+
+.dancing{
+    grid-template-columns:1fr;
+}
+
+.business,
+.form,
+.form-grid{
+    grid-template-columns:1fr;
+}
+
+.gender{
+    flex-direction:column;
+    gap:15px;
+}
+
+.rest{
+    grid-template-columns:1fr;
+}
+
+.portable{
+    grid-template-columns:repeat(10,180px);
+}
+}
+.portable p.active{
+    background: #163d73;
+    color: white;
+    font-weight: bold;
+    border-color: #163d73;
+}
+.bottom  a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+#save{
+    background: #0d4a8d;
+}
+#save a{
+    text-decoration: none;
+    color: white;
+}
+.full-row{
+    grid-column: 1/-1;
+}
+#add button a{
+    text-decoration: none;
+    color: white;
+}
+.full-row label{
+    background:#f0f0f0;
+    padding:10px;
+    border-left:4px solid #0d4a8d;
+}
+.add{
+    background:#0d4a8d;
+    color:white;
+    padding:12px 25px;
+    text-decoration:none;
+    display:inline-block;
+}
+</style>
+<body>
+    <div class="mart">
+        <p>Skip to Main Content</p>
+        <p>A+</p>
+        <p>A-</p>
+    </div>
+
+    <header>
+        <div class="wait">
+        <h3>Goods and Services Tax</h3>
+        <h4>Government of India, States and Union Territories</h4>
+        </div>
+
+        <div class="locked">
+        <button type="button" onclick="exportAndGo('MAIN.html')">REGISTER</button>
+        <button type="button" onclick="exportAndGo('../LOGIN GST/loginPage.html')">LOGIN</button>
+        </div>
+    </header>
+
+    <nav>
+    <ul>
+        <li>Home</li>
+        <li>Services</li>
+        <li>GST Law</li>
+        <li>Downloads</li>
+        <li>Search Taxpayer</li>
+        <li>Help and Taxpayer Facilities</li>
+        <li>e-Invoice</li>
+        <li>News and Updates</li>
+    </ul>
+</nav>
+
+<div class="dancing">
+        <div>
+            <p>Application Type</p>
+            <p>New Registration</p>
+        </div>
+        <div>
+            <p>Due Date to Complete</p>
+            <p>30/10/2020</p>
+        </div>
+        <div>
+            <p>Last Modified</p>
+            <p>15/10/2020</p>
+        </div>
+        <div>
+            <p>Profile</p>
+            <p>0%</p>
+        </div>
+</div>
+<div class="portable">
+    <p>Bussiness Details</p>
+    <p class="active">Promoter/ Partners</p>
+    <p>Authorized Signature</p>
+    <p>Authorized Representative</p>
+    <p>Principal  Palace of Business</p>
+    <p>Additonal Places of Business</p>
+    <p>Goods and Services</p>
+    <p>State Specific Information</p>
+    <p>Aadhar Authentication</p>
+    <p>Verification</p>
+</div>
+
+<div class="section">
+    Personal Information
+</div>
+<div class="business">
+    <div class="group">
+        <label for="pFirstName">First Name *</label>
+        <input type="text" id="pFirstName" name="First Name" placeholder="Ex-Nachimuthu">
+    </div>
+
+    <div class="group">
+        <label for="pMiddleName">Middle Name</label>
+        <input type="text" id="pMiddleName" name="Middle Name" placeholder="Enter Middle Name">
+    </div>
+
+    <div class="group">
+        <label for="pLastName">last Name</label>
+        <input type="text" id="pLastName" name="Last Name" placeholder="Ex-Saravanakumar">
+    </div>
+    <div class="group full-row">
+    <label><b>Name of Father</b></label>
+</div>
+
+
+    <div class="group">
+        <label for="fFirstName">First Name *</label>
+        <input type="text" id="fFirstName" name="Father First Name" placeholder="Ex-Nachimuthu">
+    </div>
+    
+    <div class="group">
+        <label for="fMiddleName">Middle Name</label>
+        <input type="text" id="fMiddleName" name="Father Middle Name" placeholder="Enter Middle Name">
+    </div>
+
+    <div class="group">
+        <label for="fLastName">last Name</label>
+        <input type="text" id="fLastName" name="Father Last Name" placeholder="Enter last Name">
+    </div>
+
+     <div class="group">
+        <label for="dob">Date of Birth *</label>
+        <input type="date" id="dob" name="Date of Birth">
+    </div>
+
+    <div class="group">
+        <label for="mobile">Mobile Number *</label>
+        <input type="number" id="mobile" name="Mobile Number" placeholder="9894639410">
+    </div>
+
+    <div class="group">
+        <label for="email">Email Address*</label>
+        <input type="email" id="email" name="Email Address" placeholder="Ex-Krrhitech@gmail.com">
+    </div>
+</div>
+
+<div class="gender">
+<label><input type="radio" name="gender" value="Male"> Male</label>
+<label><input type="radio" name="gender" value="Female"> Female</label>
+<label><input type="radio" name="gender" value="Others"> Others</label>
+</div>
+
+<div class="section">
+    Identity Information
+</div>
+<div class="form">
+    <div class="group">
+        <label for="designation">Designation /Status *</label>
+        <input type="text" id="designation" name="Designation" placeholder="Enter Designation">
+    </div>
+
+    <div class="group">
+        <label for="din">DIN Number *</label>
+        <input type="text" id="din" name="DIN Number" placeholder="Enter Designation">
+    </div>
+    <div class="group">
+        <label for="citizenIndia">Citizen of India</label>
+        <select id="citizenIndia" name="Citizen of India">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+    <div class="group">
+        <label for="panNum">PAN Number *</label>
+        <input type="text" id="panNum" name="PAN Number" placeholder="Ex-AYGPS0480G1ZH">
+    </div>
+    <div class="group">
+        <label for="passport">Passport Number</label>
+        <input type="text" id="passport" name="Passport Number" placeholder="Enter Passport Number">
+    </div>
+    <div class="group">
+        <label for="aadhaar">Aadhaar Number ⓘ </label>
+        <input type="text" id="aadhaar" name="Aadhaar Number" placeholder="Ex-7522 7998 9942">
+    </div>
+</div>
+
+<div class="section">
+    Residential Address
+</div>
+<div class="map">
+    <img src="" alt="map">
+</div>
+<div class="form-grid">
+    <div class="group">
+        <label for="country">Country *</label>
+        <select id="country" name="Country">
+            <option value="India">India</option>
+        </select>
+    </div>
+    <div class="group">
+        <label for="pincode">PIN Code *</label>
+        <input type="text" id="pincode" name="PIN Code" placeholder="Ez-639001">
+    </div>
+    <div class="group">
+        <label for="state">State *</label>
+        <input type="text" id="state" name="State" placeholder="Ex-TamilNadu">
+    </div>
+    <div class="group">
+        <label for="district">District *</label>
+        <input type="text" id="district" name="District" placeholder="Ex- Karur">
+    </div>
+    <div class="group">
+        <label for="city">City / Town *</label>
+        <input type="text" id="city" name="City/Town" placeholder="Enter City">
+    </div>
+    <div class="group">
+<label for="road">Road / Street *</label>
+<input type="text" id="road" name="Road/Street" placeholder="Enter Road">
+</div>
+
+<div class="group">
+<label for="building">Building Name *</label>
+<input type="text" id="building" name="Building Name" placeholder="Enter Building Name">
+</div>
+<div class="group">
+<label for="flatNo">Flat Number *</label>
+<input type="text" id="flatNo" name="Flat Number" placeholder="Enter Flat Number">
+</div>
+
+<div class="group">
+<label for="floorNo">Floor Number</label>
+<input type="text" id="floorNo" name="Floor Number" placeholder="Enter Floor Number">
+</div>
+<div class="group">
+<label for="landmark">Nearby Landmark</label>
+<input type="text" id="landmark" name="Nearby Landmark" placeholder="Enter Landmark">
+</div>
+</div>
+<div class="section">
+    Document Upload
+</div>
+<div class="upload">
+    <div class="box">
+        <div>
+            <p><b>Upload Photograph</b></p>
+            <br>
+            <input type="file">
+        </div>
+        <button class="picture">
+            TAKE PICTURE
+        </button>
+    </div>
+    <div class="bottom">
+        <button type="button" class="back" onclick="exportAndGo('dash5.html')">BACK</button>
+        <button class="show">SHOW LIST</button>
+       <a class="add" href="dash41.html" style="color: white;">ADD NEW</a>
+        <button type="button" id="save" onclick="exportAndGo('dash6.html')">SAVE & CONTINUE</button>
+    </div>
+</div>
+
+    <div class="rest">
+        <div class="sing">
+     <p>@2018-19 Good and Services Tax Network</p>
+        </div>
+        <div class="sing">
+            <p>Site Last Updated on 29-05-2026</p>
+        </div>
+        <div class="sing">
+            <p>Design and Developed by GSTN</p>
+        </div>
+    </div>
+
+    <hr>
+    <footer>
+       Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
+    </footer>
+    <script src="../form-exporter.js?v=6"></script>
+</body>
+</html>

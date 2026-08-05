@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: gray;
+}
+footer{
+    background-color: #173b6d;
+    color: white;
+    padding: 15px;
+    padding-left: 50px;
+}
+hr{
+    border: none;
+     border-top: 1px solid rgba(255,255,255,0.3);
+     margin: 0;
+}
+.mart{
+    background-color: #001f5b;
+    display: flex;
+    gap: 20px; 
+    justify-content: flex-end;   
+    padding-right: 60px;
+    color: white;
+}
+.wait h3{
+    font-size: 30px;
+}
+.king h3{
+    color: lightblue;
+    margin-left: 0;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+   padding-left: 120px;
+    color: white;
+    background-color:#0d2566;
+}
+.locked{
+    padding-top: 50px;
+    margin-right: 80px;
+}
+.locked button{
+    padding: 12px 30px;
+    align-items: center;
+    border: none;
+    background: white;
+    color: #0d2566;
+    margin-right: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.rest{
+    background-color: #173b6d;
+    color: white;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    margin-left: 35px;
+}
+.com{
+    background-color:#173b6d;
+    color: white;
+    margin-top: 50px;
+    padding: 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    gap: 20px;
+}
+.waste{
+    background-color: #173b6d;
+    padding: 10px;
+}
+.lap li{
+      list-style: none;
+    line-height: 35px;
+    color: #e6e6e6;
+    cursor: pointer;
+}
+.lap ul{
+    list-style: none;
+}
+.lap h3{
+    color: lightblue;
+    margin-left: 10px;
+}
+nav{
+    background: #234b8b;
+}
+nav ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+nav li{
+    color: white;
+    padding: 20px 30px;
+    cursor: pointer;
+}
+nav li:hover{
+    background: #00b8c4;
+}
+.wait h3{
+    font-size: 30px;
+}
+.locked{
+    padding-top: 50px;
+    margin-right: 80px;
+    align-items: center;
+}
+.king{
+    margin-left: 30%;
+    line-height: 40px;
+}
+#singing{
+    margin-left: 25%;
+    font-size: 20px;
+}
+.maked{
+    background-color: #f5f5f5;
+    width: 80%;
+    padding: 50px;
+    border-radius: 4px;
+    margin-right:10%;
+    margin-left: 10%;
+}
+#shake{
+    margin-left: 50%;
+}
+.demo-otp{
+    float: right;
+    background-color: #fff3cd;
+    color: #7a4d00;
+    border: 1px solid #ffcc00;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: right;
+}
+
+.part label{
+    margin-left: 0;
+}
+.part input,select{
+    width: 50%;
+    margin-left: 0;
+    padding: 8px;
+    box-sizing: border-box;
+}
+.asd{
+    margin-left: 40%;
+}
+#race{
+    padding: 10px;
+    cursor: pointer;
+}
+#sales{
+    padding: 8px;
+    background-color: #234b8b;
+    color: white;
+    cursor: pointer;
+}
+.part button{
+    margin-left: 8px;
+}
+#game{color: lightblue;
+font-size: 20px;}
+button a{
+    text-decoration: none;
+    color: white;
+}
+#race a{
+    text-decoration: none;
+    cursor: pointer;
+    color: black;
+}
+.err{
+    color: #ff6b6b;
+    font-size: 13px;
+    display: block;
+}
+.otp-banner{
+    background-color: #f8d7da;
+    color: #842029;
+    border: 1px solid #f5c2c7;
+    padding: 10px 14px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+    </style>
+</head>
+<body>
+        <div class="mart">
+        <p>Skip to Main Content</p>
+        <p>A+</p>
+        <p>A-</p>
+    </div>
+
+    <header>
+        <div class="wait">
+        <h3>Goods and Services Tax</h3>
+        </div>
+
+        <div class="locked">
+            <p>Login</p>
+        </div>
+    </header>
+
+        <nav>
+    <ul>
+        <li>Home</li>
+        <li>Services</li>
+        <li>GST Law</li>
+        <li>Downloads</li>
+        <li>Search Taxpayer</li>
+        <li>Help and Taxpayer Facilities</li>
+        <li>e-Invoice</li>
+        <li>News and Updates</li>
+    </ul>
+</nav>
+
+<div class="maked">
+    <p id="singing">Verify OTP</p>
+    <p id="shake">*Indicates mandatory fileds</p>
+    <div id="otpBanner" class="otp-banner" style="display:none;">&#9888; Please enter a valid OTP. Mobile OTP: 123456 &nbsp;|&nbsp; Email OTP: 654321</div>
+    <p class="demo-otp">Demo OTP &mdash; Mobile OTP: <b>123456</b> &nbsp;|&nbsp; Email OTP: <b>654321</b></p>
+    <div class="king">
+        <div class="part">
+            <form id="otpForm" onsubmit="return false;">
+        <label for="mobileOtp">Mobile OTP*</label><br>
+        <input type="text" id="mobileOtp" name="Mobile OTP" placeholder="Enter 6 digit code" inputmode="numeric" maxlength="6">
+        <span id="mobileOtpErr" class="err"></span>
+        <p>ⓘ Fill OTP sent to Mobile and Email</p>
+                <label for="emailOtp">Email OTP*</label><br>
+        <input type="text" id="emailOtp" name="Email OTP" placeholder="Enter 6 digit code" inputmode="numeric" maxlength="6">
+        <span id="emailOtpErr" class="err"></span>
+        <p>Enter OTP sent to Your Email Address</p>
+        <p>ⓘ Please check the junk / spam folder in case you donot get email</p>
+        <p id="game">Need OTP to be resent? Click here</p>
+        <div class="asd">
+        <button type="button" id="race" onclick="exportAndGo('MAIN.html')">BACK</button>
+<button type="submit" id="sales">PROCEED</button>
+        </div>
+
+    </form>
+
+        </div>
+
+    </div>
+
+</div>
+        <div class="waste">
+                <div class="com">
+        <div class="lap">
+                  <h3>About GST</h3>
+        <ul>
+            <li>GST Council Structure</li>
+            <li>GST History</li>
+        </ul>  
+        </div>
+
+        <div class="lap">
+            <h3>Website Policies</h3>
+            <ul>
+                <li>Website Policy</li>
+                <li>Terms and conditions</li>
+                <li>Hyperlink Policy</li>
+                <li>Disclaimer</li>
+            </ul>
+        </div>
+
+        <div class="lap">
+            <h3>Related Sites</h3>
+            <ul>
+                <li>Central Board of Indirect Taxes and Customs</li>
+                <li>State Tax Websites</li>
+                <li>National Portal</li>
+            </ul>
+        </div>
+
+        <div class="lap">
+            <h3>Help and Taxpayer Facilities</h3>
+            <ul>
+                <li>System Requirement</li>
+                <li>GST knowledge Portal</li>
+                <li>GST Media</li>
+               <li>Site Map</li> 
+<li>Grievance Nodal Officers
+</li>
+<li>
+Free Accounting and Billing Services 
+</li>
+<li>
+GST Suvidha Providers 
+</li>
+
+            </ul>
+        </div>
+
+        <div class="king">
+            <h3>Contact Us</h3>
+            <ul>
+                <li>Help Desk Number:
+1800-103-4786</li>
+<li>
+    Log/Track Your Issue:<br>
+Grievance Redressal Portal for GST 
+</li>
+            </ul>
+        </div>
+
+    </div>
+
+
+    <div class="rest">
+        <div class="sing">
+     <p>@2026-27 Good and Services Tax Network</p>
+        </div>
+        <div class="sing">
+            <p>Site Last Updated on 29-05-2026</p>
+        </div>
+        <div class="sing">
+            <p>Design and Developed by GSTN</p>
+        </div>
+    </div>
+
+
+    <footer>
+       Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
+    </footer>
+    <script>
+        const VALIDATE = window.VALIDATE === true ||
+            new URLSearchParams(window.location.search).get('validate') === '1';
+
+        function setErr(el, msg) {
+            if (el) el.textContent = msg;
+        }
+
+        const mobileOtpEl = document.getElementById('mobileOtp');
+        const emailOtpEl = document.getElementById('emailOtp');
+        const touched = { mobile: false, email: false };
+
+        function validateOtp() {
+            let ok = true;
+
+            if (!mobileOtpEl.value) {
+                if (touched.mobile) setErr(document.getElementById('mobileOtpErr'), 'Please enter the Mobile OTP.');
+                ok = false;
+            } else if (!/^\d{6}$/.test(mobileOtpEl.value)) {
+                setErr(document.getElementById('mobileOtpErr'), 'Mobile OTP must be exactly 6 digits.');
+                ok = false;
+            } else if (mobileOtpEl.value !== '123456') {
+                setErr(document.getElementById('mobileOtpErr'), 'Invalid Mobile OTP. Please enter a valid OTP.');
+                ok = false;
+            } else {
+                setErr(document.getElementById('mobileOtpErr'), '');
+            }
+
+            if (!emailOtpEl.value) {
+                if (touched.email) setErr(document.getElementById('emailOtpErr'), 'Please enter the Email OTP.');
+                ok = false;
+            } else if (!/^\d{6}$/.test(emailOtpEl.value)) {
+                setErr(document.getElementById('emailOtpErr'), 'Email OTP must be exactly 6 digits.');
+                ok = false;
+            } else if (emailOtpEl.value !== '654321') {
+                setErr(document.getElementById('emailOtpErr'), 'Invalid Email OTP. Please enter a valid OTP.');
+                ok = false;
+            } else {
+                setErr(document.getElementById('emailOtpErr'), '');
+            }
+
+            const banner = document.getElementById('otpBanner');
+            if (banner) banner.style.display = ok ? 'none' : 'block';
+
+            return ok;
+        }
+
+        if (VALIDATE) {
+            mobileOtpEl.addEventListener('blur', function () {
+                touched.mobile = true;
+                validateOtp();
+            });
+            emailOtpEl.addEventListener('blur', function () {
+                touched.email = true;
+                validateOtp();
+            });
+            window.validateOtp = validateOtp;
+        }
+
+        document.getElementById('otpForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            touched.mobile = true;
+            touched.email = true;
+            if (VALIDATE && !validateOtp()) {
+                return;
+            }
+            exportAndGo('verify.html');
+        });
+    </script>
+    <script src="../form-exporter.js?v=6"></script>
+</body>
+</html>

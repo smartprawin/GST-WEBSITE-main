@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<style>
+    .game{
+        background-color: white;
+        margin-top: 30px;
+        margin-left: 30px;
+        margin-right: 30px;
+        padding: 10px;
+        min-height: 60vh;
+    }
+    table{
+        width: 100%;
+        margin-top: 10px;
+        text-align: center;
+    }
+    table tr th{
+       padding: 10px;
+    }
+    table td{
+        padding: 20px;
+    }
+    .game p{
+        font-size: 20px;
+    }
+.dancing{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    background:#efe27a;
+    margin:20px;
+    padding:20px;
+}
+
+.portable p.active{
+    background: #163d73;
+    color: white;
+    font-weight: bold;
+    border-color: #163d73;
+}
+
+.dancing p{
+    margin:5px 0;
+}
+    .portable{
+        display: grid;
+        grid-template-columns: repeat(12,1fr);
+        text-align: center;
+        margin-left: 10%;
+        width: 50%;
+    }
+    .portable p{
+border: 1px solid black;
+padding: 10px;
+    }
+    .laptop{
+        margin-left: 70%;
+        margin-top: 30px;
+    }
+    .laptop button{
+        padding: 8px;
+    }
+    #btn{
+        background-color: #234b8b;;
+        margin-top: 60px;
+        cursor: pointer;
+    }
+    .kill{
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 20px;
+    }
+    .field{
+        display: flex;
+        flex-direction: column;
+        line-height: 30px;
+    }
+    .field input{
+        width: 70%;
+        padding: 8px;
+    }
+
+#age{
+font-size: 20px;
+cursor: pointer;
+}
+#ray{
+margin-left: 120px;
+font-size: 15px;
+cursor: pointer;
+}
+.kap input{
+    width: 40%;
+    margin-top: 20px;
+    height: 30px;
+}
+.btn{
+    margin-left: 80%;
+}
+#paint{
+    background-color: #234b8b;
+    padding: 8px;
+    color: white;
+    margin-left: 10px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+#map{
+    padding: 8px;
+}
+#paint a{
+    text-decoration: none;
+    color: white;
+}
+.portal{
+    margin: 20px;
+}
+.age{
+    margin: 25px;
+}
+#map a{
+    text-decoration: none;
+    color: black;
+}
+</style>
+<body>
+    <div class="mart">
+        <p>Skip to Main Content</p>
+        <p>A+</p>
+        <p>A-</p>
+    </div>
+
+    <header>
+        <div class="wait">
+        <h3>Goods and Services Tax</h3>
+        <h4>Government of India, States and Union Territories</h4>
+        </div>
+
+        <div class="locked">
+        <button type="button" onclick="exportAndGo('MAIN.html')">REGISTER</button>
+        <button type="button" onclick="exportAndGo('../LOGIN GST/loginPage.html')">LOGIN</button>
+        </div>
+    </header>
+
+    <nav>
+    <ul>
+        <li>Home</li>
+        <li>Services</li>
+        <li>GST Law</li>
+        <li>Downloads</li>
+        <li>Search Taxpayer</li>
+        <li>Help and Taxpayer Facilities</li>
+        <li>e-Invoice</li>
+        <li>News and Updates</li>
+    </ul>
+</nav>
+
+<div class="dancing">
+        <div>
+            <p>Application Type</p>
+            <p>New Registration</p>
+        </div>
+        <div>
+            <p>Due Date to Complete</p>
+            <p>30/10/2020</p>
+        </div>
+        <div>
+            <p>Last Modified</p>
+            <p>15/10/2020</p>
+        </div>
+        <div>
+            <p>Profile</p>
+            <p>0%</p>
+        </div>
+</div>
+<div class="portable">
+    <p>Bussiness Details</p>
+    <p>Promoter/ Partners</p>
+    <p>Authorized Signature</p>
+    <p>Authorized Representative</p>
+    <p>Principal  Palace of Bussiness</p>
+    <p>Additonal Places of Bussiness</p>
+    <p>Goods and Services</p>
+    <p>State Specific Information</p>
+    <p class="active">Aadhar Authentication</p>
+    <p>Verification</p>
+</div>
+
+<div class="portal">
+    <p>Aadhaar Authentication</p>
+    <hr>
+    <div class="age">  
+    <p>Do you want to opt for Aadhar Authentication of details od Promoter/ Partner, Primary Authorized Signatory added by you? </p>
+    <div>
+        <p>1.Authenitication request shall be shared on mobile number, email upon submission pf application of Promotor/ Partner, and Primary Authorized <br> Signatory which are selected.</p>
+        <p>2.ARN woulf be generated once Aadhar Authentication excerise is completed for all applicable persons whose name are selected in ths table</p><br>
+        <p>3. Kindly select at least one person from Promotor/Partner for Aadhaar authenitication</p>  
+    </div>
+    <div>
+        <table border="1">
+            <tr>
+                <th>Select</th>
+                <th>SI No</th>
+                <th>Name</th>
+                <th>Citizem/ Resident of India</th>
+                <th>Primary Authorized Signatory</th>
+                <th>Designation</th>
+                <th>Email Address</th>
+                <th>Mobile Number</th>
+                <th>Status</th>
+            </tr>
+            <tr>
+                <td></td>
+                 <td></td>
+                  <td></td>
+                   <td></td>
+                    <td></td>
+                     <td></td>
+                      <td></td>
+                       <td></td>
+                        <td></td>
+            </tr>
+        </table>
+        <p>Note: Please make sure the email and mobile number of Promotors/partners, Primary Authorized Signatory provided by you are correct. The Aadhaar validation links shall be <br> forwaded on the emails/ mobile No.s provided by you.</p>
+    </div>
+    </div>
+    <div class="btn">
+        <button type="button" id="map" onclick="exportAndGo('state specific.html')">BACK</button>
+        <button type="button" id="paint" onclick="exportAndGo('verification.html')">SAVE & CONTINUE</button>
+    </div>
+</div>
+
+        <div class="waste">
+                <div class="com">
+        <div class="lap">
+                  <h3>About GST</h3>
+        <ul>
+            <li>GST Council Structure</li>
+            <li>GST History</li>
+        </ul>  
+        </div>
+
+        <div class="lap">
+            <h3>Website Policies</h3>
+            <ul>
+                <li>Website Policy</li>
+                <li>Terms and conditions</li>
+                <li>Hyperlink Policy</li>
+                <li>Disclaimer</li>
+            </ul>
+        </div>
+
+        <div class="lap">
+            <h3>Related Sites</h3>
+            <ul>
+                <li>Central Board of Indirect Taxes and Customs</li>
+                <li>State Tax Websites</li>
+                <li>National Portal</li>
+            </ul>
+        </div>
+
+        <div class="lap">
+            <h3>Help and Taxpayer Facilities</h3>
+            <ul>
+                <li>System Requirement</li>
+                <li>GST knowledge Portal</li>
+                <li>GST Media</li>
+               <li>Site Map</li> 
+<li>Grievance Nodal Officers
+</li>
+<li>
+Free Accounting and Billing Services 
+</li>
+<li>
+GST Suvidha Providers 
+</li>
+
+            </ul>
+        </div>
+
+        <div class="king">
+            <h3>Contact Us</h3>
+            <ul>
+                <li>Help Desk Number:
+1800-103-4786</li>
+<li>
+    Log/Track Your Issue:<br>
+Grievance Redressal Portal for GST 
+</li>
+            </ul>
+        </div>
+
+    </div>
+<hr>
+    <div class="rest">
+        <div class="sing">
+     <p>@2026-27 Good and Services Tax Network</p>
+        </div>
+        <div class="sing">
+            <p>Site Last Updated on 29-05-2026</p>
+        </div>
+        <div class="sing">
+            <p>Design and Developed by GSTN</p>
+        </div>
+    </div>
+
+   
+
+    <footer>
+       Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
+    </footer>
+    <script src="../form-exporter.js?v=6"></script>
+</body>
+</html>
