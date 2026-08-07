@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        header{
+    display: flex;
+    justify-content: space-between;
+   padding-left: 120px;
+    color: white;
+    background-color:#0d2566;
+}
+
+.wait h3{
+    font-size: 30px;
+}
+
+.locked{
+    padding-top: 50px;
+    margin-right: 80px;
+}
+.locked button{
+    padding: 12px 30px;
+    align-items: center;
+    border: none;
+    background: white;
+    color: #0d2566;
+    margin-right: 15px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+nav{
+    background: #234b8b;
+}
+nav ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+nav li{
+    color: white;
+    padding: 20px 30px;
+    cursor: pointer;
+   
+};
+nav li:hover{
+    background: #00b8c4;
+}
+.waste{
+    width:100%;
+    background:#173b6d;
+    color:#fff;
+    margin-top:50px;
+}
+
+.com{
+    width:90%;
+    margin:0 auto;
+    padding:50px 0;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:40px;
+    box-sizing:border-box;
+}
+
+
+.rest{
+    width:100%;
+    background:#173b6d;
+    color:#fff;
+    border-top:1px solid rgba(255,255,255,.25);
+}
+
+.rest .sing{
+    width:90%;
+    margin:auto;
+    padding:20px 0;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    color:white;
+    text-align:center;
+}
+footer{
+    width:100%;
+    background:#35558f;
+    color:#fff;
+    text-align:center;
+    padding:18px;
+    font-size:16px;
+    box-sizing:border-box;
+}
+.fog{
+    background-color: bisque;
+    min-height: 15px;
+    padding: 10px;
+}
+.main-container{
+    width:90%;
+    margin:40px auto;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+
+}
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.title h2{
+    margin: 0;
+    color: #173b6d;
+}
+.title a{
+    text-decoration: none;
+    color: #173b6d;
+    font-weight: bold;
+}
+.left-box{
+    border: 1px solid #cfd8e3;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+}
+.lap ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.lap li{
+    margin-bottom:18px;
+    line-height:1.5;
+    color:#ffffff;
+    font-size:16px;
+}
+.lap h3{
+    color:#58c6ff;
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+.news-card{
+    padding: 25px;
+    border-top: 1px solid#ddd;
+}
+.news-card h4{
+    color: #173b6d;
+    font-size: 28px;
+}
+.news-card p{
+    color: #444;
+}
+.news-card.blue{
+    background: #eaf3ff;
+}
+.right-box{
+    border: 1px solid #d7d7d7;
+    border-radius: 8px;
+    background: #fff;
+    padding: 20px;
+}
+.help-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    border: 1px solid #ddd;
+    margin-top: 10px;
+cursor: pointer;
+}
+.help-item:hover{
+background:#eaf3ff
+}
+.help-item.active{
+    background: #d9ebff;
+}
+.help-item span{
+    font-size: 28px;
+    font-weight: bold;
+}
+.contact-box{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    border: 1px solid #ddd;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+.contact-box h3{
+    color: #173b6d;
+}
+.contact-box p{
+    margin-bottom: 10px;
+}
+.due-container{
+    width: 90%;
+    margin: 40px auto;
+}
+.due-container table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.due-container th{
+    background:#d9ebff;
+    padding:15px;
+}
+.due-container td{
+    padding:15px;
+    border:1px solid #ddd;
+}
+
+.due-container h4{
+    color:#173b6d;
+    font-size:26px;
+}
+
+.due-container p{
+    color:#173b6d;
+}
+.banner img{
+    width:100%;
+    display:block;
+}
+hr{
+   border:none;
+    border-top:1px solid rgba(255,255,255,.25);
+    margin:0;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown{
+    display:none;
+    position:absolute;
+    top:100%;
+    background:#f5f5f5;
+    min-width:700px;
+      width: 1000px; 
+}
+.dropdown a{
+    display:inline-block;
+    padding:15px 20px;
+    color:#000;
+}
+
+.active{
+    background-color: #00b8c4;
+}
+nav ul li{
+    position: relative;
+    color: white;
+    padding:20px 30px;
+    cursor:pointer;
+}
+li a{
+    text-decoration: none;
+    color: white;
+}
+    </style>
+</head>
+<body>
+    
+     <header>
+          
+        <div class="wait">
+        <h3>GST Demo</h3>
+        <!--<h4>Government of India, States and Union Territories</h4>
+        -->
+        </div>
+
+        <div class="locked">
+        <button type="submit"><a href="Registerpage.html">REGISTER</a></button>
+        <button type="submit"><a href="../login/loginPage.html">LOGIN</a></button>
+        </div>
+    </header>
+
+     <nav>
+    <ul>
+        <li>Home</li>
+        <li>
+            <summary>Services </summary>
+        <div class="dropdown">
+            <a>Registration</a>
+            <a href="#">Payment</a>
+            <a href="#">User Services</a>
+            <a href="#">Refunds</a>
+            <a href="#">e-Way Bill System</a>
+            <a href="#">Track Application Status</a>
+        </div>
+    </li>
+
+        <li>GST Law</li>
+        
+             <li><a href="https://www.gst.gov.in/download/returns">Downloads</a></li>
+        <li><a href="https://services.gst.gov.in/services/searchtp">Search Taxpayer</a></li>
+        <li>Help and Taxpayer Facilities</li>
+        <li>e-Invoice</li>
+        <li>News and Updates</li>
+    </ul>
+</nav>
+
+<div class="banner">
+    <img src="../images/gst.png" alt="">
+</div>
+
+<div class="fog"></div>
+
+<div class="main-container">
+
+<div class="left-box">
+    <div class="title">
+    <h2>New Updates</h2>
+    <a href="#">View All</a>
+ </div>
+
+    <div class="news-card">
+        <h4>FAQs on Mandatory Capture of shup to Field and voluntary closue of E-Way Bill
+             <br>2026</h4>
+        <p>Jul 2nd, 2026</p>
+    </div>
+
+        <div class="news-card blue">
+        <h4>Advisory of Revision of Timeline for Amendment of Aggregate Annual Turnover <br>(AATO), 2026</br></h4>
+        <p>Jul 1st, 2026</p>
+    </div>
+
+    <div class="news-card">
+     <h4>Gross and Net GST revenue collections for the month of June, 2026 </h4>
+        <p>Jul 1st, 2026</p>
+    </div>
+</div>
+
+<div class="right-box">
+    <h2>Popular Help Topics</h2>
+    <div class="help-item">
+    <p>How do I register with GST?</p>
+    <span>></span>
+    </div>
+    <div class="help-item active">
+             <p>How do I apply for refund?</p>
+                 <span>></span>
+    </div>
+
+    <div class="help-item">
+    <p>How do I fie returns?</p>
+     <span>></span>
+    </div>
+  
+    <div class="help-item">
+  <p>How do I use Returns Offline Tools?</p>
+  <span>></span>
+    </div>
+     
+    <div class="help-item">
+    <p>How do I file an appeal?</p>
+    <span>></span>
+    </div>
+   
+    <div class="help-item">
+ <p>How do I file intimation about voluntary payment?</p>
+ <span>></span>
+    </div>
+
+<div class="contact-box">
+    <div>
+        <p>Help-Desk Number</p>
+        <h4>1800-103-4786</h4>
+    </div>
+        <div>
+        <p>Log/Track Your Issues here</p>
+        <h4>Grievance Redressal</h4>
+    </div>
+</div>
+  </div>
+<div class="due-container">
+    <div>
+    <h4>Upcoming Due Dates</h4>
+    <p>DOWNLOADS PDF</p>
+    </div>
+<table border="1">
+    <tr>
+        <th>Monthly</th>
+        <th>Quarterly</th>
+        <th>Other Due Dates</th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>GSTR-3B (Jun, 2026)
+<br>
+Jul 20th, 2026 </td>
+<td>GSTR-3B (Apr-Jun, 2026)
+<br>
+Jul 22nd, 24th, 2026 </td>
+<td>
+    GSTR-5 (Jun, 2026)
+<br>
+Jul 13th, 2026
+</td>
+<td>
+    GSTR-5A (Jun, 2026)
+<br>
+Jul 20th, 2026
+</td>
+    </tr>
+    
+    <tr>
+        <td>GSTR-1 (Jun, 2026)
+<br>
+Jul 11th, 2026 </td>
+<td>GSTR-1 (Apr-Jun, 2026)
+<br>
+Jul 13th, 2026 
+</td>
+<td>
+    GSTR-6 (Jun, 2026)
+<br>
+Jul 13th, 2026
+</td>
+<td>GSTR-7 (Jun, 2026)
+<br>
+Jul 10th, 2026</td>
+    </tr>
+    <tr>
+        <td>IFF (Optional) (Jun,2026)
+<br>NA </td>
+
+<td>
+    CMP-08 (Apr-Jun, 2026)
+<br>
+Jul 18th, 2026
+</td>
+
+<td>
+    GSTR-8 (Jun, 2026)
+<br>
+Jul 10th, 2026
+</td>
+    <td>
+        RFD-10
+        <br>
+        2 years from the last day of the quarter in which supply was received
+ </td>
+    </tr>
+</table>
+</div>
+
+<div class="media"> 
+
+</div>
+</div>
+<div class="waste">
+                <div class="com">
+
+        <div class="lap">
+                  <h3>About GST</h3>
+        <ul>
+            <li>GST Council Structure</li>
+            <li>GST History</li>
+        </ul>  
+        </div>
+
+        <div class="lap">
+            <h3>Website Policies</h3>
+            <ul>
+                <li>Website Policy</li>
+                <li>Terms and conditions</li>
+                <li>Hyperlink Policy</li>
+                <li>Disclaimer</li>
+            </ul>
+        </div>
+
+        <div class="lap">
+            <h3>Related Sites</h3>
+            <ul>
+                <li>Central Board of Indirect Taxes and Customs</li>
+                <li>State Tax Websites</li>
+                <li>National Portal</li>
+            </ul>
+        </div>
+
+        <div class="lap">
+            <h3>Help and Taxpayer Facilities</h3>
+            <ul>
+                <li>System Requirement</li>
+                <li>GST knowledge Portal</li>
+                <li>GST Media</li>
+               <li>Site Map</li> 
+<li>Grievance Nodal Officers
+</li>
+<li>
+Free Accounting and Billing Services 
+</li>
+<li>
+GST Suvidha Providers 
+</li>
+
+            </ul>
+        </div>
+
+        <div class="lap">
+            <h3>Contact Us</h3>
+            <ul>
+<li>
+Help Desk Number:<br>
+1800-103-4786
+</li>
+
+<li>
+Log/Track Your Issue:<br>
+Grievance Redressal Portal for GST
+</li>
+            </ul>
+        </div>
+ </div>
+
+<hr>
+<div class="rest">
+    <div class="sing">
+
+        <p>© 2026-27 Goods and Services Tax Network</p>
+
+        <p>Site Last Updated on 29-05-2026</p>
+
+        <p>Designed & Developed by GSTN</p>
+
+    </div>
+</div>
+
+    <footer>
+       Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
+    </footer>
+    </div>
+</body>
+</html>
