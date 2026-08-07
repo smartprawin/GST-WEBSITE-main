@@ -69,7 +69,7 @@ header{
 .lap li{
       list-style: none;
     line-height: 35px;
-    color: #e6e6e6;
+    color: #b8d4f0;
     cursor: pointer;
 }
 .lap ul{
@@ -108,10 +108,6 @@ nav li:hover{
 #singing{
     margin-left: 25%;
     font-size: 20px;
-}
-.part label{
-    margin-left: 0;
-    line-height: 45px;
 }
 .part input,select{
     width: 100%;
@@ -159,12 +155,94 @@ nav li:hover{
     width: 100%;
     padding:12px;
 }
-.wait h3{
+.wait h1, .wait h3{
     font-size: 30px;
 }
 .wait h4{
     font-size: 25px;
 }
 #shake{
-    margin-left: 50%;
+    margin-left: 0;
+}
+
+/* Button styles */
+.btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.btn button, .buttons button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+.btn button, .buttons .back-btn {
+    background-color: #0d2566;
+    color: white;
+}
+.btn button:hover, .buttons .back-btn:hover {
+    background-color: #1a3a7a;
+}
+.buttons .save-btn {
+    background-color: #0d2566;
+    color: white;
+}
+.buttons .save-btn:hover {
+    background-color: #1a3a7a;
+}
+
+#race {
+    background-color: #0d2566;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-right: 10px;
+}
+#race:hover {
+    background-color: #1a3a7a;
+}
+
+#lack, #lack2 {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#lack {
+    background-color: #0d2566;
+    color: white;
+}
+#lack2 {
+    background-color: #0d2566;
+    color: white;
+}
+
+#map {
+    background-color: #0d2566;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+#map:hover {
+    background-color: #1a3a7a;
 }

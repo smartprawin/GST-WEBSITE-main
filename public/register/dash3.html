@@ -1,9 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My Saved Applications - GST Demo Portal</title>
+    <meta name="description" content="View and manage your saved GST registration applications. Track the status of your pending GST applications.">
+    <meta name="keywords" content="GST saved applications, GST application status, my GST applications">
+    <link rel="canonical" href="https://gstdemo.example.com/register/dash3.html">
+    <meta property="og:title" content="My Saved Applications - GST Demo Portal">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5527929723291753" crossorigin="anonymous"></script>
     <style>
@@ -19,7 +23,6 @@
         }
     </style>
     <link rel="stylesheet" href="../css/style2.css">
-</head>
 <style>
     .game{
         background-color: white;
@@ -53,6 +56,7 @@
         padding: 5px;
     }
 </style>
+</head>
 <body>
     <div class="mart">
         <p>Skip to Main Content</p>
@@ -62,7 +66,7 @@
 
     <header>
         <div class="wait">
-        <h3>Goods and Services Tax</h3>
+        <h1>GST Demo</h1>
         <h4>Government of India, States and Union Territories</h4>
         </div>
 
@@ -84,7 +88,7 @@
 
     <nav>
     <ul>
-        <li>Home</li>
+        <li><a href="index.html">Home</a></li>
         <li>Services</li>
         <li>GST Law</li>
         <li>Downloads</li>
@@ -119,7 +123,7 @@
 </td>
 </tr>
     </table>
-    <div style="margin-top:15px;">
+    <div class="btn">
         <button type="button" onclick="goBack()">BACK</button>
     </div>
     <p>Track Application Status</p>
@@ -216,7 +220,7 @@ Grievance Redressal Portal for GST
        Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
     <p style="margin-top: 15px; color: #90a4ae; font-size: 12px;"><a href="../privacy-policy.html" style="color: #4fc3f7; text-decoration: none;">Privacy Policy</a></p>
     </footer>
-    <script src="../form-exporter.js?v=6"></script>
+    <script src="../form-exporter.js?v=6" defer></script>
     <script>
         (function () {
             var d = new Date();
@@ -227,7 +231,9 @@ Grievance Redressal Portal for GST
             if (cell) cell.textContent = dd + '/' + mm + '/' + yyyy;
         })();
     </script>
-<script src="../js/video-ad.js"></script>
-<script src="../js/adblocker-detect.js"></script>
+<script src="../js/video-ad.js" defer></script>
+<script src="../js/adblocker-detect.js" defer></script>
+
+<script src="../js/collapse-ads.js" defer></script>
 </body>
 </html>

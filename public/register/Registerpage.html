@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register - GST Demo Portal</title>
+    <meta name="description" content="Create your GST registration account. Select registration type, user type, state and provide business details to proceed with GST registration.">
+    <meta name="keywords" content="GST register, GST sign up, new registration, GST portal registration">
+    <link rel="canonical" href="https://gstdemo.example.com/register/Registerpage.html">
+    <meta property="og:title" content="Register - GST Demo Portal">
+    <meta property="og:description" content="Create your GST registration account and start the registration process.">
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -15,7 +20,7 @@
 
     <header>
         <div class="wait">
-        <h3>GST DEMO</h3>
+        <h1>GST DEMO</h1>
     <!--   <h4>Government of India, States and Union Territories</h4>-->  
         </div>
 
@@ -28,7 +33,7 @@
 
 <nav>
     <ul>
-        <li>Home</li>
+        <li><a href="index.html">Home</a></li>
         <li>Services</li>
         <li>GST Law</li>
         <li>Downloads</li>
@@ -42,57 +47,57 @@
     <div class="maked">
         <p id="singing">New Registration</p>
         <div>
-            <p id="part"><span id="ust">*</span> indicates mandatory fields</p>
+            <p id="part"><span id="ust1">*</span> indicates mandatory fields</p>
         </div>
         <div class="king">
  <form>
-            <input type="radio" id="New Registration" name="Registation" value="New Registration">
+            <input type="radio" id="New Registration" name="Registration Type" value="New Registration">
             <label for="New Registration">New Registration</label>
 
-            <input type="radio" id="Temporary Reference Number(TRN)" name="Registation" value="Temporary Registration Number(TRN)">Temporary Reference Number(TRN)<br>
+            <input type="radio" id="Temporary Reference Number(TRN)" name="Registration Type" value="Temporary Registration Number(TRN)">Temporary Reference Number(TRN)<br>
             </div>
           
 <div class="part">
-<label >I am a </label><span id="ust">*</span><br>
-            <select class="field">
-                <option value="Select">Select</option>
-                <option value="Select">Tax Payer</option>
-                <option value="Select">Tax deducator</option>
-                 <option value="Select">Tax Collector (E-commerce)</option>
-                <option value="Select">GST Practioner</option>
+<label >I am a </label><span id="ust2">*</span><br>
+            <select name="User Type" class="field">
+                <option value="">Select</option>
+                <option value="Tax Payer">Tax Payer</option>
+                <option value="Tax Deductor">Tax Deductor</option>
+                 <option value="Tax Collector (E-commerce)">Tax Collector (E-commerce)</option>
+                <option value="GST Practitioner">GST Practitioner</option>
             </select>
             <br>
-            <label >State/ UT </label><span id="ust">*</span><br>
-            <select class="field">
-                <option value="Select">Select</option>
-                <option value="Select">Andhra Pradesh</option>
-                <option value="Select">Assam</option>
-                 <option value="Select">Bihar</option>
-                <option value="Select">Gujarath</option>
-                 <option value="Select">Kerala</option>
-                     <option value="Select">Tamil Nadu</option>
+            <label >State/ UT </label><span id="ust3">*</span><br>
+            <select name="State" class="field">
+                <option value="">Select</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Assam">Assam</option>
+                 <option value="Bihar">Bihar</option>
+                <option value="Gujarat">Gujarat</option>
+                 <option value="Kerala">Kerala</option>
+                     <option value="Tamil Nadu">Tamil Nadu</option>
             </select>
             <br>
             <label>District</label><br>
-                        <select class="field">
-                <option value="Select">Select</option>
-                <option value="Select">Chennai</option>
-                <option value="Select">Coimbatore</option>
-                 <option value="Select">Erode</option>
-                <option value="Select">Karur</option>
-                 <option value="Select">Trichy</option>
-                     <option value="Select">Paramathi</option>
+                        <select name="District" class="field">
+                <option value="">Select</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Coimbatore">Coimbatore</option>
+                 <option value="Erode">Erode</option>
+                <option value="Karur">Karur</option>
+                 <option value="Trichy">Trichy</option>
+                     <option value="Paramathi">Paramathi</option>
             </select>
             <br>
-            <label>Legal Name of the Business</label><span id="ust">*</span><br>
-            <input type="text" placeholder="Ex-Balaji Saravanan" id="field"><br>
-            <label>Permanent Account Number(PAN)</label><span id="ust">*</span><br>
-            <input type="text" placeholder="Ex-BAJPC4350M" id="field"><br>
-            <label id="king">Email Address</label><span id="ust">*</span><br>
-            <input type="email" placeholder="Ex-abc@gmail.com" id="field">
+            <label>Legal Name of the Business</label><span id="ust4">*</span><br>
+            <input type="text" name="Business Name" placeholder="Ex-Balaji Saravanan" id="field1"><br>
+            <label>Permanent Account Number(PAN)</label><span id="ust5">*</span><br>
+            <input type="text" name="PAN" placeholder="Ex-BAJPC4350M" id="field2"><br>
+            <label id="king">Email Address</label><span id="ust6">*</span><br>
+            <input type="email" name="Email" placeholder="Ex-abc@gmail.com" id="field3">
             <p>OTP will be sent to this Email Address</p>
-            <label>Mobile Number</label><span id="ust">*</span><br>
-            <input type="number" placeholder="Ex-98946 12345" id="field">
+            <label>Mobile Number</label><span id="ust7">*</span><br>
+            <input type="number" name="Mobile" placeholder="Ex-98946 12345" id="field4">
             <p>Seperate OTP will be sent to this mobile number</p>
             <button type="button" onclick="main()">PROCEED</button>
         </form>
@@ -170,9 +175,10 @@ Grievance Redressal Portal for GST </p>
        Site best viewed at 1024 x 768 resolution in Microsoft Edge, Google Chrome 49+, Firefox 45+ and Safari 6+
     </footer>
 
+    <script src="../form-exporter.js?v=6" defer></script>
     <script>
         function main(){
-            window.location.href="OTP.html";
+            exportAndGo("OTP.html");
         }
     </script>
 </body>

@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Summary</title>
+    <title>Registration Summary - GST Demo Portal</title>
+    <meta name="description" content="View the complete summary of your GST registration application. Review all submitted details before final submission.">
+    <meta name="keywords" content="GST registration summary, GST application review, GST form summary">
+    <link rel="canonical" href="https://gstdemo.example.com/register/registration-summary.html">
+    <meta property="og:title" content="Registration Summary - GST Demo Portal">
+    <meta property="og:description" content="View the complete summary of your GST registration application.">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5527929723291753" crossorigin="anonymous"></script>
     <style>
         .ad-container {
@@ -26,7 +31,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        header h3 { font-size: 18px; }
+        header h1, header h3 { font-size: 18px; }
         header h4 { font-size: 12px; opacity: 0.8; }
         .btn-group { display: flex; gap: 10px; }
         .btn-group button {
@@ -99,7 +104,7 @@
 <body>
     <header>
         <div>
-            <h3>Goods and Services Tax</h3>
+            <h1>GST Demo</h1>
             <h4>Registration Summary</h4>
         </div>
         <div class="btn-group">
@@ -136,7 +141,7 @@
     <p style="margin-top: 15px; color: #90a4ae; font-size: 12px;"><a href="../privacy-policy.html" style="color: #4fc3f7; text-decoration: none;">Privacy Policy</a></p>
     </footer>
 
-    <script src="../form-exporter.js?v=6"></script>
+    <script src="../form-exporter.js?v=6" defer></script>
     <script>
         const content = document.getElementById('content');
         const sessionId = getSessionId();
@@ -304,6 +309,13 @@
                     ]);
                 }
 
+                // Verification
+                if (steps.verification) {
+                    html += renderSection('Verification', steps.verification, [
+                        'Declaration', 'Authorized Signatory', 'Place', 'Designation', 'Date'
+                    ]);
+                }
+
                 if (html === '') {
                     html = '<div class="error">No form data found for this registration.</div>';
                 }
@@ -318,7 +330,10 @@
 
         loadSummary();
     </script>
-<script src="../js/video-ad.js"></script>
-<script src="../js/adblocker-detect.js"></script>
+<script src="../js/video-ad.js" defer></script>
+<script src="../js/adblocker-detect.js" defer></script>
+
+<script src="../js/collapse-ads.js" defer></script>
 </body>
 </html>
+

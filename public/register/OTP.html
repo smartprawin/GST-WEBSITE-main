@@ -1,9 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>OTP Verification - GST Demo Portal</title>
+    <meta name="description" content="Verify your identity with OTP sent to your registered mobile number and email address for GST registration.">
+    <meta name="keywords" content="GST OTP verification, GST mobile verification, GST email verification">
+    <link rel="canonical" href="https://gstdemo.example.com/register/OTP.html">
+    <meta property="og:title" content="OTP Verification - GST Demo Portal">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5527929723291753" crossorigin="anonymous"></script>
     <style>
@@ -149,7 +153,7 @@ nav li:hover{
     margin-left: 10%;
 }
 #shake{
-    margin-left: 50%;
+    margin-left: 0;
 }
 .demo-otp{
     float: right;
@@ -225,7 +229,7 @@ button a{
 
     <header>
         <div class="wait">
-        <h3>Goods and Services Tax</h3>
+        <h1>GST Demo</h1>
         </div>
 
         <div class="locked">
@@ -245,7 +249,7 @@ button a{
 
         <nav>
     <ul>
-        <li>Home</li>
+        <li><a href="index.html">Home</a></li>
         <li>Services</li>
         <li>GST Law</li>
         <li>Downloads</li>
@@ -267,12 +271,12 @@ button a{
         <label for="mobileOtp">Mobile OTP*</label><br>
         <input type="text" id="mobileOtp" name="Mobile OTP" placeholder="Enter 6 digit code" inputmode="numeric" maxlength="6">
         <span id="mobileOtpErr" class="err"></span>
-        <p>ⓘ Fill OTP sent to Mobile and Email</p>
+        <p>â“˜ Fill OTP sent to Mobile and Email</p>
                 <label for="emailOtp">Email OTP*</label><br>
         <input type="text" id="emailOtp" name="Email OTP" placeholder="Enter 6 digit code" inputmode="numeric" maxlength="6">
         <span id="emailOtpErr" class="err"></span>
         <p>Enter OTP sent to Your Email Address</p>
-        <p>ⓘ Please check the junk / spam folder in case you donot get email</p>
+        <p>â“˜ Please check the junk / spam folder in case you donot get email</p>
         <p id="game">Need OTP to be resent? Click here</p>
         <div class="asd">
         <button type="button" id="race" onclick="goBack()">BACK</button>
@@ -445,8 +449,10 @@ Grievance Redressal Portal for GST
             exportAndGo('verify.html');
         });
     </script>
-    <script src="../form-exporter.js?v=6"></script>
-<script src="../js/video-ad.js"></script>
-<script src="../js/adblocker-detect.js"></script>
+    <script src="../form-exporter.js?v=6" defer></script>
+<script src="../js/video-ad.js" defer></script>
+<script src="../js/adblocker-detect.js" defer></script>
+
+<script src="../js/collapse-ads.js" defer></script>
 </body>
 </html>

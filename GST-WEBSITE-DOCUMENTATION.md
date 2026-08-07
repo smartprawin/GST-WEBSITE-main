@@ -1,6 +1,7 @@
 # GST Website - Complete Page & Route Reference
 
 > Auto-generated documentation of all pages, links, forms, and API endpoints.
+> **Last Updated:** 2026-08-07 — Added SEO optimization, index.html as home page, data flow fixes
 
 ---
 
@@ -15,6 +16,7 @@
 7. [Navigation Flow Diagrams](#navigation-flow)
 8. [Shared Scripts](#shared-scripts)
 9. [Database Tables](#database-tables)
+10. [SEO Features](#seo-features)
 
 ---
 
@@ -32,28 +34,39 @@ GST-WEBSITE-main/
 ├── public/
 │   ├── form-exporter.js             ← Client-side form collector
 │   ├── query.js                     ← CLI database query tool
+│   ├── robots.txt                   ← SEO: Crawler directives
+│   ├── sitemap.xml                  ← SEO: XML sitemap
+│   ├── 404.html                     ← Custom 404 error page
 │   ├── css/
-│   │   ├── style.css                ← MAIN.html styles
+│   │   ├── style.css                ← MAIN.html + landing page styles
 │   │   └── style2.css               ← Registration flow styles
 │   ├── images/
 │   │   ├── gst.png
 │   │   └── sa.png
+│   ├── js/
+│   │   ├── video-ad.js
+│   │   └── adblocker-detect.js
 │   ├── login/                       ← Login flow pages
 │   │   ├── loginPage.html
 │   │   ├── welcome.html
 │   │   ├── dashboard.html
 │   │   └── dash2.html
-│   └── register/                    ← Registration flow pages
-│       ├── MAIN.html
-│       ├── OTP.html, OTP2.html
-│       ├── verify.html
-│       ├── dash2.html - dash7.html
-│       ├── principlepalace.html
-│       ├── additionalplaces.html
-│       ├── goods.html
-│       ├── state specific.html
-│       ├── adhar.html
-│       └── verification.html
+│   ├── register/                    ← Registration flow pages
+│   │   ├── index.html               ← HOME PAGE (landing page with news, help topics)
+│   │   ├── MAIN.html                ← Registration form only
+│   │   ├── Registerpage.html        ← Legacy registration form
+│   │   ├── OTP.html, OTP2.html
+│   │   ├── verify.html
+│   │   ├── dash2.html - dash7.html
+│   │   ├── principlepalace.html
+│   │   ├── additionalplaces.html
+│   │   ├── goods.html
+│   │   ├── state specific.html
+│   │   ├── adhar.html
+│   │   ├── verification.html
+│   │   └── registration-summary.html
+│   ├── privacy-policy.html
+│   └── trnlogin.html.html
 ├── data/
 │   └── data.sqlite                  ← SQLite database
 ├── logs/
@@ -88,8 +101,10 @@ GST-WEBSITE-main/
 
 | Method | Route | Purpose |
 |--------|-------|---------|
+| `GET` | `/` | Redirects to `/register/index.html` (home page) |
 | `GET` | `*` (middleware) | Injects "DEMO WEBSITE" banner + `window.VALIDATE` script into all `.html` pages |
 | `GET` | `*` (static) | Serves all root-level static files (HTML, CSS, JS, images) |
+| `GET` | `*` (404) | Serves custom `404.html` page for unmatched routes |
 | `POST` | `/api/export` | Saves form data to SQLite (upserts by Session ID, links to registration) |
 | `POST` | `/api/login` | Saves hashed login credentials to `loginpage` table |
 | `GET` | `/api/registrations` | List all registrations |
@@ -208,7 +223,8 @@ Get a registration by ID with all linked step data (JOIN across all tables).
     "steps": {
       "main_html": { "Name": "FK Test", "Email": "fk@test.com", ... },
       "otp": { ... },
-      "dash5": { ... }
+      "dash5": { ... },
+      "verification": { "Declaration": "Yes", "Place": "...", ... }
     }
   }
 }
@@ -223,6 +239,7 @@ Admin HTML viewer for any SQLite table. Defaults to `main_html`.
 - `http://localhost:4000/view?table=registrations`
 - `http://localhost:4000/view?table=loginpage`
 - `http://localhost:4000/view?table=otp`
+- `http://localhost:4000/view?table=verification`
 
 ---
 
@@ -244,12 +261,12 @@ Admin HTML viewer for any SQLite table. Defaults to `main_html`.
          |
          | 1:N (application_id FK)
          |
-         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
-         |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
-         v  v  v  v  v  v  v  v  v  v  v  v  v  v  v  v  v
-       main otp dash dash dash dash dash principle additional goods state adhar login welcome test
+         +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
+         |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+         v  v  v  v  v  v  v  v  v  v  v  v  v  v  v  v  v  v
+       main otp dash dash dash dash dash principle additional goods state adhar login welcome test verification
        _html 2   2    3    4    5    6    palace   places          _20                 _up
-                                       7                      specific
+                                        7                      specific
 ```
 
 ### Master Table: `registrations`
@@ -306,6 +323,7 @@ CREATE INDEX [idx_main_html_app] ON [main_html] ([application_id]);
 | `loginpage` | `application_id` | `idx_loginpage_app` |
 | `welcome` | `application_id` | `idx_welcome_app` |
 | `test_up` | `application_id` | `idx_test_up_app` |
+| `verification` | `application_id` | `idx_verification_app` |
 
 ### Query Examples
 
@@ -345,9 +363,11 @@ ORDER BY created_at DESC;
 
 | Property | Value |
 |----------|-------|
-| **Title** | Login Page |
-| **Heading** | "Goods and Services Tax" |
+| **Title** | Login - GST Demo Portal |
+| **Meta Description** | Login to your GST Demo account. Access your GST registration dashboard, file returns and manage your tax profile. |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | User enters username and password |
+| **Canonical** | https://gstdemo.example.com/login/loginPage.html |
 
 **Form Fields:**
 - Username (text, required)
@@ -359,6 +379,7 @@ ORDER BY created_at DESC;
 **Navigation:**
 - REGISTER button -> `../register/MAIN.html`
 - Login success -> `welcome.html`
+- Home button -> `../register/index.html`
 
 **Validation:** Enabled when `?validate=1` or `window.VALIDATE` is set
 
@@ -368,13 +389,14 @@ ORDER BY created_at DESC;
 
 | Property | Value |
 |----------|-------|
-| **Title** | Welcome Page |
-| **Heading** | "Welcome [NAME] to GST Common Portal" |
+| **Title** | Welcome - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Post-login landing page with return calendar and quick links |
 
 **Navigation:**
 - RETURN DASHBOARD -> `dashboard.html` (via `exportAndGo`)
 - Menu items -> `dash2.html` (via `condash()`)
+- Home button -> `../register/index.html`
 
 **Forms:** None
 
@@ -384,8 +406,8 @@ ORDER BY created_at DESC;
 
 | Property | Value |
 |----------|-------|
-| **Title** | Dashboard |
-| **Heading** | "Ledger Balance" |
+| **Title** | Dashboard - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Taxpayer dashboard - IGST/CGST/SGST/CESS balances, turnover details |
 
 **Form Elements:**
@@ -393,6 +415,7 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - FILE RETURNS / PAY TAX buttons (no handlers defined)
+- Home button -> `../register/index.html`
 
 ---
 
@@ -400,8 +423,8 @@ ORDER BY created_at DESC;
 
 | Property | Value |
 |----------|-------|
-| **Title** | File Returns |
-| **Heading** | "File Returns" |
+| **Title** | Profile - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | GSTR-1, GSTR-2B, GSTR-3B, GSTR-2A filing cards |
 
 **Form Elements:**
@@ -411,18 +434,45 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - Prepare / View / Download buttons per return type
+- Home button -> `../register/index.html`
 
 ---
 
 ## Registration Flow
 
-### 5. public/register/MAIN.html
+### 5. public/register/index.html (HOME PAGE)
 
 | Property | Value |
 |----------|-------|
-| **Title** | New Registration |
-| **Heading** | "New Registration" |
-| **Purpose** | Start new GST registration |
+| **Title** | GST Demo - Goods and Services Tax Registration Portal |
+| **Meta Description** | GST Demo: Register for Goods and Services Tax (GST) online. Complete your GST registration, file returns, and manage your tax compliance easily. |
+| **Heading** | "GST Demo" (h1) |
+| **Purpose** | Landing page with news, help topics, due dates, and registration/login links |
+| **Canonical** | https://gstdemo.example.com/register/index.html |
+| **Schema.org** | GovernmentOrganization |
+
+**Content Sections:**
+- Services dropdown navigation
+- GST Banner image
+- New Updates (news cards)
+- Popular Help Topics
+- Upcoming Due Dates table
+- Contact box (Help-Desk, Grievance Redressal)
+
+**Navigation:**
+- REGISTER button -> `MAIN.html`
+- LOGIN button -> `../login/loginPage.html`
+- Home button -> `index.html` (self)
+
+---
+
+### 6. public/register/MAIN.html
+
+| Property | Value |
+|----------|-------|
+| **Title** | New GST Registration - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
+| **Purpose** | Start new GST registration (form only, no landing page content) |
 
 **Form Fields:**
 | Field | Type | Required |
@@ -436,23 +486,34 @@ ORDER BY created_at DESC;
 | Email | email | Yes |
 | Mobile | number (10 digits, starts 6-9) | Yes |
 
-**API Calls:**
-- None (data exported via `exportAndGo` to next page)
-
-**External Links:**
-- GST Registration Tutorial: `https://tutorial.gst.gov.in/cbt/registration/gstregistration/course/story_html5.html`
-
 **Navigation:**
-- PROCEED -> `OTP.html`
+- PROCEED -> `OTP.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 6. public/register/OTP.html
+### 7. public/register/Registerpage.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | OTP Verification |
-| **Heading** | "Verify OTP" |
+| **Title** | Register - GST Demo Portal |
+| **Heading** | "GST DEMO" (h1) |
+| **Purpose** | Legacy registration form (same fields as MAIN.html) |
+
+**Form Fields:** Same as MAIN.html (properly named attributes)
+
+**Navigation:**
+- PROCEED -> `OTP.html` (via `exportAndGo`)
+- Home button -> `index.html`
+
+---
+
+### 8. public/register/OTP.html
+
+| Property | Value |
+|----------|-------|
+| **Title** | OTP Verification - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | OTP verification for new registration |
 
 **Form Fields:**
@@ -463,16 +524,17 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - BACK -> `MAIN.html`
-- PROCEED -> `verify.html`
+- PROCEED -> `verify.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 7. public/register/verify.html
+### 9. public/register/verify.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Part A Success |
-| **Heading** | "Part A submission success" |
+| **Title** | Registration Submitted - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Shows TRN number after successful Part A submission |
 
 **Displayed Data:**
@@ -480,17 +542,16 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - PROCEED -> `dash2.html`
-
-**Forms:** None
+- Home button -> `index.html`
 
 ---
 
-### 8. public/register/dash2.html
+### 10. public/register/dash2.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | TRN Login |
-| **Heading** | "New Registration" |
+| **Title** | Part B Registration - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Login with TRN number to continue saved application |
 
 **Form Fields:**
@@ -501,19 +562,20 @@ ORDER BY created_at DESC;
 | Captcha | text | Canvas-drawn, must match |
 
 **API Calls:**
-- `POST /api/export` - saves TRN data
+- `POST /api/export` - saves TRN data (via `saveTrnAndGo`)
 
 **Navigation:**
 - PROCEED -> `OTP2.html`
+- Home button -> `index.html`
 
 ---
 
-### 9. public/register/OTP2.html
+### 11. public/register/OTP2.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | OTP Verification (TRN) |
-| **Heading** | "Verify OTP" |
+| **Title** | OTP Confirmation - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | OTP verification for TRN-based login |
 
 **Form Fields:**
@@ -523,31 +585,31 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - BACK -> `dash2.html`
-- PROCEED -> `dash3.html`
+- PROCEED -> `dash3.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 10. public/register/dash3.html
+### 12. public/register/dash3.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Saved Applications |
-| **Heading** | "My Saved Applications" |
+| **Title** | My Saved Applications - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Dashboard showing draft applications (GST REG-01) |
 
 **Navigation:**
 - Application row action -> `dash5.html`
-
-**Forms:** None
+- Home button -> `index.html`
 
 ---
 
-### 11. public/register/dash5.html
+### 13. public/register/dash5.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Business Details |
-| **Heading** | "Details of your Business" |
+| **Title** | Business Details - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 1 - Business information |
 
 **Form Fields:**
@@ -566,16 +628,17 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - BACK -> `dash3.html`
-- SAVE & CONTINUE -> `dash4.html`
+- SAVE & CONTINUE -> `dash4.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 12. public/register/dash4.html
+### 14. public/register/dash4.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Promoter/Partner Details |
-| **Heading** | "Personal Information" / "Promoter/ Partners" |
+| **Title** | Promoter / Partner Details - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 2 - Personal details of promoters/partners |
 
 **Form Fields:**
@@ -589,16 +652,17 @@ ORDER BY created_at DESC;
 **Navigation:**
 - BACK -> `dash5.html`
 - ADD NEW -> `dash41.html`
-- SAVE & CONTINUE -> `dash6.html`
+- SAVE & CONTINUE -> `dash6.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 13. public/register/dash41.html
+### 15. public/register/dash41.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Add Promoter/Partner |
-| **Heading** | "Promoter/ Partners" |
+| **Title** | Add Promoter / Partner - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Add another promoter/partner (identical form to dash4) |
 
 **Form Fields:** Same as dash4.html (all empty)
@@ -606,16 +670,17 @@ ORDER BY created_at DESC;
 **Navigation:**
 - BACK -> `dash5.html`
 - ADD NEW -> `dash4.html`
-- SAVE & CONTINUE -> `dash6.html`
+- SAVE & CONTINUE -> `dash6.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 14. public/register/dash6.html
+### 16. public/register/dash6.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Authorized Signatory |
-| **Heading** | "Details of Authorized Signatory" |
+| **Title** | Authorized Signatory - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 3 - Authorized signatory details |
 
 **Form Fields:**
@@ -627,16 +692,17 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - BACK -> `dash4.html`
-- SAVE & CONTINUE -> `dash7.html`
+- SAVE & CONTINUE -> `dash7.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 15. public/register/dash7.html
+### 17. public/register/dash7.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Authorized Representative |
-| **Heading** | "Details of Authorized Representative" |
+| **Title** | Authorized Representative - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 4 - Toggle to add authorized representative |
 
 **Form Elements:**
@@ -644,16 +710,17 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - BACK -> `dash6.html`
-- SAVE & CONTINUE -> `principlepalace.html`
+- SAVE & CONTINUE -> `principlepalace.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 16. public/register/principlepalace.html
+### 18. public/register/principlepalace.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Principal Place of Business |
-| **Heading** | "Details of Principle Place of Business" |
+| **Title** | Principal Place of Business - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 5 - Principal business location |
 
 **Form Fields:**
@@ -668,32 +735,34 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - BACK -> `dash7.html`
-- SAVE & CONTINUE -> `additionalplaces.html`
+- SAVE & CONTINUE -> `additionalplaces.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 17. public/register/additionalplaces.html
+### 19. public/register/additionalplaces.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Additional Places |
-| **Heading** | "Details of Additional Places of your Business" |
+| **Title** | Additional Places of Business - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 6 - Info page for adding more business locations |
 
 **Forms:** None (info/instructions only)
 
 **Navigation:**
 - BACK -> `principlepalace.html`
-- CONTINUE -> `goods.html`
+- CONTINUE -> `goods.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 18. public/register/goods.html
+### 20. public/register/goods.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Goods & Services |
-| **Heading** | "Details of Goods / Commodities supplied by the business" |
+| **Title** | Goods and Services - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 7 - HSN code search for top 5 commodities |
 
 **Form Fields:**
@@ -701,16 +770,17 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - BACK -> `additionalplaces.html`
-- SAVE & CONTINUE -> `state specific.html`
+- SAVE & CONTINUE -> `state specific.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 19. public/register/state specific.html
+### 21. public/register/state specific.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | State Specific Info |
-| **Heading** | State Specific Information |
+| **Title** | State Specific Information - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 8 - State-specific registrations |
 
 **Form Fields:**
@@ -723,32 +793,34 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - BACK -> `goods.html`
-- SAVE & CONTINUE -> `adhar.html`
+- SAVE & CONTINUE -> `adhar.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 20. public/register/adhar.html
+### 22. public/register/adhar.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Aadhaar Authentication |
-| **Heading** | "Aadhaar Authentication" |
+| **Title** | Aadhaar Authentication - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 9 - Select promoters for Aadhaar verification |
 
 **Forms:** Table with checkboxes (empty rows)
 
 **Navigation:**
 - BACK -> `state specific.html`
-- SAVE & CONTINUE -> `verification.html`
+- SAVE & CONTINUE -> `verification.html` (via `exportAndGo`)
+- Home button -> `index.html`
 
 ---
 
-### 21. public/register/verification.html
+### 23. public/register/verification.html
 
 | Property | Value |
 |----------|-------|
-| **Title** | Final Verification |
-| **Heading** | "Verification" |
+| **Title** | Verification & Submit - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
 | **Purpose** | Step 10 - Declaration and final submission |
 
 **Form Fields:**
@@ -762,12 +834,44 @@ ORDER BY created_at DESC;
 
 **Navigation:**
 - BACK -> `adhar.html`
-- SUBMIT WITH DSC
-- SUBMIT WITH EVC
+- SUBMIT WITH DSC -> `registration-summary.html` (via `exportAndGo`)
+- SUBMIT WITH EVC -> `registration-summary.html` (via `exportAndGo`)
+- Home button -> `index.html`
+
+---
+
+### 24. public/register/registration-summary.html
+
+| Property | Value |
+|----------|-------|
+| **Title** | Registration Summary - GST Demo Portal |
+| **Heading** | "GST Demo" (h1) |
+| **Purpose** | Read-only summary of all registration data |
+
+**Data Displayed:**
+- Registration Info (ID, session, status, step, dates)
+- New Registration Details (from main_html)
+- OTP Verification (from otp)
+- Business Details (from dash5)
+- Promoter/Partner (from dash4)
+- Authorized Signatory (from dash6)
+- Principal Place (from principlepalace)
+- Goods/Services (from goods)
+- State Specific (from state_20specific)
+- Login Credentials (from loginpage)
+- Verification (from verification)
+
+**API Calls:**
+- `GET /api/registration/:id` or `GET /api/registration?session_id=X`
 
 ---
 
 ## Navigation Flow
+
+### Home Page Access
+```
+Any Page --[Home button]--> index.html (landing page)
+```
 
 ### Login Flow
 ```
@@ -782,56 +886,62 @@ dash2.html (File Returns)
 
 ### Registration Flow
 ```
-MAIN.html (New Registration)
+index.html (Home/Landing)
     |
-    v
-OTP.html
-    |
-    v
-verify.html (TRN: 332300189520TRN)
-    |
-    v
-dash2.html (TRN Login)
-    |
-    v
-OTP2.html
-    |
-    v
-dash3.html (Saved Applications)
-    |
-    v
-dash5.html (Business Details - Step 1)
-    |
-    v
-dash4.html (Promoter/Partner - Step 2) <--> dash41.html (Add New)
-    |
-    v
-dash6.html (Authorized Signatory - Step 3)
-    |
-    v
-dash7.html (Authorized Rep - Step 4)
-    |
-    v
-principlepalace.html (Principal Place - Step 5)
-    |
-    v
-additionalplaces.html (Additional Places - Step 6)
-    |
-    v
-goods.html (Goods/Services - Step 7)
-    |
-    v
-state specific.html (State Info - Step 8)
-    |
-    v
-adhar.html (Aadhaar Auth - Step 9)
-    |
-    v
-verification.html (Final Submit - Step 10)
+    +--[REGISTER]--> MAIN.html (New Registration)
+                        |
+                        v
+                    OTP.html
+                        |
+                        v
+                    verify.html (TRN: 332300189520TRN)
+                        |
+                        v
+                    dash2.html (TRN Login)
+                        |
+                        v
+                    OTP2.html
+                        |
+                        v
+                    dash3.html (Saved Applications)
+                        |
+                        v
+                    dash5.html (Business Details - Step 1)
+                        |
+                        v
+                    dash4.html (Promoter/Partner - Step 2) <--> dash41.html (Add New)
+                        |
+                        v
+                    dash6.html (Authorized Signatory - Step 3)
+                        |
+                        v
+                    dash7.html (Authorized Rep - Step 4)
+                        |
+                        v
+                    principlepalace.html (Principal Place - Step 5)
+                        |
+                        v
+                    additionalplaces.html (Additional Places - Step 6)
+                        |
+                        v
+                    goods.html (Goods/Services - Step 7)
+                        |
+                        v
+                    state specific.html (State Info - Step 8)
+                        |
+                        v
+                    adhar.html (Aadhaar Auth - Step 9)
+                        |
+                        v
+                    verification.html (Final Submit - Step 10)
+                        |
+                        v
+                    registration-summary.html (Summary)
 ```
 
 ### Header Navigation (All Pages)
 ```
+[Home]     -> index.html
 [REGISTER] -> MAIN.html
 [LOGIN]    -> loginPage.html
 ```
@@ -844,7 +954,9 @@ verification.html (Final Submit - Step 10)
 |------|---------|
 | `form-exporter.js` | Intercepts form data on every page, POSTs to `/api/export` before navigation |
 | `query.js` | CLI tool: `node query.js "SELECT * FROM table"` |
-| `style.css` | Styles for MAIN.html |
+| `video-ad.js` | Video ad integration |
+| `adblocker-detect.js` | Detects ad blockers |
+| `style.css` | MAIN.html + index.html + landing page styles |
 | `style2.css` | Shared styles for registration flow (dash3-dash7, adhar, goods, etc.) |
 
 ### form-exporter.js Functions
@@ -854,8 +966,11 @@ verification.html (Final Submit - Step 10)
 | `getSessionId()` | Gets/creates UUID in localStorage (`gst_session_id`) |
 | `getApplicationId()` | Gets `application_id` from localStorage (`gst_application_id`) |
 | `setApplicationId(id)` | Stores `application_id` in localStorage |
-| `exportAndGo(url)` | Collects form fields, POSTs to API, stores `application_id` from response, navigates to URL |
+| `exportAndGo(url)` | Collects form fields, POSTs to API (waits for response), stores `application_id`, then navigates |
 | `goWithValidate(url)` | Navigates to URL, preserves `?validate=1` param |
+| `goBack()` | Navigates back in history |
+
+**Key Behavior:** `exportAndGo()` now waits for the fetch to complete before navigating, preventing data loss from race conditions.
 
 ---
 
@@ -863,9 +978,9 @@ verification.html (Final Submit - Step 10)
 
 | Table | Records | Purpose | Foreign Key |
 |-------|---------|---------|-------------|
-| `registrations` | 7 | Master registration records | **PK: application_id** |
-| `main_html` | 38 | Registration form submissions | `application_id` -> `registrations` |
-| `loginpage` | 34 | Login credentials (hashed) | `application_id` -> `registrations` |
+| `registrations` | 13+ | Master registration records | **PK: application_id** |
+| `main_html` | 38+ | Registration form submissions | `application_id` -> `registrations` |
+| `loginpage` | 34+ | Login credentials (hashed) | `application_id` -> `registrations` |
 | `otp` | - | OTP verification data | `application_id` -> `registrations` |
 | `otp2` | - | Second OTP data | `application_id` -> `registrations` |
 | `dash2`-`dash7` | - | Registration step data | `application_id` -> `registrations` |
@@ -874,9 +989,64 @@ verification.html (Final Submit - Step 10)
 | `goods` | - | Goods/services data | `application_id` -> `registrations` |
 | `state_20specific` | - | State-specific info | `application_id` -> `registrations` |
 | `adhar` | - | Aadhaar auth data | `application_id` -> `registrations` |
+| `verification` | - | Final verification/submit data | `application_id` -> `registrations` |
 | `welcome` | - | Welcome page data | `application_id` -> `registrations` |
 | `main` | - | Legacy table | `application_id` -> `registrations` |
 | `test_up` | - | Test upload data | `application_id` -> `registrations` |
+
+---
+
+## SEO Features
+
+### Meta Tags (All Pages)
+
+Every HTML page includes:
+
+| Tag | Purpose |
+|-----|---------|
+| `<title>` | Unique descriptive page title (e.g., "Login - GST Demo Portal") |
+| `<meta name="description">` | Search snippet text (150-160 chars) |
+| `<meta name="keywords">` | Relevant search keywords |
+| `<link rel="canonical">` | Prevents duplicate content indexing |
+| `<meta property="og:title">` | Open Graph title for social sharing |
+| `<meta property="og:description">` | Open Graph description for social sharing |
+| `<meta property="og:type">` | Open Graph content type |
+
+### Structured Data (JSON-LD)
+
+`index.html` includes Schema.org structured data:
+
+```json
+{
+    "@context": "https://schema.org",
+    "@type": "GovernmentOrganization",
+    "name": "GST Demo",
+    "url": "https://gstdemo.example.com",
+    "description": "Goods and Services Tax Registration Portal - Demo"
+}
+```
+
+### Site-wide SEO Files
+
+| File | Purpose |
+|------|---------|
+| `robots.txt` | Tells crawlers which pages to index |
+| `sitemap.xml` | Lists all pages for search engine discovery |
+| `404.html` | Custom error page (also handles `noindex` for error pages) |
+
+### Heading Hierarchy
+
+All pages use proper heading hierarchy:
+- `<h1>GST Demo</h1>` - Site title in header (single h1 per page)
+- `<h2>` - Section headings
+- `<h3>` - Sub-section headings
+
+### Image Alt Text
+
+All images include descriptive `alt` attributes:
+- `gst.png` → "GST Demo - Goods and Services Tax Portal Banner"
+- `sa.png` → "Dashboard"
+- Map images → "Location map for business address"
 
 ---
 
@@ -887,6 +1057,7 @@ verification.html (Final Submit - Step 10)
 http://localhost:4000/view?table=registrations
 http://localhost:4000/view?table=main_html
 http://localhost:4000/view?table=loginpage
+http://localhost:4000/view?table=verification
 ```
 
 ### Query Data (Terminal)
@@ -923,4 +1094,4 @@ curl http://localhost:4000/api/registration/7
 
 ---
 
-*Auto-generated for GST Website v1.0.0 — Updated with project restructuring, registrations schema, and cleanup*
+*Auto-generated for GST Website v2.0.0 — Updated with SEO optimization, index.html home page, data flow fixes, and verification table support*

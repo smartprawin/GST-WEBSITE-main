@@ -48,7 +48,7 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res) => {
-    res.redirect('/register/MAIN.html');
+    res.redirect('/register/index.html');
 });
 
 app.use(express.static(PUBLIC_DIR));
@@ -76,7 +76,7 @@ const REGISTRATION_TABLES = [
     'main_html', 'main', 'otp', 'dash2', 'otp2', 'dash3',
     'dash4', 'dash5', 'dash6', 'dash7', 'principlepalace',
     'additionalplaces', 'goods', 'state_20specific', 'adhar',
-    'loginpage', 'welcome', 'test_up'
+    'loginpage', 'welcome', 'test_up', 'verification'
 ];
 
 function ensureRegistrationsTable() {
@@ -348,6 +348,10 @@ function seedAdmin() {
         console.log('Seeded default admin account (username: admin, password: admin)');
     }
 }
+
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(PUBLIC_DIR, '404.html'));
+});
 
 app.listen(PORT, () => {
     console.log(`GST Website running at http://localhost:${PORT}`);

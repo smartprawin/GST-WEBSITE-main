@@ -68,8 +68,8 @@ async function exportAndGo(url) {
         }
 
         if (input.type === 'checkbox') {
-            let labelText = '';
-            if (input.id) {
+            let labelText = input.name || '';
+            if (!labelText && input.id) {
                 const lbl = document.querySelector('label[for="' + input.id + '"]');
                 if (lbl) labelText = lbl.textContent.trim();
             }
@@ -150,13 +150,10 @@ async function exportAndGo(url) {
         data.application_id = appId;
     }
 
-    window.location.href = url;
-
-    fetch('http://localhost:4000/api/export', {
+    fetch('/api/export', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-        keepalive: true
+        body: JSON.stringify(data)
     }).then(function (res) {
         return res.json();
     }).then(function (result) {
@@ -165,7 +162,11 @@ async function exportAndGo(url) {
         if (result && result.application_id) {
             setApplicationId(result.application_id);
         }
+        // Navigate AFTER data is saved
+        window.location.href = url;
     }).catch(function (e) {
         console.error('Export failed:', e);
+        // Navigate even if export fails
+        window.location.href = url;
     });
 }

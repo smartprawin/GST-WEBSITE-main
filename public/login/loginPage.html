@@ -1,9 +1,14 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login - GST Demo Portal</title>
+    <meta name="description" content="Login to your GST Demo account. Access your GST registration dashboard, file returns and manage your tax profile.">
+    <meta name="keywords" content="GST login, GST portal login, GST account login, GST sign in">
+    <link rel="canonical" href="https://gstdemo.example.com/login/loginPage.html">
+    <meta property="og:title" content="Login - GST Demo Portal">
+    <meta property="og:description" content="Login to your GST Demo account to manage your tax registration.">
     <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5527929723291753" crossorigin="anonymous"></script>
     <style>
@@ -149,7 +154,7 @@ nav li:hover{
     margin-left: 10%;
 }
 #shake{
-    margin-left: 50%;
+    margin-left: 0;
 }
 .demo-otp{
     background-color: #fff3cd;
@@ -220,7 +225,7 @@ button a{
     <header>
           
         <div class="wait">
-        <h3>Goods and Services Tax</h3>
+        <h1>GST Demo</h1>
         <h4>Government of India, States and Union Territories</h4>
         </div>
 
@@ -242,7 +247,7 @@ button a{
 
     <nav>
     <ul>
-        <li>Home</li>
+        <li><a href="../register/index.html">Home</a></li>
         <li>Services</li>
         <li>GST Law</li>
         <li>Downloads</li>
@@ -268,7 +273,7 @@ button a{
 
         <button type="submit" id="sales">LOGIN</button>
         <p>Forget Username</p>
-        <p>ⓘ <b>First time login: </b> If you are logging in for the first time, click here to <br> log in</p>
+        <p>â“˜ <b>First time login: </b> If you are logging in for the first time, click here to <br> log in</p>
         <p id="game">Need OTP to be resent? Click here</p>
         <div class="asd">
         </div>
@@ -428,14 +433,17 @@ Grievance Redressal Portal for GST
             }
             const username = usernameEl.value.trim();
             const password = passwordEl.value;
-            fetch('http://localhost:4000/api/login', {
+            fetch('/api/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username: username, password: password }),
-                keepalive: true
+                body: JSON.stringify({ username: username, password: password })
+            }).then(function () {
+                let target = "welcome.html";
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('validate') === '1') target += '?validate=1';
+                window.location.href = target;
             }).catch(function (e) {
                 console.error('Login save failed:', e);
-            }).finally(function () {
                 let target = "welcome.html";
                 const params = new URLSearchParams(window.location.search);
                 if (params.get('validate') === '1') target += '?validate=1';
@@ -459,8 +467,10 @@ Grievance Redressal Portal for GST
             });
         }
     </script>
-    <script src="../form-exporter.js?v=6"></script>
-<script src="../js/video-ad.js"></script>
-<script src="../js/adblocker-detect.js"></script>
+    <script src="../form-exporter.js?v=6" defer></script>
+<script src="../js/video-ad.js" defer></script>
+<script src="../js/adblocker-detect.js" defer></script>
+
+<script src="../js/collapse-ads.js" defer></script>
 </body>
 </html>

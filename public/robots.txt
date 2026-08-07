@@ -1,0 +1,10 @@
+# robots.txt - GST Demo Website
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://gstdemo.example.com/sitemap.xml
+
+# Disallow admin/internal pages
+Disallow: /view
+Disallow: /api/
