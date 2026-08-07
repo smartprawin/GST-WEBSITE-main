@@ -278,18 +278,21 @@ padding: 10px;
     .upload input[type=file]{
         margin-top: 10px;
     }
-    .save-btn{
+    .buttons .save-btn{
     background:#163d73;
     color:white;
     border:none;
     padding:12px 40px;
     font-size:16px;
+    width:auto;
 }
-.back-btn{
-    border:1px solid #666;
-    background:white;
+.buttons .back-btn{
+    border:1px solid #0d2566;
+    background:#0d2566;
+    color:white;
     padding:12px 40px;
     font-size:16px;
+    width:auto;
 }
 .buttons{
         display:flex;
@@ -568,12 +571,12 @@ input:checked + .slider:before{
 
             <div class="date">
                 <input type="text" id="regDate" name="Date of Registration" placeholder="DD/MM/YYYY">
-                <button class="calendar">ðŸ“…</button>
+                <button class="calendar">📅</button>
             </div>
          </div>
               <div class="action">
             <button class="add-btn">+ ADD</button>
-            <button class="cancel-btn">âœ– CANCEL</button>
+            <button class="cancel-btn">✖ CANCEL</button>
         </div>
             </div>
   
@@ -583,8 +586,8 @@ input:checked + .slider:before{
     <h2>Document Upload</h2>
     <div class="upload">
         <h3>Document for Trade Name</h3>
-        <p>â“˜ File with PDF or JPEG format is only allowed.</p>
-           <p>â“˜Maximum file size for upload is 5 MB</p>
+        <p>ⓘ File with PDF or JPEG format is only allowed.</p>
+           <p>ⓘMaximum file size for upload is 5 MB</p>
            <input type="file">
 
     </div>

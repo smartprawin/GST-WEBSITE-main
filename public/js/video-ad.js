@@ -91,9 +91,17 @@ function initVideoAd() {
     `;
     document.head.appendChild(style);
 
-    // Show popup after 3 seconds
+    // Show popup after 3 seconds only if the ad actually rendered.
+    // If the ad slot is empty/unfilled, keep the popup hidden.
     setTimeout(() => {
-        popup.style.display = 'block';
+        const ins = popup.querySelector('ins.adsbygoogle');
+        const adStatus = ins ? ins.getAttribute('data-ad-status') : null;
+        const hasAd = ins && (adStatus === 'filled' || (adStatus !== 'unfilled' && ins.childNodes.length > 0));
+        if (hasAd) {
+            popup.style.display = 'block';
+        } else {
+            popup.remove();
+        }
     }, 3000);
 }
 
